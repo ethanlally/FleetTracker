@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\FleetTracker.Services.Application\FleetTracker.Services.Application.csproj" />
+    <ProjectReference Include="..\FleetTracker.Services.Data\FleetTracker.Services.Data.csproj" />
+    <ProjectReference Include="..\FleetTracker.Services.Core\FleetTracker.Services.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
