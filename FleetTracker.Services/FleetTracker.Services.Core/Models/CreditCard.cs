@@ -9,6 +9,8 @@ namespace FleetTracker.Services.Core.Models
         public string ExpirationDate { get; init; }
         public string Cvv { get; init; }
 
+        private CreditCard() { } // Required for EF Core
+
         public CreditCard(string cardNumber, string cardHolderName, string expirationDate, string cvv)
         {
             CardNumber = cardNumber;

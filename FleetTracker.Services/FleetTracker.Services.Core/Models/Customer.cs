@@ -14,6 +14,8 @@ namespace FleetTracker.Services.Core.Models
         public Address HomeAddress { get; private set; }
         public ICollection<RentalAgreement> RentalHistory { get; private set; } = new List<RentalAgreement>();
 
+        private Customer() : base() { } // Required for EF Core
+
         public Customer(string driversLicense, DateTime dateOfBirth, PaymentInformation paymentInformation, ContactInfo contact, Address homeAddress)
             : base()
         {

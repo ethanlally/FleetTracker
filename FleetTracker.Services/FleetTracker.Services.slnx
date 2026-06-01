@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="FleetTracker.Services.Api/FleetTracker.Services.Api.csproj" />
   <Project Path="FleetTracker.Services.Application/FleetTracker.Services.Application.csproj" />
   <Project Path="FleetTracker.Services.ConsoleApp/FleetTracker.Services.ConsoleApp.csproj" />
   <Project Path="FleetTracker.Services.Core/FleetTracker.Services.Core.csproj" />

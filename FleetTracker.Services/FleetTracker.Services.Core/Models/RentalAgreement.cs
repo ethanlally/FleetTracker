@@ -19,6 +19,8 @@ namespace FleetTracker.Services.Core.Models
         public Guid VehicleId { get; private set; }
         public Vehicle? Vehicle { get; private set; }
 
+        private RentalAgreement() : base() { } // Required for EF Core
+
         public RentalAgreement(string agreementNumber, DateTime pickupDate, DateTime expectedReturnDate, int startingMileage, Guid customerId, Guid vehicleId)
             : base()
         {

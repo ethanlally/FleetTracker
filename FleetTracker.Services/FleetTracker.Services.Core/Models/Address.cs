@@ -10,6 +10,8 @@ namespace FleetTracker.Services.Core.Models
         public string Zip { get; init; }
         public string Country { get; init; }
 
+        private Address() { } // Required for EF Core
+
         public Address(string street, string city, string state, string zip, string country)
         {
             Street = street;

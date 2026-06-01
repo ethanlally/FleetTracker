@@ -17,6 +17,8 @@ namespace FleetTracker.Services.Core.Models
         public ICollection<RentalAgreement> RentalHistory { get; private set; } = new List<RentalAgreement>();
         public ICollection<MaintenanceRecord> MaintenanceHistory { get; private set; } = new List<MaintenanceRecord>();
 
+        private Vehicle() : base() { } // Required for EF Core
+
         public Vehicle(string vin, string licensePlate, string make, string model, int year, VehicleClass vehicleClass, decimal dailyRate) 
             : base()
         {

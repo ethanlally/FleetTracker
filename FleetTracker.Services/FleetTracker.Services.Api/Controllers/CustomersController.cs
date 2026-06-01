@@ -1,0 +1,64 @@
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using FleetTracker.Services.Core.Interfaces;
+using FleetTracker.Services.Core.Models;
+using FleetTracker.Services.Api.DataModels;
+
+namespace FleetTracker.Services.Api.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class CustomersController : ControllerBase
+    {
+        private readonly ICustomerRepository _customerRepository;
+
+        public CustomersController(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllCustomers()
+        {
+            var customers = _customerRepository.GetAllCustomers();
+            return Ok(customers);
+        }
+
+        [HttpGet("{id:guid}")]
+        public IActionResult GetCustomerById(Guid id)
+        {
+            var customer = _customerRepository.GetCustomerById(id);
+            if (customer == null) return NotFound();
+            return Ok(customer);
+        }
+
+        [HttpGet("{license}")]
+        public IActionResult GetCustomerByLicense(string license)
+        {
+            var customer = _customerRepository.GetCustomerByLicense(license);
+            if (customer == null) return NotFound();
+            return Ok(customer);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCustomer([FromBody] CreateCustomerRequest request)
+        {
+            if (_customerRepository.GetCustomerByLicense(request.DriversLicense) != null)
+            {
+                return BadRequest("A customer with this license already exists.");
+            }
+
+            var address = new Address(request.HomeAddress.Street, request.HomeAddress.City, request.HomeAddress.State, request.HomeAddress.Zip, request.HomeAddress.Country);
+            var contact = new ContactInfo(request.Contact.Name, request.Contact.Email, request.Contact.PhoneNumber);
+            var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
+            var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
+            var paymentInfo = new PaymentInformation(billingAddress, creditCard);
+
+            var customer = new Customer(request.DriversLicense, request.DateOfBirth, paymentInfo, contact, address);
+            _customerRepository.AddCustomer(customer);
+
+            return CreatedAtAction(nameof(GetCustomerById), new { id = customer.Id }, customer);
+        }
+    }
+}

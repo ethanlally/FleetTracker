@@ -15,11 +15,11 @@ namespace FleetTracker.Services.Data
             var creditCard = new CreditCard("4111222233334444", "JOHN DOE", "12/30", "123");
             var paymentInfo = new PaymentInformation(address, creditCard);
             
-            var c1 = new Customer("DL-111", new DateTime(1985, 5, 20), paymentInfo, contact, address);
-            var c2 = new Customer("DL-222", new DateTime(1990, 8, 15), paymentInfo, new ContactInfo("Jane Smith", "jane@example.com", "123-555-0200"), address);
-            var c3 = new Customer("DL-333", new DateTime(1975, 2, 10), paymentInfo, new ContactInfo("Bob Jones", "bob@example.com", "123-555-0300"), address);
-            var c4 = new Customer("DL-444", new DateTime(1992, 11, 5), paymentInfo, new ContactInfo("Alice Cooper", "alice@example.com", "123-555-0400"), address);
-            var c5 = new Customer("DL-555", new DateTime(1988, 3, 22), paymentInfo, new ContactInfo("Charlie Brown", "charlie@example.com", "123-555-0500"), address);
+            var c1 = new Customer("DL-111", new DateTime(1985, 5, 20), paymentInfo with { BillingAddress = address with { }, CreditCard = creditCard with { } }, contact with { }, address with { });
+            var c2 = new Customer("DL-222", new DateTime(1990, 8, 15), paymentInfo with { BillingAddress = address with { }, CreditCard = creditCard with { } }, new ContactInfo("Jane Smith", "jane@example.com", "123-555-0200"), address with { });
+            var c3 = new Customer("DL-333", new DateTime(1975, 2, 10), paymentInfo with { BillingAddress = address with { }, CreditCard = creditCard with { } }, new ContactInfo("Bob Jones", "bob@example.com", "123-555-0300"), address with { });
+            var c4 = new Customer("DL-444", new DateTime(1992, 11, 5), paymentInfo with { BillingAddress = address with { }, CreditCard = creditCard with { } }, new ContactInfo("Alice Cooper", "alice@example.com", "123-555-0400"), address with { });
+            var c5 = new Customer("DL-555", new DateTime(1988, 3, 22), paymentInfo with { BillingAddress = address with { }, CreditCard = creditCard with { } }, new ContactInfo("Charlie Brown", "charlie@example.com", "123-555-0500"), address with { });
             
             customerRepo.AddCustomer(c1);
             customerRepo.AddCustomer(c2);

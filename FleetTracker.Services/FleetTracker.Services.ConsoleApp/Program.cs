@@ -1,20 +1,52 @@
 using System;
-using FleetTracker.Services.Core.Repositories;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using FleetTracker.Services.Core.Interfaces;
 using FleetTracker.Services.Application.Interfaces;
 using FleetTracker.Services.Application.Services;
 using FleetTracker.Services.Application.Managers;
 using FleetTracker.Services.Data;
 
-// setting up manual dependency injection for the managers, makes the code modular and easier to transition
-var repository = new InMemoryFleetRepository();
-var validator = new InputValidator();
-var console = new ConsoleService(validator);
+// Setup Dependency Injection Container
+var services = new ServiceCollection();
 
-FakeDataSeeder.Seed(repository, repository, repository);
+// Register the DbContext to use SQL Server (same localdb connection string)
+services.AddDbContext<FleetTrackerDbContext>(options =>
+    options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=FleetTrackerDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
 
-var customerManager = new CustomerManager(repository, repository, console);
-var vehicleManager = new VehicleManager(repository, repository, console);
-var rentalManager = new RentalManager(repository, repository, repository, console);
+// Register Services and Repositories
+services.AddTransient<IInputValidator, InputValidator>();
+services.AddTransient<IConsoleService, ConsoleService>();
+
+services.AddScoped<EfFleetRepository>();
+services.AddScoped<ICustomerRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
+services.AddScoped<IVehicleRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
+services.AddScoped<IRentalRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
+
+services.AddTransient<CustomerManager>();
+services.AddTransient<VehicleManager>();
+services.AddTransient<RentalManager>();
+
+var serviceProvider = services.BuildServiceProvider();
+
+// Initialize the database
+using (var scope = serviceProvider.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<FleetTrackerDbContext>();
+    context.Database.Migrate();
+
+    if (!context.Customers.Any())
+    {
+        var repo = scope.ServiceProvider.GetRequiredService<EfFleetRepository>();
+        FakeDataSeeder.Seed(repo, repo, repo);
+    }
+}
+
+// Resolve the managers
+var customerManager = serviceProvider.GetRequiredService<CustomerManager>();
+var vehicleManager = serviceProvider.GetRequiredService<VehicleManager>();
+var rentalManager = serviceProvider.GetRequiredService<RentalManager>();
+var console = serviceProvider.GetRequiredService<IConsoleService>();
 
 bool exit = false;
 while (!exit)

@@ -1,0 +1,25 @@
+@FleetTracker.Services.Api_HostAddress = http://localhost:5144
+
+### Get all vehicles
+GET {{FleetTracker.Services.Api_HostAddress}}/api/vehicles
+Accept: application/json
+
+###
+
+### Get only available vehicles
+GET {{FleetTracker.Services.Api_HostAddress}}/api/vehicles/available
+Accept: application/json
+
+###
+
+### Get all customers
+GET {{FleetTracker.Services.Api_HostAddress}}/api/customers
+Accept: application/json
+
+###
+
+### Get active rentals
+GET {{FleetTracker.Services.Api_HostAddress}}/api/rentals/active
+Accept: application/json
+
+###
