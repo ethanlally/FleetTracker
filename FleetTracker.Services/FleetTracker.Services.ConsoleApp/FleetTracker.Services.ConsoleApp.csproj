@@ -4,6 +4,7 @@
     <ProjectReference Include="..\FleetTracker.Services.Application\FleetTracker.Services.Application.csproj" />
     <ProjectReference Include="..\FleetTracker.Services.Data\FleetTracker.Services.Data.csproj" />
     <ProjectReference Include="..\FleetTracker.Services.Core\FleetTracker.Services.Core.csproj" />
+    <ProjectReference Include="..\..\FleetTracker.ServiceDefaults\FleetTracker.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.8" />
   </ItemGroup>
 
   <PropertyGroup>

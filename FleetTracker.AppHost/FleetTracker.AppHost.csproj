@@ -1,0 +1,16 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.4.0">
+
+  <ItemGroup>
+    <ProjectReference Include="..\FleetTracker.Services\FleetTracker.Services.Api\FleetTracker.Services.Api.csproj" />
+    <ProjectReference Include="..\FleetTracker.Services\FleetTracker.Services.ConsoleApp\FleetTracker.Services.ConsoleApp.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>7032f0c4-f49e-4c19-8e68-7303a14fcf97</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

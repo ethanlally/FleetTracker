@@ -7,27 +7,34 @@ using FleetTracker.Services.Application.Services;
 using FleetTracker.Services.Application.Managers;
 using FleetTracker.Services.Data;
 
-// Setup Dependency Injection Container
-var services = new ServiceCollection();
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
-// Register the DbContext to use SQL Server (same localdb connection string)
-services.AddDbContext<FleetTrackerDbContext>(options =>
-    options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=FleetTrackerDb;Trusted_Connection=True;MultipleActiveResultSets=true"));
+var builder = Host.CreateApplicationBuilder(args);
+
+// Hook into Aspire telemetry and defaults
+builder.AddServiceDefaults();
+
+// Register the DbContext to use the dynamic Aspire connection string
+builder.Services.AddDbContext<FleetTrackerDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FleetTrackerDb")));
 
 // Register Services and Repositories
-services.AddTransient<IInputValidator, InputValidator>();
-services.AddTransient<IConsoleService, ConsoleService>();
+builder.Services.AddTransient<IInputValidator, InputValidator>();
+builder.Services.AddTransient<IConsoleService, ConsoleService>();
 
-services.AddScoped<EfFleetRepository>();
-services.AddScoped<ICustomerRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
-services.AddScoped<IVehicleRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
-services.AddScoped<IRentalRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
+builder.Services.AddScoped<EfFleetRepository>();
+builder.Services.AddScoped<ICustomerRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
+builder.Services.AddScoped<IVehicleRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
+builder.Services.AddScoped<IRentalRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
 
-services.AddTransient<CustomerManager>();
-services.AddTransient<VehicleManager>();
-services.AddTransient<RentalManager>();
+builder.Services.AddTransient<CustomerManager>();
+builder.Services.AddTransient<VehicleManager>();
+builder.Services.AddTransient<RentalManager>();
 
-var serviceProvider = services.BuildServiceProvider();
+var host = builder.Build();
+
+var serviceProvider = host.Services;
 
 // Initialize the database
 using (var scope = serviceProvider.CreateScope())

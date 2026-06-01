@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FleetTracker.Services.Core\FleetTracker.Services.Core.csproj" />
     <ProjectReference Include="..\FleetTracker.Services.Data\FleetTracker.Services.Data.csproj" />
+    <ProjectReference Include="..\..\FleetTracker.ServiceDefaults\FleetTracker.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

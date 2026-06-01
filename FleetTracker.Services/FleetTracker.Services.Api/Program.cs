@@ -6,13 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-// Register the DbContext to use SQL Server
+// Register the DbContext to use the dynamic Aspire connection string
 builder.Services.AddDbContext<FleetTrackerDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FleetTrackerConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FleetTrackerDb")));
 
 // Register the EfFleetRepository as Scoped
 builder.Services.AddScoped<EfFleetRepository>();
