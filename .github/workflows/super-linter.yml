@@ -7,31 +7,54 @@
 name: Lint Code Base
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches: "master"
+  push:
+    branches: "master"
+
+permissions:
+  contents: write
+  statuses: write
+  pull-requests: write
+
 jobs:
-  run-lint:
+  lint-and-fix:
+    name: Lint and Auto-Fix Codebase
     runs-on: ubuntu-latest
+
+    if: |
+      !contains(github.event.head_commit.message, '[skip ci]') && 
+      !contains(github.event.head_commit.message, '#style-fix')
+
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Lint Code Base
-        uses: github/super-linter@v4
+      - name: Import GPG Key
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      - name: Lint and Fix Codebase
+        uses: super-linter/super-linter@v8
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
           FIX_CSHARP: true
-          DEFAULT_BRANCH: "master"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILTER_REGEX_EXCLUDE: '.*\.github/workflows/.*'
-          DISABLE_ERRORS: true
-          
+
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "style: auto-fix C# linting errors"
+          commit_message: "style: auto-fix formatting errors [skip ci] #style-fix"
+          branch: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          commit_author: "${{ steps.import-gpg.outputs.name }} <${{ steps.import-gpg.outputs.email }}>"
+          commit_user_name: ${{ steps.import-gpg.outputs.name }}
+          commit_user_email: ${{ steps.import-gpg.outputs.email }}
+          commit_options: "--gpg-sign=${{ steps.import-gpg.outputs.keyid }}"
