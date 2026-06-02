@@ -19,7 +19,9 @@ namespace FleetTracker.Services.Core.Models
         public Guid? VehicleId { get; private set; }
         public Vehicle? Vehicle { get; private set; }
 
+#pragma warning disable CS8618
         private RentalAgreement() : base() { } // Required for EF Core
+#pragma warning restore CS8618
 
         public RentalAgreement(string agreementNumber, DateTime pickupDate, DateTime expectedReturnDate, int startingMileage, Guid customerId, Guid vehicleId)
             : base()

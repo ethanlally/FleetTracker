@@ -27,18 +27,18 @@ namespace FleetTracker.Services.Data
             customerRepo.AddCustomer(c4);
             customerRepo.AddCustomer(c5);
 
-            var v1 = new Vehicle("1111111", "XYZ-101", "Honda", "Civic", 2023, VehicleClass.Compact, 35m);
-            var v2 = new Vehicle("2222222", "XYZ-102", "Toyota", "Camry", 2023, VehicleClass.Sedan, 45m);
-            var v3 = new Vehicle("3333333", "XYZ-103", "Ford", "Explorer", 2022, VehicleClass.SUV, 65m);
-            var v4 = new Vehicle("4444444", "XYZ-104", "Chevy", "Silverado", 2024, VehicleClass.Truck, 75m);
-            var v5 = new Vehicle("5555555", "XYZ-105", "BMW", "7 Series", 2023, VehicleClass.Luxury, 120m);
-            var v6 = new Vehicle("6666666", "XYZ-106", "Nissan", "Sentra", 2021, VehicleClass.Compact, 35m);
-            var v7 = new Vehicle("7777777", "XYZ-107", "Honda", "Accord", 2020, VehicleClass.Sedan, 40m);
-            var v8 = new Vehicle("8888888", "XYZ-108", "Jeep", "Wrangler", 2021, VehicleClass.SUV, 60m);
-            var v9 = new Vehicle("9999999", "XYZ-109", "Tesla", "Model 3", 2023, VehicleClass.Sedan, 55m);
-            var v10 = new Vehicle("1010101", "XYZ-110", "Ford", "Mustang", 2022, VehicleClass.Luxury, 90m);
-            var v11 = new Vehicle("1212121", "XYZ-111", "Subaru", "Outback", 2024, VehicleClass.SUV, 60m);
-            var v12 = new Vehicle("1313131", "XYZ-112", "Toyota", "Corolla", 2021, VehicleClass.Compact, 30m);
+            var v1 = new Vehicle("11111110000000000", "XYZ-101", "Honda", "Civic", 2023, VehicleClass.Compact, 35m);
+            var v2 = new Vehicle("22222220000000000", "XYZ-102", "Toyota", "Camry", 2023, VehicleClass.Sedan, 45m);
+            var v3 = new Vehicle("33333330000000000", "XYZ-103", "Ford", "Explorer", 2022, VehicleClass.SUV, 65m);
+            var v4 = new Vehicle("44444440000000000", "XYZ-104", "Chevy", "Silverado", 2024, VehicleClass.Truck, 75m);
+            var v5 = new Vehicle("55555550000000000", "XYZ-105", "BMW", "7 Series", 2023, VehicleClass.Luxury, 120m);
+            var v6 = new Vehicle("66666660000000000", "XYZ-106", "Nissan", "Sentra", 2021, VehicleClass.Compact, 35m);
+            var v7 = new Vehicle("77777770000000000", "XYZ-107", "Honda", "Accord", 2020, VehicleClass.Sedan, 40m);
+            var v8 = new Vehicle("88888880000000000", "XYZ-108", "Jeep", "Wrangler", 2021, VehicleClass.SUV, 60m);
+            var v9 = new Vehicle("99999990000000000", "XYZ-109", "Tesla", "Model 3", 2023, VehicleClass.Sedan, 55m);
+            var v10 = new Vehicle("10101010000000000", "XYZ-110", "Ford", "Mustang", 2022, VehicleClass.Luxury, 90m);
+            var v11 = new Vehicle("12121210000000000", "XYZ-111", "Subaru", "Outback", 2024, VehicleClass.SUV, 60m);
+            var v12 = new Vehicle("13131310000000000", "XYZ-112", "Toyota", "Corolla", 2021, VehicleClass.Compact, 30m);
 
             vehicleRepo.AddVehicle(v1);
             vehicleRepo.AddVehicle(v2);

@@ -14,7 +14,9 @@ namespace FleetTracker.Services.Core.Models
         public Address HomeAddress { get; private set; }
         public ICollection<RentalAgreement> RentalHistory { get; private set; } = new List<RentalAgreement>();
 
+#pragma warning disable CS8618
         private Customer() : base() { } // Required for EF Core
+#pragma warning restore CS8618
 
         public Customer(string driversLicense, DateTime dateOfBirth, PaymentInformation paymentInformation, ContactInfo contact, Address homeAddress)
             : base()

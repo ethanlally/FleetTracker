@@ -17,7 +17,9 @@ namespace FleetTracker.Services.Core.Models
         public ICollection<RentalAgreement> RentalHistory { get; private set; } = new List<RentalAgreement>();
         public ICollection<MaintenanceRecord> MaintenanceHistory { get; private set; } = new List<MaintenanceRecord>();
 
+#pragma warning disable CS8618
         private Vehicle() : base() { } // Required for EF Core
+#pragma warning restore CS8618
 
         public Vehicle(string vin, string licensePlate, string make, string model, int year, VehicleClass vehicleClass, decimal dailyRate) 
             : base()
