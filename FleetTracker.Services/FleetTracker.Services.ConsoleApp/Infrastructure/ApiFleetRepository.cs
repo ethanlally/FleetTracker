@@ -137,6 +137,8 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
 
         public void DeleteCustomer(Guid id)
         {
+            var response = _httpClient.DeleteAsync($"/api/customers/{id}").Result;
+            EnsureSuccess(response);
         }
 
         public IEnumerable<Vehicle> GetAllVehicles()
@@ -165,6 +167,25 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
 
         public void AddVehicle(Vehicle vehicle)
         {
+            var request = new CreateVehicleRequest
+            {
+                VehicleVin = vehicle.VIN,
+                LicensePlate = vehicle.LicensePlate,
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                Year = vehicle.Year,
+                Class = (int)vehicle.Class,
+                DailyRate = vehicle.DailyRate
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(request), System.Text.Encoding.UTF8, "application/json");
+            var response = _httpClient.PostAsync("/api/vehicles", content).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = response.Content.ReadAsStringAsync().Result;
+                throw new Exception($"API Error: {error}");
+            }
         }
 
         public void UpdateVehicle(Vehicle vehicle)
@@ -205,6 +226,8 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
 
         public void DeleteVehicle(Guid id)
         {
+            var response = _httpClient.DeleteAsync($"/api/vehicles/{id}").Result;
+            EnsureSuccess(response);
         }
 
         public IEnumerable<RentalAgreement> GetAllRentals()
@@ -237,8 +260,8 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
         {
             var request = new StartRentalRequest
             {
-                CustomerId = rental.CustomerId,
-                VehicleVin = GetVehicleById(rental.VehicleId)?.VIN ?? string.Empty,
+                CustomerId = rental.CustomerId.GetValueOrDefault(),
+                VehicleVin = GetVehicleById(rental.VehicleId.GetValueOrDefault())?.VIN ?? string.Empty,
                 ExpectedReturnDate = rental.ExpectedReturnDate,
                 StartingMileage = rental.StartingMileage,
                 PickupDate = rental.PickupDate

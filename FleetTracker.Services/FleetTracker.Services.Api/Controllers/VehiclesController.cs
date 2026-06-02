@@ -25,6 +25,28 @@ namespace FleetTracker.Services.Api.Controllers
             return Ok(vehicles);
         }
 
+        [HttpPost]
+        public IActionResult CreateVehicle([FromBody] CreateVehicleRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var vehicle = new Vehicle(
+                request.VehicleVin,
+                request.LicensePlate,
+                request.Make,
+                request.Model,
+                request.Year,
+                (VehicleClass)request.Class,
+                request.DailyRate
+            );
+
+            _vehicleRepository.AddVehicle(vehicle);
+            return Ok(vehicle);
+        }
+
         [HttpGet("available")]
         public IActionResult GetAvailableVehicles()
         {
@@ -72,13 +94,6 @@ namespace FleetTracker.Services.Api.Controllers
             return Ok(vehicle);
         }
 
-        public class MaintenanceRequestDto
-        {
-            public string Description { get; set; }
-            public decimal Cost { get; set; }
-            public int Type { get; set; }
-        }
-
         [HttpPost("{vin}/maintenance/start")]
         public IActionResult StartMaintenance(string vin, [FromBody] MaintenanceRequestDto request)
         {
@@ -108,6 +123,23 @@ namespace FleetTracker.Services.Api.Controllers
                 return Ok(new { message = "Vehicle returned from maintenance." });
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id:guid}")]
+        public IActionResult DeleteVehicle(Guid id)
+        {
+            try
+            {
+                var vehicle = _vehicleRepository.GetVehicleById(id);
+                if (vehicle == null) return NotFound();
+
+                _vehicleRepository.DeleteVehicle(id);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }

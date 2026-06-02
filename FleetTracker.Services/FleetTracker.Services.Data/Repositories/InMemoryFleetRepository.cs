@@ -32,7 +32,24 @@ namespace FleetTracker.Services.Data.Repositories
         public void UpdateCustomer(Customer customer)
         {
             var existing = GetCustomerById(customer.Id);
-            if (existing == null) throw new InvalidOperationException("Customer not found.");
+            if (existing != null)
+            {
+                _customers.Remove(existing);
+                _customers.Add(customer);
+            }
+        }
+
+        public void DeleteCustomer(Guid id)
+        {
+            var customer = GetCustomerById(id);
+            if (customer != null)
+            {
+                if (customer.RentalHistory.Any(r => r.Status == RentalStatus.Active))
+                {
+                    throw new InvalidOperationException("Cannot delete customer with active rentals. Complete the rental first.");
+                }
+                _customers.Remove(customer);
+            }
         }
 
         public void UpdateVehicle(Vehicle vehicle)
@@ -62,7 +79,14 @@ namespace FleetTracker.Services.Data.Repositories
         public void DeleteVehicle(Guid id)
         {
             var vehicle = GetVehicleById(id);
-            if (vehicle != null) _vehicles.Remove(vehicle);
+            if (vehicle != null)
+            {
+                if (vehicle.Status != VehicleStatus.Available && vehicle.Status != VehicleStatus.Unavailable)
+                {
+                    throw new InvalidOperationException($"Cannot delete vehicle in status: {vehicle.Status}. Ensure the vehicle is Available or Unavailable first.");
+                }
+                _vehicles.Remove(vehicle);
+            }
         }
 
         public void UpdateRental(RentalAgreement rental)
@@ -76,7 +100,7 @@ namespace FleetTracker.Services.Data.Repositories
             var rental = GetRentalById(id);
             if (rental != null)
             {
-                var vehicle = GetVehicleById(rental.VehicleId);
+                var vehicle = GetVehicleById(rental.VehicleId.GetValueOrDefault());
                 if (vehicle != null)
                 {
                     vehicle.CompleteRental(rental, endingMileage);

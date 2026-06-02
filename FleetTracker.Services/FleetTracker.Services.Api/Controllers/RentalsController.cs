@@ -73,7 +73,7 @@ namespace FleetTracker.Services.Api.Controllers
             var rental = _rentalRepository.GetRentalById(id);
             if (rental == null) return NotFound("Rental not found.");
 
-            var vehicle = _vehicleRepository.GetVehicleById(rental.VehicleId);
+            var vehicle = _vehicleRepository.GetVehicleById(rental.VehicleId.GetValueOrDefault());
             if (vehicle == null) return NotFound("Associated vehicle not found.");
 
             try
@@ -87,16 +87,6 @@ namespace FleetTracker.Services.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        public class UpdateRentalRequest
-        {
-            public DateTime ExpectedReturnDate { get; set; }
-            public int StartingMileage { get; set; }
-            public DateTime? ActualReturnDate { get; set; }
-            public int? EndingMileage { get; set; }
-            public decimal? TotalCost { get; set; }
-            public int Status { get; set; }
         }
 
         [HttpPut("{id:guid}")]

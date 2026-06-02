@@ -112,6 +112,23 @@ namespace FleetTracker.Services.Core.DataModels
         public int EndingMileage { get; set; }
     }
 
+    public class UpdateRentalRequest
+    {
+        public DateTime ExpectedReturnDate { get; set; }
+        public int StartingMileage { get; set; }
+        public DateTime? ActualReturnDate { get; set; }
+        public int? EndingMileage { get; set; }
+        public decimal? TotalCost { get; set; }
+        public int Status { get; set; }
+    }
+
+    public class MaintenanceRequestDto
+    {
+        public string Description { get; set; } = string.Empty;
+        public decimal Cost { get; set; }
+        public int Type { get; set; }
+    }
+
     public class UpdateCustomerRequest
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
@@ -129,6 +146,13 @@ namespace FleetTracker.Services.Core.DataModels
 
         [Required]
         public AddressData HomeAddress { get; set; } = new();
+    }
+
+    public class CreateVehicleRequest : UpdateVehicleRequest
+    {
+        [Required(ErrorMessage = "Input cannot be null or empty.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        public string VehicleVin { get; set; } = string.Empty;
     }
 
     public class UpdateVehicleRequest

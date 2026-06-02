@@ -91,5 +91,22 @@ namespace FleetTracker.Services.Api.Controllers
 
             return Ok(customer);
         }
+
+        [HttpDelete("{id:guid}")]
+        public IActionResult DeleteCustomer(Guid id)
+        {
+            try
+            {
+                var customer = _customerRepository.GetCustomerById(id);
+                if (customer == null) return NotFound();
+
+                _customerRepository.DeleteCustomer(id);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

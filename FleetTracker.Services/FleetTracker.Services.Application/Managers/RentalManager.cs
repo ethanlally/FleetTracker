@@ -134,8 +134,8 @@ namespace FleetTracker.Services.Application.Managers
 
             foreach (var r in activeRentals)
             {
-                var v = _vehicleRepository.GetVehicleById(r.VehicleId);
-                var c = _customerRepository.GetCustomerById(r.CustomerId);
+                var v = _vehicleRepository.GetVehicleById(r.VehicleId.GetValueOrDefault());
+                var c = _customerRepository.GetCustomerById(r.CustomerId.GetValueOrDefault());
                 string vInfo = v != null ? $"[{v.VIN}] {v.Make} {v.Model}" : "[Unknown Vehicle]";
                 string cInfo = c != null ? $"[{c.DriversLicense}] {c.Contact.Name}" : "[Unknown Customer]";
                 
@@ -162,7 +162,7 @@ namespace FleetTracker.Services.Application.Managers
                 rental = _rentalRepository.GetAllRentals().FirstOrDefault(r => string.Equals(r.AgreementNumber, agreementNum, StringComparison.OrdinalIgnoreCase));
             }
 
-            var vehicle = _vehicleRepository.GetVehicleById(rental.VehicleId);
+            var vehicle = _vehicleRepository.GetVehicleById(rental.VehicleId.GetValueOrDefault());
 
             int endingMileage = _console.PromptForInt("Enter Ending Mileage: ");
 
@@ -192,8 +192,8 @@ namespace FleetTracker.Services.Application.Managers
 
         private void PrintRentalDetails(RentalAgreement r)
         {
-            var vehicle = _vehicleRepository.GetVehicleById(r.VehicleId);
-            var customer = _customerRepository.GetCustomerById(r.CustomerId);
+            var vehicle = _vehicleRepository.GetVehicleById(r.VehicleId.GetValueOrDefault());
+            var customer = _customerRepository.GetCustomerById(r.CustomerId.GetValueOrDefault());
             string vInfo = vehicle != null ? $"[{vehicle.VIN}] {vehicle.Make} {vehicle.Model}" : "Unknown Vehicle";
             string cInfo = customer != null ? $"[{customer.DriversLicense}] {customer.Contact.Name}" : "Unknown Customer";
 
@@ -221,8 +221,8 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine("All Rentals:");
             foreach (var r in _rentalRepository.GetAllRentals())
             {
-                var v = _vehicleRepository.GetVehicleById(r.VehicleId);
-                var c = _customerRepository.GetCustomerById(r.CustomerId);
+                var v = _vehicleRepository.GetVehicleById(r.VehicleId.GetValueOrDefault());
+                var c = _customerRepository.GetCustomerById(r.CustomerId.GetValueOrDefault());
                 string vInfo = v != null ? $"[{v.VIN}] {v.Make}" : "[Unknown Vehicle]";
                 string cInfo = c != null ? $"[{c.DriversLicense}] {c.Contact.Name}" : "[Unknown Customer]";
                 _console.WriteLine($"  [{r.AgreementNumber}] {vInfo} to {cInfo} (Status: {r.Status})");
@@ -256,21 +256,21 @@ namespace FleetTracker.Services.Application.Managers
             }
             else if (rental.Status == RentalStatus.Completed)
             {
-                DateTime newActualReturn = _console.PromptForOptionalDate($"Actual Return Date ({rental.ActualReturnDate:yyyy-MM-dd}): ", rental.ActualReturnDate.Value);
+                DateTime newActualReturn = _console.PromptForOptionalDate($"Actual Return Date ({rental.ActualReturnDate:yyyy-MM-dd}): ", rental.ActualReturnDate.GetValueOrDefault(DateTime.Now));
                 while (newActualReturn < rental.PickupDate)
                 {
                     _console.WriteLine("Actual return date cannot be before pickup date.");
-                    newActualReturn = _console.PromptForOptionalDate($"Actual Return Date ({rental.ActualReturnDate:yyyy-MM-dd}): ", rental.ActualReturnDate.Value);
+                    newActualReturn = _console.PromptForOptionalDate($"Actual Return Date ({rental.ActualReturnDate:yyyy-MM-dd}): ", rental.ActualReturnDate.GetValueOrDefault(DateTime.Now));
                 }
 
-                int newEndMileage = _console.PromptForOptionalInt($"Ending Mileage ({rental.EndingMileage}): ", rental.EndingMileage.Value);
+                int newEndMileage = _console.PromptForOptionalInt($"Ending Mileage ({rental.EndingMileage}): ", rental.EndingMileage.GetValueOrDefault());
                 while (newEndMileage < rental.StartingMileage)
                 {
                     _console.WriteLine("Ending mileage cannot be less than starting mileage.");
-                    newEndMileage = _console.PromptForOptionalInt($"Ending Mileage ({rental.EndingMileage}): ", rental.EndingMileage.Value);
+                    newEndMileage = _console.PromptForOptionalInt($"Ending Mileage ({rental.EndingMileage}): ", rental.EndingMileage.GetValueOrDefault());
                 }
 
-                decimal newTotalCost = _console.PromptForOptionalDecimal($"Total Cost ({rental.TotalCost}): ", rental.TotalCost.Value);
+                decimal newTotalCost = _console.PromptForOptionalDecimal($"Total Cost ({rental.TotalCost}): ", rental.TotalCost.GetValueOrDefault());
 
                 rental.UpdateCompletedDetails(newActualReturn, newEndMileage, newTotalCost);
             }
