@@ -1,32 +1,35 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using FleetTracker.Services.Core.Interfaces;
 using FleetTracker.Services.Application.Interfaces;
 using FleetTracker.Services.Application.Services;
 using FleetTracker.Services.Application.Managers;
-using FleetTracker.Services.Data;
+using FleetTracker.Services.ConsoleApp.Infrastructure;
 
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 var builder = Host.CreateApplicationBuilder(args);
+
+builder.Logging.ClearProviders();
 
 // Hook into Aspire telemetry and defaults
 builder.AddServiceDefaults();
 
-// Register the DbContext to use the dynamic Aspire connection string
-builder.Services.AddDbContext<FleetTrackerDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FleetTrackerDb")));
+// Register the HTTP Client for ApiFleetRepository to talk to the "api" service
+builder.Services.AddHttpClient<ApiFleetRepository>(client => 
+{
+    client.BaseAddress = new Uri("https+http://api");
+});
 
 // Register Services and Repositories
 builder.Services.AddTransient<IInputValidator, InputValidator>();
 builder.Services.AddTransient<IConsoleService, ConsoleService>();
 
-builder.Services.AddScoped<EfFleetRepository>();
-builder.Services.AddScoped<ICustomerRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
-builder.Services.AddScoped<IVehicleRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
-builder.Services.AddScoped<IRentalRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
+// Forward the interfaces to the ApiFleetRepository from the DI container
+builder.Services.AddScoped<ICustomerRepository>(sp => sp.GetRequiredService<ApiFleetRepository>());
+builder.Services.AddScoped<IVehicleRepository>(sp => sp.GetRequiredService<ApiFleetRepository>());
+builder.Services.AddScoped<IRentalRepository>(sp => sp.GetRequiredService<ApiFleetRepository>());
 
 builder.Services.AddTransient<CustomerManager>();
 builder.Services.AddTransient<VehicleManager>();
@@ -35,19 +38,6 @@ builder.Services.AddTransient<RentalManager>();
 var host = builder.Build();
 
 var serviceProvider = host.Services;
-
-// Initialize the database
-using (var scope = serviceProvider.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<FleetTrackerDbContext>();
-    context.Database.Migrate();
-
-    if (!context.Customers.Any())
-    {
-        var repo = scope.ServiceProvider.GetRequiredService<EfFleetRepository>();
-        FakeDataSeeder.Seed(repo, repo, repo);
-    }
-}
 
 // Resolve the managers
 var customerManager = serviceProvider.GetRequiredService<CustomerManager>();

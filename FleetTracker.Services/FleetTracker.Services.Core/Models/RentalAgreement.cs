@@ -13,10 +13,10 @@ namespace FleetTracker.Services.Core.Models
         public decimal? TotalCost { get; private set; }
         public RentalStatus Status { get; private set; }
         
-        public Guid CustomerId { get; private set; }
+        public Guid? CustomerId { get; private set; }
         public Customer? Customer { get; private set; }
         
-        public Guid VehicleId { get; private set; }
+        public Guid? VehicleId { get; private set; }
         public Vehicle? Vehicle { get; private set; }
 
         private RentalAgreement() : base() { } // Required for EF Core

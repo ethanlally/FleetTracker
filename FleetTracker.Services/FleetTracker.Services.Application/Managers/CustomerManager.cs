@@ -31,7 +31,8 @@ namespace FleetTracker.Services.Application.Managers
                 _console.WriteLine("2. View Customer Profile");
                 _console.WriteLine("3. List All Customers");
                 _console.WriteLine("4. Edit Customer Information");
-                _console.WriteLine("5. Go Back to Main Menu");
+                _console.WriteLine("5. Delete Customer");
+                _console.WriteLine("6. Go Back to Main Menu");
 
                 string choice = _console.ReadLine();
 
@@ -43,7 +44,8 @@ namespace FleetTracker.Services.Application.Managers
                         case "2": ViewCustomerProfile(); break;
                         case "3": ListAllCustomers(); break;
                         case "4": EditCustomer(); break;
-                        case "5": back = true; break;
+                        case "5": DeleteCustomer(); break;
+                        case "6": back = true; break;
                         default: _console.WriteLine("Invalid Selection!"); break;
                     }
                 }
@@ -70,9 +72,22 @@ namespace FleetTracker.Services.Application.Managers
                 dob = _console.PromptForDate("Enter Date of Birth (yyyy-mm-dd): ");
             }
 
-            var address = new Address("Unknown", "Unknown", "Unknown", "00000", "Unknown");
+            string street = _console.PromptForInput("Enter Street Address: ");
+            string city = _console.PromptForInput("Enter City: ");
+            string state = _console.PromptForState("Enter State: ");
+            string zip = _console.PromptForZip("Enter Zip Code: ");
+            string country = _console.PromptForInput("Enter Country: ");
+            var address = new Address(street, city, state, zip, country);
+            
             var contact = new ContactInfo(name, email, phone);
-            var creditCard = new CreditCard("0000", name, "01/99", "000");
+
+            _console.WriteLine("--- Payment Information ---");
+            string ccNumber = _console.PromptForInput("Enter Credit Card Number: ");
+            string ccName = _console.PromptForInput("Enter Name on Card: ");
+            string ccExp = _console.PromptForInput("Enter Expiration Date (mm/yy): ");
+            string ccCvv = _console.PromptForInput("Enter CVV: ");
+            var creditCard = new CreditCard(ccNumber, ccName, ccExp, ccCvv);
+            
             var paymentInfo = new PaymentInformation(address, creditCard);
 
             var customer = new Customer(license, dob, paymentInfo, contact, address);
@@ -140,7 +155,7 @@ namespace FleetTracker.Services.Application.Managers
                 _console.WriteLine("Rental History:");
                 foreach(var rh in customer.RentalHistory)
                 {
-                    var vehicle = _vehicleRepository.GetVehicleById(rh.VehicleId);
+                    var vehicle = rh.VehicleId.HasValue ? _vehicleRepository.GetVehicleById(rh.VehicleId.Value) : null;
                     string vInfo = vehicle != null ? $"{vehicle.Year} {vehicle.Make} {vehicle.Model} (VIN: {vehicle.VIN})" : "Unknown Vehicle";
                     _console.WriteLine($"  - {vInfo} | Status: {rh.Status}");
                 }
@@ -223,12 +238,49 @@ namespace FleetTracker.Services.Application.Managers
             string ccCvv = _console.PromptForOptionalInput($"CC CVV ({customer.PaymentInformation.CreditCard.Cvv}): ", customer.PaymentInformation.CreditCard.Cvv);
             
             var newCc = new CreditCard(ccNumber, ccName, ccExp, ccCvv);
-            customer.UpdatePayment(new PaymentInformation(customer.HomeAddress, newCc));
+            customer.UpdatePayment(new PaymentInformation(customer.PaymentInformation.BillingAddress, newCc));
 
             _customerRepository.UpdateCustomer(customer);
             _console.WriteLine();
             _console.WriteLine("Customer updated successfully. New Details:");
             PrintCustomerDetails(customer);
+        }
+
+        private void DeleteCustomer()
+        {
+            _console.WriteLine("All Customers:");
+            foreach (var c in _customerRepository.GetAllCustomers())
+            {
+                _console.WriteLine($"  [{c.DriversLicense}] {c.Contact.Name}");
+            }
+            _console.WriteLine();
+
+            string license = _console.PromptForInput("Enter Driver's License to delete: ");
+            var customer = _customerRepository.GetCustomerByLicense(license);
+            
+            if (customer == null)
+            {
+                _console.WriteLine("Customer not found.");
+                return;
+            }
+
+            string confirm = _console.PromptForInput($"Are you sure you want to delete {customer.Contact.Name}? (Y/N): ");
+            if (confirm.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    _customerRepository.DeleteCustomer(customer.Id);
+                    _console.WriteLine("Customer deleted successfully.");
+                }
+                catch (Exception ex)
+                {
+                    _console.WriteLine($"Error deleting customer: {ex.Message}");
+                }
+            }
+            else
+            {
+                _console.WriteLine("Deletion cancelled.");
+            }
         }
     }
 }

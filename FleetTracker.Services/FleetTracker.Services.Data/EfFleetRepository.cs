@@ -50,6 +50,20 @@ namespace FleetTracker.Services.Data
             _context.SaveChanges();
         }
 
+        public void DeleteCustomer(Guid id)
+        {
+            var customer = GetCustomerById(id);
+            if (customer != null)
+            {
+                if (customer.RentalHistory.Any(r => r.Status == RentalStatus.Active))
+                {
+                    throw new InvalidOperationException("Cannot delete customer with active rentals. Complete the rental first.");
+                }
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
+            }
+        }
+
         // IVehicleRepository
         public Vehicle? GetVehicleById(Guid id)
         {
@@ -87,6 +101,52 @@ namespace FleetTracker.Services.Data
             _context.SaveChanges();
         }
 
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        {
+            var vehicle = GetVehicleByVin(vin);
+            if (vehicle != null)
+            {
+                vehicle.SendToMaintenance(description, cost, MaintenanceType.Repair);
+                var newRecord = vehicle.MaintenanceHistory.Last();
+                _context.Entry(newRecord).State = EntityState.Added;
+                _context.SaveChanges();
+            }
+        }
+
+        public void ReturnVehicleFromMaintenance(string vin)
+        {
+            var vehicle = GetVehicleByVin(vin);
+            if (vehicle != null)
+            {
+                vehicle.ReturnFromMaintenance();
+                _context.SaveChanges();
+            }
+        }
+
+        public void ToggleVehicleAvailability(string vin)
+        {
+            var vehicle = GetVehicleByVin(vin);
+            if (vehicle != null)
+            {
+                vehicle.ToggleAvailability();
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeleteVehicle(Guid id)
+        {
+            var vehicle = GetVehicleById(id);
+            if (vehicle != null)
+            {
+                if (vehicle.Status != VehicleStatus.Available && vehicle.Status != VehicleStatus.Unavailable)
+                {
+                    throw new InvalidOperationException($"Cannot delete vehicle in status: {vehicle.Status}. Ensure the vehicle is Available or Unavailable first.");
+                }
+                _context.Vehicles.Remove(vehicle);
+                _context.SaveChanges();
+            }
+        }
+
         // IRentalRepository
         public RentalAgreement? GetRentalById(Guid id)
         {
@@ -122,6 +182,20 @@ namespace FleetTracker.Services.Data
         {
             _context.RentalAgreements.Update(rental);
             _context.SaveChanges();
+        }
+
+        public void CompleteRental(Guid id, int endingMileage)
+        {
+            var rental = GetRentalById(id);
+            if (rental != null)
+            {
+                var vehicle = GetVehicleById(rental.VehicleId.GetValueOrDefault());
+                if (vehicle != null)
+                {
+                    vehicle.CompleteRental(rental, endingMileage);
+                    _context.SaveChanges();
+                }
+            }
         }
     }
 }

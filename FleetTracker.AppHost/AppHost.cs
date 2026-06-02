@@ -1,14 +1,11 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-// Define the connection string resource (points to our localdb)
 var sql = builder.AddConnectionString("FleetTrackerDb");
 
-// Orchestrate the Web API
 var api = builder.AddProject<Projects.FleetTracker_Services_Api>("api")
     .WithReference(sql);
 
-// Orchestrate the Console Application
-var consoleApp = builder.AddProject<Projects.FleetTracker_Services_ConsoleApp>("consoleapp")
-    .WithReference(sql);
+var consoleApp = builder.AddExecutable("consoleapp", "cmd.exe", ".", "/c", "start", "cmd", "/k", "dotnet", "run", "--project", "..\\FleetTracker.Services\\FleetTracker.Services.ConsoleApp")
+    .WithReference(api);
 
 builder.Build().Run();

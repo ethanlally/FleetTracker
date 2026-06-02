@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FleetTracker.Services.Core.Models
 {
@@ -6,6 +7,7 @@ namespace FleetTracker.Services.Core.Models
     {
         public DateTime ServiceDate { get; private set; }
         public string Description { get; private set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Cost { get; private set; }
         public MaintenanceType Type { get; private set; }
         

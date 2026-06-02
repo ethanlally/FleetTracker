@@ -21,7 +21,7 @@ namespace FleetTracker.Services.Application.Services
                 return false;
             }
 
-            string pattern = @"[^a-zA-Z0-9\s\-_.,()@+]";
+            string pattern = @"[^a-zA-Z0-9\s\-_.,()@+/]";
             string sanitized = Regex.Replace(parsed, pattern, "");
 
             if (sanitized != parsed)

@@ -4,6 +4,7 @@ using FleetTracker.Services.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetTracker.Services.Data.Migrations
 {
     [DbContext(typeof(FleetTrackerDbContext))]
-    partial class FleetTrackerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260602151152_MakeRentalIdsNullable")]
+    partial class MakeRentalIdsNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

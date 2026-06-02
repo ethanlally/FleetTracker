@@ -61,7 +61,7 @@ namespace FleetTracker.Services.Data
                 entity.HasMany(c => c.RentalHistory)
                       .WithOne(r => r.Customer)
                       .HasForeignKey(r => r.CustomerId)
-                      .OnDelete(DeleteBehavior.Cascade);
+                      .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<Vehicle>(entity =>
@@ -78,7 +78,7 @@ namespace FleetTracker.Services.Data
                 entity.HasMany(v => v.RentalHistory)
                       .WithOne(r => r.Vehicle)
                       .HasForeignKey(r => r.VehicleId)
-                      .OnDelete(DeleteBehavior.Cascade);
+                      .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<RentalAgreement>(entity =>
