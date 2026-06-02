@@ -33,15 +33,6 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Import GPG Key
-        id: import-gpg
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-
       - name: Lint and Fix Codebase
         uses: super-linter/super-linter@v8
         continue-on-error: true
@@ -57,7 +48,3 @@ jobs:
         with:
           commit_message: "style: auto-fix formatting errors [skip ci] #style-fix"
           branch: ${{ github.event.pull_request.head.ref || github.ref_name }}
-          commit_author: "${{ steps.import-gpg.outputs.name }} <${{ steps.import-gpg.outputs.email }}>"
-          commit_user_name: ${{ steps.import-gpg.outputs.name }}
-          commit_user_email: ${{ steps.import-gpg.outputs.email }}
-          commit_options: "--gpg-sign=${{ steps.import-gpg.outputs.keyid }}"
