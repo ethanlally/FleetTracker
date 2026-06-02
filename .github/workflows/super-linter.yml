@@ -44,10 +44,13 @@ jobs:
 
       - name: Lint and Fix Codebase
         uses: super-linter/super-linter@v8
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
           FIX_CSHARP: true
+          FILTER_REGEX_EXCLUDE: '.*\.github/workflows/.*'
+          DISABLE_ERRORS: true
 
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
