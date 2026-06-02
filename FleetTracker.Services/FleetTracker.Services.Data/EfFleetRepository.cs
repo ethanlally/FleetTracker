@@ -87,6 +87,48 @@ namespace FleetTracker.Services.Data
             _context.SaveChanges();
         }
 
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        {
+            var vehicle = GetVehicleByVin(vin);
+            if (vehicle != null)
+            {
+                vehicle.SendToMaintenance(description, cost, MaintenanceType.Repair);
+                var newRecord = vehicle.MaintenanceHistory.Last();
+                _context.Entry(newRecord).State = EntityState.Added;
+                _context.SaveChanges();
+            }
+        }
+
+        public void ReturnVehicleFromMaintenance(string vin)
+        {
+            var vehicle = GetVehicleByVin(vin);
+            if (vehicle != null)
+            {
+                vehicle.ReturnFromMaintenance();
+                _context.SaveChanges();
+            }
+        }
+
+        public void ToggleVehicleAvailability(string vin)
+        {
+            var vehicle = GetVehicleByVin(vin);
+            if (vehicle != null)
+            {
+                vehicle.ToggleAvailability();
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeleteVehicle(Guid id)
+        {
+            var vehicle = _context.Vehicles.Find(id);
+            if (vehicle != null)
+            {
+                _context.Vehicles.Remove(vehicle);
+                _context.SaveChanges();
+            }
+        }
+
         // IRentalRepository
         public RentalAgreement? GetRentalById(Guid id)
         {
@@ -122,6 +164,20 @@ namespace FleetTracker.Services.Data
         {
             _context.RentalAgreements.Update(rental);
             _context.SaveChanges();
+        }
+
+        public void CompleteRental(Guid id, int endingMileage)
+        {
+            var rental = GetRentalById(id);
+            if (rental != null)
+            {
+                var vehicle = GetVehicleById(rental.VehicleId);
+                if (vehicle != null)
+                {
+                    vehicle.CompleteRental(rental, endingMileage);
+                    _context.SaveChanges();
+                }
+            }
         }
     }
 }

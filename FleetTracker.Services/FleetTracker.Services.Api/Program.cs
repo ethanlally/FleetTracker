@@ -1,5 +1,5 @@
 using FleetTracker.Services.Core.Interfaces;
-using FleetTracker.Services.Core.Repositories;
+using FleetTracker.Services.Data.Repositories;
 using FleetTracker.Services.Data;
 using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddOpenApi();
 
 // Register the DbContext to use the dynamic Aspire connection string

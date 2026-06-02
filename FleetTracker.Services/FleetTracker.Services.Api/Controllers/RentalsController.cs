@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using FleetTracker.Services.Core.Interfaces;
 using FleetTracker.Services.Core.Models;
-using FleetTracker.Services.Api.DataModels;
+using FleetTracker.Services.Core.DataModels;
 
 namespace FleetTracker.Services.Api.Controllers
 {
@@ -87,6 +87,38 @@ namespace FleetTracker.Services.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        public class UpdateRentalRequest
+        {
+            public DateTime ExpectedReturnDate { get; set; }
+            public int StartingMileage { get; set; }
+            public DateTime? ActualReturnDate { get; set; }
+            public int? EndingMileage { get; set; }
+            public decimal? TotalCost { get; set; }
+            public int Status { get; set; }
+        }
+
+        [HttpPut("{id:guid}")]
+        public IActionResult UpdateRental(Guid id, [FromBody] UpdateRentalRequest request)
+        {
+            var rental = _rentalRepository.GetRentalById(id);
+            if (rental == null) return NotFound("Rental not found.");
+
+            if (request.Status == (int)RentalStatus.Active)
+            {
+                rental.UpdateActiveDetails(request.ExpectedReturnDate, request.StartingMileage);
+            }
+            else if (request.Status == (int)RentalStatus.Completed)
+            {
+                if (request.ActualReturnDate.HasValue && request.EndingMileage.HasValue && request.TotalCost.HasValue)
+                {
+                    rental.UpdateCompletedDetails(request.ActualReturnDate.Value, request.EndingMileage.Value, request.TotalCost.Value);
+                }
+            }
+            
+            _rentalRepository.UpdateRental(rental);
+            return Ok(rental);
         }
     }
 }

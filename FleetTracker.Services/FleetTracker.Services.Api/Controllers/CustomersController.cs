@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using FleetTracker.Services.Core.Interfaces;
 using FleetTracker.Services.Core.Models;
-using FleetTracker.Services.Api.DataModels;
+using FleetTracker.Services.Core.DataModels;
 
 namespace FleetTracker.Services.Api.Controllers
 {
@@ -33,7 +33,7 @@ namespace FleetTracker.Services.Api.Controllers
             return Ok(customer);
         }
 
-        [HttpGet("{license}")]
+        [HttpGet("license/{license}")]
         public IActionResult GetCustomerByLicense(string license)
         {
             var customer = _customerRepository.GetCustomerByLicense(license);
@@ -59,6 +59,37 @@ namespace FleetTracker.Services.Api.Controllers
             _customerRepository.AddCustomer(customer);
 
             return CreatedAtAction(nameof(GetCustomerById), new { id = customer.Id }, customer);
+        }
+
+        [HttpPut("{id:guid}")]
+        public IActionResult UpdateCustomer(Guid id, [FromBody] UpdateCustomerRequest request)
+        {
+            var customer = _customerRepository.GetCustomerById(id);
+            if (customer == null) return NotFound();
+
+            // Check if the license is being changed to one that already exists on another customer
+            var existingWithLicense = _customerRepository.GetCustomerByLicense(request.DriversLicense);
+            if (existingWithLicense != null && existingWithLicense.Id != id)
+            {
+                return BadRequest("A different customer with this license already exists.");
+            }
+
+            customer.UpdateBasicInfo(request.DriversLicense, request.DateOfBirth);
+
+            var contact = new ContactInfo(request.Contact.Name, request.Contact.Email, request.Contact.PhoneNumber);
+            customer.UpdateContact(contact);
+
+            var address = new Address(request.HomeAddress.Street, request.HomeAddress.City, request.HomeAddress.State, request.HomeAddress.Zip, request.HomeAddress.Country);
+            customer.UpdateAddress(address);
+
+            var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
+            var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
+            var paymentInfo = new PaymentInformation(billingAddress, creditCard);
+            customer.UpdatePayment(paymentInfo);
+
+            _customerRepository.UpdateCustomer(customer);
+
+            return Ok(customer);
         }
     }
 }

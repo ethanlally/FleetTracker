@@ -260,8 +260,9 @@ namespace FleetTracker.Services.Application.Managers
 
             try
             {
-                vehicle.ToggleAvailability();
-                _console.WriteLine($"Vehicle status successfully toggled to: {vehicle.Status}");
+                _vehicleRepository.ToggleVehicleAvailability(vin);
+                var updated = _vehicleRepository.GetVehicleByVin(vin);
+                _console.WriteLine($"Vehicle status successfully toggled to: {updated?.Status}");
             }
             catch (Exception ex)
             {
@@ -272,8 +273,8 @@ namespace FleetTracker.Services.Application.Managers
         private void SendToMaintenance()
         {
             _console.WriteLine();
-            _console.WriteLine("Vehicles not in maintenance:");
-            var availableForMaint = _vehicleRepository.GetAllVehicles().Where(v => v.Status != VehicleStatus.InMaintenance);
+            _console.WriteLine("Vehicles available to send to maintenance:");
+            var availableForMaint = _vehicleRepository.GetAllVehicles().Where(v => v.Status == VehicleStatus.Available);
             if (!availableForMaint.Any())
             {
                 _console.WriteLine("No vehicles available to send to maintenance.");
@@ -291,12 +292,12 @@ namespace FleetTracker.Services.Application.Managers
             string vin = _console.PromptForInput("Enter VIN of vehicle to send to maintenance: ");
 
             var vehicle = _vehicleRepository.GetVehicleByVin(vin);
-            while (vehicle == null || vehicle.Status == VehicleStatus.InMaintenance)
+            while (vehicle == null || vehicle.Status != VehicleStatus.Available)
             {
                 if (vehicle == null)
                     vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
                 else
-                    vin = _console.PromptForInput("Vehicle is already in maintenance. Try another VIN or type 'CANCEL' to go back: ");
+                    vin = _console.PromptForInput($"Vehicle is {vehicle.Status} and cannot be sent to maintenance. Try another VIN or type 'CANCEL' to go back: ");
                     
                 if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
@@ -305,7 +306,7 @@ namespace FleetTracker.Services.Application.Managers
             string description = _console.PromptForInput("Enter Maintenance Description: ");
             decimal cost = _console.PromptForDecimal("Enter Estimated Cost: ");
 
-            vehicle.SendToMaintenance(description, cost, MaintenanceType.Repair);
+            _vehicleRepository.SendVehicleToMaintenance(vin, description, cost);
             
             _console.WriteLine("Vehicle sent to maintenance successfully.");
         }
@@ -344,7 +345,7 @@ namespace FleetTracker.Services.Application.Managers
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
 
-            vehicle.ReturnFromMaintenance();
+            _vehicleRepository.ReturnVehicleFromMaintenance(vin);
             _console.WriteLine("Vehicle returned from maintenance and is now Available.");
         }
 

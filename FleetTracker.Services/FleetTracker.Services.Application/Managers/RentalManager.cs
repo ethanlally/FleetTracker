@@ -166,9 +166,12 @@ namespace FleetTracker.Services.Application.Managers
 
             int endingMileage = _console.PromptForInt("Enter Ending Mileage: ");
 
-            vehicle.CompleteRental(rental, endingMileage);
+            _rentalRepository.CompleteRental(rental.Id, endingMileage);
 
-            _console.WriteLine($"Rental completed successfully. Total Cost: ${rental.TotalCost}");
+            // Fetch the updated rental to get the total cost
+            var updatedRental = _rentalRepository.GetRentalById(rental.Id);
+
+            _console.WriteLine($"Rental completed successfully. Total Cost: ${updatedRental?.TotalCost}");
         }
 
         private void ViewActiveRentals()
