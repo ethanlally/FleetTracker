@@ -9,7 +9,9 @@ namespace FleetTracker.Services.Core.Models
         public string ExpirationDate { get; init; }
         public string Cvv { get; init; }
 
+#pragma warning disable CS8618
         private CreditCard() { } // Required for EF Core
+#pragma warning restore CS8618
 
         public CreditCard(string cardNumber, string cardHolderName, string expirationDate, string cvv)
         {

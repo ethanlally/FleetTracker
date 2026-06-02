@@ -6,11 +6,11 @@ namespace FleetTracker.Services.Core.DataModels
     public class AddressData
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,#]+$", ErrorMessage = "Street address has invalid characters.")]
         public string Street { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[a-zA-Z\s\-]+$", ErrorMessage = "City contains invalid characters.")]
         public string City { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
@@ -22,14 +22,14 @@ namespace FleetTracker.Services.Core.DataModels
         public string Zip { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[a-zA-Z\s\-]+$", ErrorMessage = "Country contains invalid characters.")]
         public string Country { get; set; } = string.Empty;
     }
 
     public class ContactData
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[a-zA-Z\s\-']+$", ErrorMessage = "Name contains invalid characters.")]
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
@@ -45,19 +45,19 @@ namespace FleetTracker.Services.Core.DataModels
     public class CreditCardData
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^\d{16}$", ErrorMessage = "Credit card must be exactly 16 digits.")]
         public string CardNumber { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[a-zA-Z\s\-']+$", ErrorMessage = "Card holder name contains invalid characters.")]
         public string CardHolderName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^(0[1-9]|1[0-2])\/([0-9]{2})$", ErrorMessage = "Expiration date must be in MM/YY format.")]
         public string ExpirationDate { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^\d{3,4}$", ErrorMessage = "CVV must be 3 or 4 digits.")]
         public string Cvv { get; set; } = string.Empty;
     }
 
@@ -72,7 +72,7 @@ namespace FleetTracker.Services.Core.DataModels
     public class CreateCustomerRequest
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[A-Z0-9\-]+$", ErrorMessage = "Drivers license contains invalid characters.")]
         public string DriversLicense { get; set; } = string.Empty;
 
         [Required]
@@ -94,7 +94,7 @@ namespace FleetTracker.Services.Core.DataModels
         public Guid CustomerId { get; set; }
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[A-HJ-NPR-Z0-9]{17}$", ErrorMessage = "VIN must be exactly 17 alphanumeric characters (excluding I, O, Q).")]
         public string VehicleVin { get; set; } = string.Empty;
 
         [Required]
@@ -132,7 +132,7 @@ namespace FleetTracker.Services.Core.DataModels
     public class UpdateCustomerRequest
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[A-Z0-9\-]+$", ErrorMessage = "Drivers license contains invalid characters.")]
         public string DriversLicense { get; set; } = string.Empty;
 
         [Required]
@@ -151,20 +151,22 @@ namespace FleetTracker.Services.Core.DataModels
     public class CreateVehicleRequest : UpdateVehicleRequest
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[A-HJ-NPR-Z0-9]{17}$", ErrorMessage = "VIN must be exactly 17 alphanumeric characters (excluding I, O, Q).")]
         public string VehicleVin { get; set; } = string.Empty;
     }
 
     public class UpdateVehicleRequest
     {
         [Required(ErrorMessage = "Input cannot be null or empty.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s\-_.,()@+/]+$", ErrorMessage = "Input has invalid characters.")]
+        [RegularExpression(@"^[A-Z0-9\- ]+$", ErrorMessage = "License plate contains invalid characters.")]
         public string LicensePlate { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s\-]+$", ErrorMessage = "Make contains invalid characters.")]
         public string Make { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Input cannot be null or empty.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s\-]+$", ErrorMessage = "Model contains invalid characters.")]
         public string Model { get; set; } = string.Empty;
 
         [Range(1900, 2100)]
