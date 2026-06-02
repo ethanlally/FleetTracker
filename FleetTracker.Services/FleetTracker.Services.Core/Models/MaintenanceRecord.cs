@@ -10,7 +10,7 @@ namespace FleetTracker.Services.Core.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Cost { get; private set; }
         public MaintenanceType Type { get; private set; }
-        
+
         public Guid VehicleId { get; private set; }
         public Vehicle? Vehicle { get; private set; }
 

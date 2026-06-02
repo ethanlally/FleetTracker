@@ -129,7 +129,7 @@ namespace FleetTracker.Services.Application.Managers
                 var record = v.MaintenanceHistory.LastOrDefault();
                 string reason = record != null ? record.Description : "Unknown";
                 string cost = record != null ? $"${record.Cost}" : "Unknown";
-                
+
                 _console.WriteLine("--------------------------------------------------");
                 _console.WriteLine($"[{v.VIN}] {v.Year} {v.Make} {v.Model}");
                 _console.WriteLine($"Reason: {reason}");
@@ -185,7 +185,7 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine($"[{vehicle.VIN}] {vehicle.Year} {vehicle.Make} {vehicle.Model}");
             _console.WriteLine($"License Plate: {vehicle.LicensePlate} | Class: {vehicle.Class}");
             _console.WriteLine($"Daily Rate: ${vehicle.DailyRate} | Status: {vehicle.Status}");
-            
+
             if (vehicle.RentalHistory.Count == 0)
             {
                 _console.WriteLine("Total Rentals: 0");
@@ -194,7 +194,7 @@ namespace FleetTracker.Services.Application.Managers
             {
                 _console.WriteLine($"Total Rentals: {vehicle.RentalHistory.Count}");
                 _console.WriteLine("Rental History:");
-                foreach(var rh in vehicle.RentalHistory)
+                foreach (var rh in vehicle.RentalHistory)
                 {
                     var customer = _customerRepository.GetCustomerById(rh.CustomerId.GetValueOrDefault());
                     string cInfo = customer != null ? $"{customer.Contact.Name} (DL: {customer.DriversLicense})" : "Unknown Customer";
@@ -213,9 +213,9 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine("2. Return Vehicle from Maintenance");
             _console.WriteLine("3. Toggle General Availability (Available <-> Unavailable)");
             _console.WriteLine("4. Cancel");
-            
+
             string choice = _console.ReadLine();
-            switch(choice)
+            switch (choice)
             {
                 case "1": SendToMaintenance(); break;
                 case "2": ReturnFromMaintenance(); break;
@@ -231,7 +231,7 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine("Vehicles that are Available or Unavailable:");
             // filtering the list to only include vehicles that can actually be toggled
             var eligibleVehicles = _vehicleRepository.GetAllVehicles().Where(v => v.Status == VehicleStatus.Available || v.Status == VehicleStatus.Unavailable);
-            
+
             if (!eligibleVehicles.Any())
             {
                 _console.WriteLine("No eligible vehicles found.");
@@ -255,7 +255,7 @@ namespace FleetTracker.Services.Application.Managers
                     vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
                 else
                     vin = _console.PromptForInput($"Vehicle is {vehicle.Status} and cannot be toggled. Try another VIN or type 'CANCEL' to go back: ");
-                    
+
                 if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
@@ -300,7 +300,7 @@ namespace FleetTracker.Services.Application.Managers
                     vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
                 else
                     vin = _console.PromptForInput($"Vehicle is {vehicle.Status} and cannot be sent to maintenance. Try another VIN or type 'CANCEL' to go back: ");
-                    
+
                 if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
@@ -309,7 +309,7 @@ namespace FleetTracker.Services.Application.Managers
             decimal cost = _console.PromptForDecimal("Enter Estimated Cost: ");
 
             _vehicleRepository.SendVehicleToMaintenance(vin, description, cost);
-            
+
             _console.WriteLine("Vehicle sent to maintenance successfully.");
         }
 
@@ -318,7 +318,7 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine();
             _console.WriteLine("Vehicles currently in maintenance:");
             var inMaintenance = _vehicleRepository.GetAllVehicles().Where(v => v.Status == VehicleStatus.InMaintenance);
-            
+
             if (!inMaintenance.Any())
             {
                 _console.WriteLine("No vehicles are currently in maintenance.");
@@ -342,7 +342,7 @@ namespace FleetTracker.Services.Application.Managers
                     vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
                 else
                     vin = _console.PromptForInput("Vehicle is not in maintenance. Try another VIN or type 'CANCEL' to go back: ");
-                    
+
                 if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
@@ -370,7 +370,7 @@ namespace FleetTracker.Services.Application.Managers
             }
 
             _console.WriteLine("Enter new values or press Enter to keep current values.");
-            
+
             string newVin = _console.PromptForOptionalInput($"VIN ({vehicle.VIN}): ", vehicle.VIN);
             if (newVin != vehicle.VIN)
             {
@@ -411,7 +411,7 @@ namespace FleetTracker.Services.Application.Managers
 
             string vin = _console.PromptForInput("Enter VIN to delete: ");
             var vehicle = _vehicleRepository.GetVehicleByVin(vin);
-            
+
             if (vehicle == null)
             {
                 _console.WriteLine("Vehicle not found.");

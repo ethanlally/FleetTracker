@@ -63,7 +63,7 @@ namespace FleetTracker.Services.Application.Managers
             string name = _console.PromptForInput("Enter Full Name: ");
             string email = _console.PromptForEmail("Enter Email: ");
             string phone = _console.PromptForPhone("Enter Phone Number: ");
-            
+
             DateTime dob = _console.PromptForDate("Enter Date of Birth (yyyy-mm-dd): ");
             // enforcing minimum age requirements during input (can be changed to different age if needed)
             while (dob > DateTime.Now.AddYears(-18))
@@ -78,7 +78,7 @@ namespace FleetTracker.Services.Application.Managers
             string zip = _console.PromptForZip("Enter Zip Code: ");
             string country = _console.PromptForInput("Enter Country: ");
             var address = new Address(street, city, state, zip, country);
-            
+
             var contact = new ContactInfo(name, email, phone);
 
             _console.WriteLine("--- Payment Information ---");
@@ -87,7 +87,7 @@ namespace FleetTracker.Services.Application.Managers
             string ccExp = _console.PromptForInput("Enter Expiration Date (mm/yy): ");
             string ccCvv = _console.PromptForInput("Enter CVV: ");
             var creditCard = new CreditCard(ccNumber, ccName, ccExp, ccCvv);
-            
+
             var paymentInfo = new PaymentInformation(address, creditCard);
 
             var customer = new Customer(license, dob, paymentInfo, contact, address);
@@ -140,11 +140,11 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine($"Email: {customer.Contact.Email}");
             _console.WriteLine($"Phone: {customer.Contact.PhoneNumber}");
             _console.WriteLine($"Address: {customer.HomeAddress.Street}, {customer.HomeAddress.City}, {customer.HomeAddress.State} {customer.HomeAddress.Zip} {customer.HomeAddress.Country}");
-            
+
             _console.WriteLine($"Payment Info - Card Name: {customer.PaymentInformation.CreditCard.CardHolderName}");
             _console.WriteLine($"Payment Info - Card Number: {customer.PaymentInformation.CreditCard.CardNumber}");
             _console.WriteLine($"Payment Info - Exp: {customer.PaymentInformation.CreditCard.ExpirationDate} | CVV: {customer.PaymentInformation.CreditCard.Cvv}");
-            
+
             if (customer.RentalHistory.Count == 0)
             {
                 _console.WriteLine("Total Rentals: 0");
@@ -153,7 +153,7 @@ namespace FleetTracker.Services.Application.Managers
             {
                 _console.WriteLine($"Total Rentals: {customer.RentalHistory.Count}");
                 _console.WriteLine("Rental History:");
-                foreach(var rh in customer.RentalHistory)
+                foreach (var rh in customer.RentalHistory)
                 {
                     var vehicle = rh.VehicleId.HasValue ? _vehicleRepository.GetVehicleById(rh.VehicleId.Value) : null;
                     string vInfo = vehicle != null ? $"{vehicle.Year} {vehicle.Make} {vehicle.Model} (VIN: {vehicle.VIN})" : "Unknown Vehicle";
@@ -200,7 +200,7 @@ namespace FleetTracker.Services.Application.Managers
             }
 
             _console.WriteLine("Enter new values or press Enter to keep current values.");
-            
+
             string newLicense = _console.PromptForOptionalInput($"Drivers License ({customer.DriversLicense}): ", customer.DriversLicense);
             if (newLicense != customer.DriversLicense)
             {
@@ -217,7 +217,7 @@ namespace FleetTracker.Services.Application.Managers
                 _console.WriteLine("Customer must be at least 18 years old.");
                 newDob = _console.PromptForOptionalDate($"Date of Birth ({customer.DateOfBirth:yyyy-MM-dd}): ", customer.DateOfBirth);
             }
-            
+
             customer.UpdateBasicInfo(newLicense, newDob);
 
             string newName = _console.PromptForOptionalInput($"Name ({customer.Contact.Name}): ", customer.Contact.Name);
@@ -236,7 +236,7 @@ namespace FleetTracker.Services.Application.Managers
             string ccName = _console.PromptForOptionalInput($"CC Name ({customer.PaymentInformation.CreditCard.CardHolderName}): ", customer.PaymentInformation.CreditCard.CardHolderName);
             string ccExp = _console.PromptForOptionalInput($"CC Exp (mm/yy) ({customer.PaymentInformation.CreditCard.ExpirationDate}): ", customer.PaymentInformation.CreditCard.ExpirationDate);
             string ccCvv = _console.PromptForOptionalInput($"CC CVV ({customer.PaymentInformation.CreditCard.Cvv}): ", customer.PaymentInformation.CreditCard.Cvv);
-            
+
             var newCc = new CreditCard(ccNumber, ccName, ccExp, ccCvv);
             customer.UpdatePayment(new PaymentInformation(customer.PaymentInformation.BillingAddress, newCc));
 
@@ -257,7 +257,7 @@ namespace FleetTracker.Services.Application.Managers
 
             string license = _console.PromptForInput("Enter Driver's License to delete: ");
             var customer = _customerRepository.GetCustomerByLicense(license);
-            
+
             if (customer == null)
             {
                 _console.WriteLine("Customer not found.");

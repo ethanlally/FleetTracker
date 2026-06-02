@@ -88,7 +88,7 @@ namespace FleetTracker.Services.Api.Controllers
             if (vehicle == null) return NotFound();
 
             vehicle.UpdateDetails(vin, request.LicensePlate, request.Make, request.Model, request.Year, (VehicleClass)request.Class, request.DailyRate);
-            
+
             _vehicleRepository.UpdateVehicle(vehicle);
 
             return Ok(vehicle);

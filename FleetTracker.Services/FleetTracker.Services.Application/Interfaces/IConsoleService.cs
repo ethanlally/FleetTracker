@@ -8,7 +8,7 @@ namespace FleetTracker.Services.Application.Interfaces
         void Write(string message);
         string ReadLine();
         void Clear();
-        
+
         string PromptForInput(string prompt);
         string PromptForPhone(string prompt);
         string PromptForEmail(string prompt);

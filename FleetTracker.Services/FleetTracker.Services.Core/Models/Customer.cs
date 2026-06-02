@@ -43,7 +43,7 @@ namespace FleetTracker.Services.Core.Models
         {
             HomeAddress = newAddress;
         }
-        
+
         public void UpdatePayment(PaymentInformation newPaymentInfo)
         {
             PaymentInformation = newPaymentInfo;

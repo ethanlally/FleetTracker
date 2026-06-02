@@ -12,7 +12,7 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
     public class ApiFleetRepository : ICustomerRepository, IVehicleRepository, IRentalRepository
     {
         private readonly HttpClient _httpClient;
-        
+
         private static readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
         {
             ContractResolver = new PrivateSetterContractResolver(),

@@ -17,7 +17,7 @@ builder.Logging.ClearProviders();
 builder.AddServiceDefaults();
 
 // Register the HTTP Client for ApiFleetRepository to talk to the "api" service
-builder.Services.AddHttpClient<ApiFleetRepository>(client => 
+builder.Services.AddHttpClient<ApiFleetRepository>(client =>
 {
     client.BaseAddress = new Uri("https+http://api");
 });

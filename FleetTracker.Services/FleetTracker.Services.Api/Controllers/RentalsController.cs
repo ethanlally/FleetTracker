@@ -106,7 +106,7 @@ namespace FleetTracker.Services.Api.Controllers
                     rental.UpdateCompletedDetails(request.ActualReturnDate.Value, request.EndingMileage.Value, request.TotalCost.Value);
                 }
             }
-            
+
             _rentalRepository.UpdateRental(rental);
             return Ok(rental);
         }

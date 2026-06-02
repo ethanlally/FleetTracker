@@ -13,7 +13,7 @@ namespace FleetTracker.Services.Core.Models
         public VehicleClass Class { get; private set; }
         public decimal DailyRate { get; private set; }
         public VehicleStatus Status { get; private set; }
-        
+
         public ICollection<RentalAgreement> RentalHistory { get; private set; } = new List<RentalAgreement>();
         public ICollection<MaintenanceRecord> MaintenanceHistory { get; private set; } = new List<MaintenanceRecord>();
 
@@ -21,7 +21,7 @@ namespace FleetTracker.Services.Core.Models
         private Vehicle() : base() { } // Required for EF Core
 #pragma warning restore CS8618
 
-        public Vehicle(string vin, string licensePlate, string make, string model, int year, VehicleClass vehicleClass, decimal dailyRate) 
+        public Vehicle(string vin, string licensePlate, string make, string model, int year, VehicleClass vehicleClass, decimal dailyRate)
             : base()
         {
             VIN = vin;
@@ -93,10 +93,10 @@ namespace FleetTracker.Services.Core.Models
             var actualPickup = pickupDate ?? DateTime.Now;
             var agreementNumber = $"RA-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}";
             var agreement = new RentalAgreement(agreementNumber, actualPickup, expectedReturnDate, startingMileage, customer.Id, Id);
-            
+
             RentalHistory.Add(agreement);
             customer.AddRental(agreement);
-            
+
             Status = VehicleStatus.Rented;
             return agreement;
         }

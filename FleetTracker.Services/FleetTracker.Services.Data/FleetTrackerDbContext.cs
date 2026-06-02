@@ -85,11 +85,11 @@ namespace FleetTracker.Services.Data
             {
                 entity.HasKey(r => r.Id);
                 entity.HasIndex(r => r.AgreementNumber).IsUnique();
-                
+
                 // precision for currency
                 entity.Property(r => r.TotalCost).HasColumnType("decimal(18,2)");
             });
-            
+
             // Precision for vehicle daily rate
             modelBuilder.Entity<Vehicle>()
                 .Property(v => v.DailyRate).HasColumnType("decimal(18,2)");

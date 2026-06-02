@@ -12,10 +12,10 @@ namespace FleetTracker.Services.Core.Models
         public int? EndingMileage { get; private set; }
         public decimal? TotalCost { get; private set; }
         public RentalStatus Status { get; private set; }
-        
+
         public Guid? CustomerId { get; private set; }
         public Customer? Customer { get; private set; }
-        
+
         public Guid? VehicleId { get; private set; }
         public Vehicle? Vehicle { get; private set; }
 
@@ -70,7 +70,7 @@ namespace FleetTracker.Services.Core.Models
 
             EndingMileage = endingMileage;
             ActualReturnDate = DateTime.Now;
-            
+
             var daysRented = (ActualReturnDate.Value - PickupDate).TotalDays;
             var billableDays = (int)Math.Ceiling(Math.Max(1, daysRented));
             TotalCost = billableDays * dailyRate;

@@ -78,7 +78,7 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine();
             _console.WriteLine("Available Vehicles:");
             var availableVehicles = _vehicleRepository.GetAllVehicles().Where(v => v.Status == VehicleStatus.Available);
-            
+
             if (!availableVehicles.Any())
             {
                 _console.WriteLine("No vehicles available for rent.");
@@ -100,7 +100,7 @@ namespace FleetTracker.Services.Application.Managers
                     vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
                 else
                     vin = _console.PromptForInput("Vehicle is not available. Try another VIN or type 'CANCEL' to go back: ");
-                    
+
                 if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
@@ -125,7 +125,7 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine();
             _console.WriteLine("Active Rentals:");
             var activeRentals = _rentalRepository.GetAllRentals().Where(r => r.Status == RentalStatus.Active);
-            
+
             if (!activeRentals.Any())
             {
                 _console.WriteLine("No active rentals found.");
@@ -138,7 +138,7 @@ namespace FleetTracker.Services.Application.Managers
                 var c = _customerRepository.GetCustomerById(r.CustomerId.GetValueOrDefault());
                 string vInfo = v != null ? $"[{v.VIN}] {v.Make} {v.Model}" : "[Unknown Vehicle]";
                 string cInfo = c != null ? $"[{c.DriversLicense}] {c.Contact.Name}" : "[Unknown Customer]";
-                
+
                 _console.WriteLine("--------------------------------------------------");
                 _console.WriteLine($"Agreement: {r.AgreementNumber}");
                 _console.WriteLine($"Vehicle: {vInfo}");
@@ -150,14 +150,14 @@ namespace FleetTracker.Services.Application.Managers
             string agreementNum = _console.PromptForInput("Enter Agreement Number to complete: ");
 
             var rental = _rentalRepository.GetAllRentals().FirstOrDefault(r => string.Equals(r.AgreementNumber, agreementNum, StringComparison.OrdinalIgnoreCase));
-            
+
             while (rental == null || rental.Status != RentalStatus.Active)
             {
                 if (rental == null)
                     agreementNum = _console.PromptForInput("Agreement not found. Try another or type 'CANCEL' to go back: ");
                 else
                     agreementNum = _console.PromptForInput("Agreement is not active. Try another or type 'CANCEL' to go back: ");
-                    
+
                 if (agreementNum.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 rental = _rentalRepository.GetAllRentals().FirstOrDefault(r => string.Equals(r.AgreementNumber, agreementNum, StringComparison.OrdinalIgnoreCase));
             }
@@ -231,7 +231,7 @@ namespace FleetTracker.Services.Application.Managers
 
             string agreementNum = _console.PromptForInput("Enter Agreement Number to edit: ");
             var rental = _rentalRepository.GetAllRentals().FirstOrDefault(r => string.Equals(r.AgreementNumber, agreementNum, StringComparison.OrdinalIgnoreCase));
-            
+
             while (rental == null)
             {
                 agreementNum = _console.PromptForInput("Agreement not found. Try another or type 'CANCEL' to go back: ");
@@ -251,7 +251,7 @@ namespace FleetTracker.Services.Application.Managers
                 }
 
                 int newStartMileage = _console.PromptForOptionalInt($"Starting Mileage ({rental.StartingMileage}): ", rental.StartingMileage);
-                
+
                 rental.UpdateActiveDetails(newExpectedReturn, newStartMileage);
             }
             else if (rental.Status == RentalStatus.Completed)
