@@ -102,7 +102,7 @@ namespace FleetTracker.Services.Api.Controllers
 
             try
             {
-                _vehicleRepository.SendVehicleToMaintenance(vin, request.Description, request.Cost);
+                _vehicleRepository.SendVehicleToMaintenance(vin, request.Description, request.Cost, (MaintenanceType)request.Type);
                 return Ok(new { message = "Vehicle sent to maintenance." });
             }
             catch (Exception ex)

@@ -347,7 +347,24 @@ namespace FleetTracker.Services.Application.Managers
             string description = _console.PromptForInput("Enter Maintenance Description: ");
             decimal cost = _console.PromptForDecimal("Enter Estimated Cost: ");
 
-            _vehicleRepository.SendVehicleToMaintenance(vin, description, cost);
+            MaintenanceType type;
+            while (true)
+            {
+                _console.WriteLine("Select Maintenance Type:");
+                _console.WriteLine("0 - Routine");
+                _console.WriteLine("1 - Repair");
+                _console.WriteLine("2 - Inspection");
+                string typeInput = _console.PromptForInput("Enter choice (0-2): ");
+                
+                if (Enum.TryParse<MaintenanceType>(typeInput, true, out var parsedType) && Enum.IsDefined(typeof(MaintenanceType), parsedType))
+                {
+                    type = parsedType;
+                    break;
+                }
+                _console.WriteLine("Invalid selection. Please try again.");
+            }
+
+            _vehicleRepository.SendVehicleToMaintenance(vin, description, cost, type);
 
             _console.WriteLine("Vehicle sent to maintenance successfully.");
         }

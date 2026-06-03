@@ -70,7 +70,8 @@ namespace FleetTracker.Services.Data
                 {
                     m.ToTable("MaintenanceRecords");
                     m.WithOwner().HasForeignKey("VehicleId");
-                    m.HasKey(r => r.Id);
+                    m.Property<Guid>("Id");
+                    m.HasKey("Id");
                     m.Property(r => r.Cost).HasColumnType("decimal(18,2)");
                 });
             });

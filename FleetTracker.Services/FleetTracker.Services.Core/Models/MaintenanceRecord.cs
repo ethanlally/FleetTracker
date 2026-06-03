@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FleetTracker.Services.Core.Models
 {
-    public class MaintenanceRecord : Entity
+    public class MaintenanceRecord
     {
         public DateTime ServiceDate { get; private set; }
         public string Description { get; private set; }
@@ -13,7 +13,6 @@ namespace FleetTracker.Services.Core.Models
 
         public Guid VehicleId { get; private set; }
         public MaintenanceRecord(Guid vehicleId, DateTime serviceDate, string description, decimal cost, MaintenanceType type)
-            : base()
         {
             VehicleId = vehicleId;
             ServiceDate = serviceDate;

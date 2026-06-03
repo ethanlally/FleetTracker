@@ -58,10 +58,10 @@ namespace FleetTracker.Services.Data.Repositories
             if (index != -1) _vehicles[index] = vehicle;
         }
 
-        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost, MaintenanceType type)
         {
             var vehicle = GetVehicleByVin(vin);
-            vehicle?.SendToMaintenance(description, cost, MaintenanceType.Repair);
+            vehicle?.SendToMaintenance(description, cost, type);
         }
 
         public void ReturnVehicleFromMaintenance(string vin)

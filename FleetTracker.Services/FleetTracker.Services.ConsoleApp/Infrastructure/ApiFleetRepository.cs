@@ -205,9 +205,9 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
             EnsureSuccess(response);
         }
 
-        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost, MaintenanceType type)
         {
-            var request = new { Description = description, Cost = cost, Type = 0 };
+            var request = new { Description = description, Cost = cost, Type = (int)type };
             var response = _httpClient.PostAsJsonAsync($"/api/vehicles/{vin}/maintenance/start", request).Result;
             EnsureSuccess(response);
         }

@@ -92,12 +92,12 @@ namespace FleetTracker.Services.Data
             _context.SaveChanges();
         }
 
-        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost, MaintenanceType type)
         {
             var vehicle = GetVehicleByVin(vin);
             if (vehicle != null)
             {
-                vehicle.SendToMaintenance(description, cost, MaintenanceType.Repair);
+                vehicle.SendToMaintenance(description, cost, type);
                 var newRecord = vehicle.MaintenanceHistory.Last();
                 _context.Entry(newRecord).State = EntityState.Added;
                 _context.SaveChanges();
