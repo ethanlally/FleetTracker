@@ -119,12 +119,12 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string license = _console.PromptForInput("Enter Driver's License: ");
+            string license = _console.PromptForDriversLicense("Enter Driver's License: ");
 
             var customer = _customerRepository.GetCustomerByLicense(license);
             while (customer == null)
             {
-                license = _console.PromptForInput("Customer not found. Try another license or type 'CANCEL' to go back: ");
+                license = _console.PromptForDriversLicense("Customer not found. Try another license or type 'CANCEL' to go back: ");
                 if (license.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 customer = _customerRepository.GetCustomerByLicense(license);
             }
@@ -194,11 +194,11 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string license = _console.PromptForInput("Enter Driver's License to edit: ");
+            string license = _console.PromptForDriversLicense("Enter Driver's License to edit: ");
             var customer = _customerRepository.GetCustomerByLicense(license);
             while (customer == null)
             {
-                license = _console.PromptForInput("Customer not found. Try another license or type 'CANCEL' to go back: ");
+                license = _console.PromptForDriversLicense("Customer not found. Try another license or type 'CANCEL' to go back: ");
                 if (license.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 customer = _customerRepository.GetCustomerByLicense(license);
             }
@@ -259,7 +259,7 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string license = _console.PromptForInput("Enter Driver's License to delete: ");
+            string license = _console.PromptForDriversLicense("Enter Driver's License to delete: ");
             var customer = _customerRepository.GetCustomerByLicense(license);
 
             if (customer == null)
