@@ -20,6 +20,7 @@ namespace FleetTracker.Services.Data
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasKey(c => c.Id);
+                entity.HasIndex(c => c.DriversLicense).IsUnique();
 
                 // Configure value objects as complex types / owned entities
                 entity.OwnsOne(c => c.Contact, contact =>
@@ -58,10 +59,6 @@ namespace FleetTracker.Services.Data
                     });
                 });
 
-                entity.HasMany(c => c.RentalHistory)
-                      .WithOne(r => r.Customer)
-                      .HasForeignKey(r => r.CustomerId)
-                      .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<Vehicle>(entity =>
@@ -69,22 +66,22 @@ namespace FleetTracker.Services.Data
                 entity.HasKey(v => v.Id);
                 entity.HasIndex(v => v.VIN).IsUnique();
 
-                entity.OwnsMany(v => v.MaintenanceHistory, maintenance =>
+                entity.OwnsMany(v => v.MaintenanceHistory, m =>
                 {
-                    maintenance.HasKey(m => m.Id);
-                    maintenance.WithOwner().HasForeignKey("VehicleId");
+                    m.ToTable("MaintenanceRecords");
+                    m.WithOwner().HasForeignKey("VehicleId");
+                    m.Property<Guid>("Id");
+                    m.HasKey("Id");
+                    m.Property(r => r.Cost).HasColumnType("decimal(18,2)");
                 });
-
-                entity.HasMany(v => v.RentalHistory)
-                      .WithOne(r => r.Vehicle)
-                      .HasForeignKey(r => r.VehicleId)
-                      .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<RentalAgreement>(entity =>
             {
                 entity.HasKey(r => r.Id);
                 entity.HasIndex(r => r.AgreementNumber).IsUnique();
+                entity.HasIndex(r => r.CustomerId);
+                entity.HasIndex(r => r.VehicleId);
 
                 // precision for currency
                 entity.Property(r => r.TotalCost).HasColumnType("decimal(18,2)");

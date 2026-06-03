@@ -20,21 +20,18 @@ namespace FleetTracker.Services.Data
         public Customer? GetCustomerById(Guid id)
         {
             return _context.Customers
-                .Include(c => c.RentalHistory)
                 .FirstOrDefault(c => c.Id == id);
         }
 
         public Customer? GetCustomerByLicense(string license)
         {
             return _context.Customers
-                .Include(c => c.RentalHistory)
                 .FirstOrDefault(c => c.DriversLicense == license);
         }
 
         public IEnumerable<Customer> GetAllCustomers()
         {
             return _context.Customers
-                .Include(c => c.RentalHistory)
                 .ToList();
         }
 
@@ -55,7 +52,7 @@ namespace FleetTracker.Services.Data
             var customer = GetCustomerById(id);
             if (customer != null)
             {
-                if (customer.RentalHistory.Any(r => r.Status == RentalStatus.Active))
+                if (_context.RentalAgreements.Any(r => r.CustomerId == id && r.Status == RentalStatus.Active))
                 {
                     throw new InvalidOperationException("Cannot delete customer with active rentals. Complete the rental first.");
                 }
@@ -68,23 +65,18 @@ namespace FleetTracker.Services.Data
         public Vehicle? GetVehicleById(Guid id)
         {
             return _context.Vehicles
-                .Include(v => v.RentalHistory)
-                .Include(v => v.MaintenanceHistory)
                 .FirstOrDefault(v => v.Id == id);
         }
 
         public Vehicle? GetVehicleByVin(string vin)
         {
             return _context.Vehicles
-                .Include(v => v.RentalHistory)
-                .Include(v => v.MaintenanceHistory)
                 .FirstOrDefault(v => v.VIN == vin);
         }
 
         public IEnumerable<Vehicle> GetAllVehicles()
         {
             return _context.Vehicles
-                .Include(v => v.RentalHistory)
                 .Include(v => v.MaintenanceHistory)
                 .ToList();
         }
@@ -101,12 +93,12 @@ namespace FleetTracker.Services.Data
             _context.SaveChanges();
         }
 
-        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost, MaintenanceType type)
         {
             var vehicle = GetVehicleByVin(vin);
             if (vehicle != null)
             {
-                vehicle.SendToMaintenance(description, cost, MaintenanceType.Repair);
+                vehicle.SendToMaintenance(description, cost, type);
                 var newRecord = vehicle.MaintenanceHistory.Last();
                 _context.Entry(newRecord).State = EntityState.Added;
                 _context.SaveChanges();
@@ -151,24 +143,32 @@ namespace FleetTracker.Services.Data
         public RentalAgreement? GetRentalById(Guid id)
         {
             return _context.RentalAgreements
-                .Include(r => r.Customer)
-                .Include(r => r.Vehicle)
                 .FirstOrDefault(r => r.Id == id);
         }
 
         public RentalAgreement? GetRentalByAgreementNumber(string agreementNumber)
         {
             return _context.RentalAgreements
-                .Include(r => r.Customer)
-                .Include(r => r.Vehicle)
                 .FirstOrDefault(r => r.AgreementNumber == agreementNumber);
         }
 
         public IEnumerable<RentalAgreement> GetAllRentals()
         {
             return _context.RentalAgreements
-                .Include(r => r.Customer)
-                .Include(r => r.Vehicle)
+                .ToList();
+        }
+
+        public IEnumerable<RentalAgreement> GetRentalsByCustomerId(Guid customerId)
+        {
+            return _context.RentalAgreements
+                .Where(r => r.CustomerId == customerId)
+                .ToList();
+        }
+
+        public IEnumerable<RentalAgreement> GetRentalsByVehicleId(Guid vehicleId)
+        {
+            return _context.RentalAgreements
+                .Where(r => r.VehicleId == vehicleId)
                 .ToList();
         }
 

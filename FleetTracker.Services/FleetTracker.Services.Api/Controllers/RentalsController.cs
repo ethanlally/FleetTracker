@@ -44,6 +44,20 @@ namespace FleetTracker.Services.Api.Controllers
             return Ok(rental);
         }
 
+        [HttpGet("customer/{customerId:guid}")]
+        public IActionResult GetRentalsByCustomerId(Guid customerId)
+        {
+            var rentals = _rentalRepository.GetRentalsByCustomerId(customerId);
+            return Ok(rentals);
+        }
+
+        [HttpGet("vehicle/{vehicleId:guid}")]
+        public IActionResult GetRentalsByVehicleId(Guid vehicleId)
+        {
+            var rentals = _rentalRepository.GetRentalsByVehicleId(vehicleId);
+            return Ok(rentals);
+        }
+
         [HttpPost("start")]
         public IActionResult StartRental([FromBody] StartRentalRequest request)
         {

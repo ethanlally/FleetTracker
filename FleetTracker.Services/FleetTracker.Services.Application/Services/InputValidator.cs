@@ -136,5 +136,109 @@ namespace FleetTracker.Services.Application.Services
             }
             return true;
         }
+
+        public bool TryValidateVin(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            parsed = parsed.ToUpperInvariant();
+            if (!Regex.IsMatch(parsed, @"^[A-HJ-NPR-Z0-9]{17}$"))
+            {
+                errorMsg = "VIN must be exactly 17 alphanumeric characters (excluding I, O, Q).";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateLicensePlate(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            parsed = parsed.ToUpperInvariant();
+            if (!Regex.IsMatch(parsed, @"^[A-Z0-9\- ]+$"))
+            {
+                errorMsg = "License plate contains invalid characters.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateMakeModel(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            if (!Regex.IsMatch(parsed, @"^[a-zA-Z0-9\s\-]+$"))
+            {
+                errorMsg = "Input contains invalid characters.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateDriversLicense(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            parsed = parsed.ToUpperInvariant();
+            if (!Regex.IsMatch(parsed, @"^[A-Z0-9\-]+$"))
+            {
+                errorMsg = "Drivers license contains invalid characters.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateNameCityCountry(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            if (!Regex.IsMatch(parsed, @"^[a-zA-Z\s\-']+$"))
+            {
+                errorMsg = "Input contains invalid characters.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateStreet(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            if (!Regex.IsMatch(parsed, @"^[a-zA-Z0-9\s\-_.,#]+$"))
+            {
+                errorMsg = "Street address has invalid characters.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateCreditCard(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            parsed = Regex.Replace(parsed, @"[^\d]", ""); // remove spaces/dashes
+            if (!Regex.IsMatch(parsed, @"^\d{16}$"))
+            {
+                errorMsg = "Credit card must be exactly 16 digits.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateExpirationDate(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            if (!Regex.IsMatch(parsed, @"^(0[1-9]|1[0-2])\/([0-9]{2})$"))
+            {
+                errorMsg = "Expiration date must be in MM/YY format.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool TryValidateCvv(string input, out string parsed, out string errorMsg)
+        {
+            if (!TryValidateString(input, out parsed, out errorMsg)) return false;
+            parsed = Regex.Replace(parsed, @"[^\d]", "");
+            if (!Regex.IsMatch(parsed, @"^\d{3,4}$"))
+            {
+                errorMsg = "CVV must be 3 or 4 digits.";
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace FleetTracker.Services.Core.Models
         public PaymentInformation PaymentInformation { get; private set; }
         public ContactInfo Contact { get; private set; }
         public Address HomeAddress { get; private set; }
-        public ICollection<RentalAgreement> RentalHistory { get; private set; } = new List<RentalAgreement>();
+
 
 #pragma warning disable CS8618
         private Customer() : base() { } // Required for EF Core
@@ -49,9 +49,5 @@ namespace FleetTracker.Services.Core.Models
             PaymentInformation = newPaymentInfo;
         }
 
-        internal void AddRental(RentalAgreement agreement)
-        {
-            RentalHistory.Add(agreement);
-        }
     }
 }

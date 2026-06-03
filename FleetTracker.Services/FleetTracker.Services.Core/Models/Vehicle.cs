@@ -14,7 +14,7 @@ namespace FleetTracker.Services.Core.Models
         public decimal DailyRate { get; private set; }
         public VehicleStatus Status { get; private set; }
 
-        public ICollection<RentalAgreement> RentalHistory { get; private set; } = new List<RentalAgreement>();
+
         public ICollection<MaintenanceRecord> MaintenanceHistory { get; private set; } = new List<MaintenanceRecord>();
 
 #pragma warning disable CS8618
@@ -93,9 +93,6 @@ namespace FleetTracker.Services.Core.Models
             var actualPickup = pickupDate ?? DateTime.Now;
             var agreementNumber = $"RA-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}";
             var agreement = new RentalAgreement(agreementNumber, actualPickup, expectedReturnDate, startingMileage, customer.Id, Id);
-
-            RentalHistory.Add(agreement);
-            customer.AddRental(agreement);
 
             Status = VehicleStatus.Rented;
             return agreement;

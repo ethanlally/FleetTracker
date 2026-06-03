@@ -8,6 +8,8 @@ namespace FleetTracker.Services.Application.Services
     {
         private readonly IInputValidator _validator;
 
+        private delegate bool ValidatorDelegate<T>(string input, out T parsed, out string errorMsg);
+
         public ConsoleService(IInputValidator validator)
         {
             _validator = validator;
@@ -18,238 +20,77 @@ namespace FleetTracker.Services.Application.Services
         public string ReadLine() => Console.ReadLine() ?? "";
         public void Clear() => Console.Clear();
 
-        public string PromptForInput(string prompt)
+        private T PromptWithValidation<T>(string prompt, ValidatorDelegate<T> validateMethod, string retryPromptSuffix = "Try again: ")
         {
             Console.Write(prompt);
             string input = ReadLine();
-            string parsed;
+            T parsed;
             string error;
-            // validating user input to ensure it meets format requirements, will keep prompting until a valid entry is provided
-            while (!_validator.TryValidateString(input, out parsed, out error))
+            while (!validateMethod(input, out parsed, out error))
             {
-                Console.Write($"{error} Try again: ");
+                Console.Write($"{error} {retryPromptSuffix}");
                 input = ReadLine();
             }
             return parsed;
         }
 
-        public string PromptForPhone(string prompt)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            string parsed;
-            string error;
-            while (!_validator.TryValidatePhone(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-            }
-            return parsed;
-        }
-
-        public string PromptForEmail(string prompt)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            string parsed;
-            string error;
-            while (!_validator.TryValidateEmail(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-            }
-            return parsed;
-        }
-
-        public string PromptForState(string prompt)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            string parsed;
-            string error;
-            while (!_validator.TryValidateState(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-            }
-            return parsed;
-        }
-
-        public string PromptForZip(string prompt)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            string parsed;
-            string error;
-            while (!_validator.TryValidateZip(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-            }
-            return parsed;
-        }
-
-        public int PromptForInt(string prompt)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            int parsed;
-            string error;
-            while (!_validator.TryValidateInt(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-            }
-            return parsed;
-        }
-
-        public decimal PromptForDecimal(string prompt)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            decimal parsed;
-            string error;
-            while (!_validator.TryValidateDecimal(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-            }
-            return parsed;
-        }
-
-        public DateTime PromptForDate(string prompt)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            DateTime parsed;
-            string error;
-            while (!_validator.TryValidateDate(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again (yyyy-mm-dd): ");
-                input = ReadLine();
-            }
-            return parsed;
-        }
-
-        // prompting for optional field update - if input is left blank then existing value is retained
-        public string PromptForOptionalInput(string prompt, string currentValue)
+        private T PromptForOptionalWithValidation<T>(string prompt, T currentValue, ValidatorDelegate<T> validateMethod, string retryPromptSuffix = "Try again: ")
         {
             Console.Write(prompt);
             string input = ReadLine();
             if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            string parsed; string error;
-            while (!_validator.TryValidateString(input, out parsed, out error))
+
+            T parsed;
+            string error;
+            while (!validateMethod(input, out parsed, out error))
             {
-                Console.Write($"{error} Try again: ");
+                Console.Write($"{error} {retryPromptSuffix}");
                 input = ReadLine();
                 if (string.IsNullOrWhiteSpace(input)) return currentValue;
             }
             return parsed;
         }
 
-        public string PromptForOptionalPhone(string prompt, string currentValue)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            string parsed; string error;
-            while (!_validator.TryValidatePhone(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            }
-            return parsed;
-        }
+        // --- Required Prompts ---
 
-        public string PromptForOptionalEmail(string prompt, string currentValue)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            string parsed; string error;
-            while (!_validator.TryValidateEmail(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            }
-            return parsed;
-        }
+        public string PromptForInput(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateString);
+        public string PromptForPhone(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidatePhone);
+        public string PromptForEmail(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateEmail);
+        public string PromptForState(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateState);
+        public string PromptForZip(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateZip);
+        public int PromptForInt(string prompt) => PromptWithValidation<int>(prompt, _validator.TryValidateInt);
+        public decimal PromptForDecimal(string prompt) => PromptWithValidation<decimal>(prompt, _validator.TryValidateDecimal);
+        public DateTime PromptForDate(string prompt) => PromptWithValidation<DateTime>(prompt, _validator.TryValidateDate, "Try again (yyyy-mm-dd): ");
 
-        public string PromptForOptionalState(string prompt, string currentValue)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            string parsed; string error;
-            while (!_validator.TryValidateState(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            }
-            return parsed;
-        }
+        public string PromptForVin(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateVin);
+        public string PromptForLicensePlate(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateLicensePlate);
+        public string PromptForMakeModel(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateMakeModel);
+        public string PromptForDriversLicense(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateDriversLicense);
+        public string PromptForNameCityCountry(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateNameCityCountry);
+        public string PromptForStreet(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateStreet);
+        public string PromptForCreditCard(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateCreditCard);
+        public string PromptForExpirationDate(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateExpirationDate);
+        public string PromptForCvv(string prompt) => PromptWithValidation<string>(prompt, _validator.TryValidateCvv);
 
-        public string PromptForOptionalZip(string prompt, string currentValue)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            string parsed; string error;
-            while (!_validator.TryValidateZip(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            }
-            return parsed;
-        }
+        // --- Optional Prompts ---
 
-        public int PromptForOptionalInt(string prompt, int currentValue)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            int parsed; string error;
-            while (!_validator.TryValidateInt(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            }
-            return parsed;
-        }
+        public string PromptForOptionalInput(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateString);
+        public string PromptForOptionalPhone(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidatePhone);
+        public string PromptForOptionalEmail(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateEmail);
+        public string PromptForOptionalState(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateState);
+        public string PromptForOptionalZip(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateZip);
+        public int PromptForOptionalInt(string prompt, int cv) => PromptForOptionalWithValidation<int>(prompt, cv, _validator.TryValidateInt);
+        public decimal PromptForOptionalDecimal(string prompt, decimal cv) => PromptForOptionalWithValidation<decimal>(prompt, cv, _validator.TryValidateDecimal);
+        public DateTime PromptForOptionalDate(string prompt, DateTime cv) => PromptForOptionalWithValidation<DateTime>(prompt, cv, _validator.TryValidateDate, "Try again (yyyy-mm-dd): ");
 
-        public decimal PromptForOptionalDecimal(string prompt, decimal currentValue)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            decimal parsed; string error;
-            while (!_validator.TryValidateDecimal(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again: ");
-                input = ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            }
-            return parsed;
-        }
-
-        public DateTime PromptForOptionalDate(string prompt, DateTime currentValue)
-        {
-            Console.Write(prompt);
-            string input = ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            DateTime parsed; string error;
-            while (!_validator.TryValidateDate(input, out parsed, out error))
-            {
-                Console.Write($"{error} Try again (yyyy-mm-dd): ");
-                input = ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            }
-            return parsed;
-        }
+        public string PromptForOptionalVin(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateVin);
+        public string PromptForOptionalLicensePlate(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateLicensePlate);
+        public string PromptForOptionalMakeModel(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateMakeModel);
+        public string PromptForOptionalDriversLicense(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateDriversLicense);
+        public string PromptForOptionalNameCityCountry(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateNameCityCountry);
+        public string PromptForOptionalStreet(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateStreet);
+        public string PromptForOptionalCreditCard(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateCreditCard);
+        public string PromptForOptionalExpirationDate(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateExpirationDate);
+        public string PromptForOptionalCvv(string prompt, string cv) => PromptForOptionalWithValidation<string>(prompt, cv, _validator.TryValidateCvv);
     }
 }

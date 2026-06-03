@@ -13,7 +13,7 @@ namespace FleetTracker.Services.Core.Interfaces
         void UpdateVehicle(Vehicle vehicle);
         void DeleteVehicle(Guid id);
 
-        void SendVehicleToMaintenance(string vin, string description, decimal cost);
+        void SendVehicleToMaintenance(string vin, string description, decimal cost, MaintenanceType type);
         void ReturnVehicleFromMaintenance(string vin);
         void ToggleVehicleAvailability(string vin);
     }

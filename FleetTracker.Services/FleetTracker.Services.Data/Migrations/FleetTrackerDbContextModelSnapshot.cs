@@ -33,9 +33,12 @@ namespace FleetTracker.Services.Data.Migrations
 
                     b.Property<string>("DriversLicense")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DriversLicense")
+                        .IsUnique();
 
                     b.ToTable("Customers");
                 });
@@ -299,23 +302,6 @@ namespace FleetTracker.Services.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FleetTracker.Services.Core.Models.RentalAgreement", b =>
-                {
-                    b.HasOne("FleetTracker.Services.Core.Models.Customer", "Customer")
-                        .WithMany("RentalHistory")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("FleetTracker.Services.Core.Models.Vehicle", "Vehicle")
-                        .WithMany("RentalHistory")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Vehicle");
-                });
-
             modelBuilder.Entity("FleetTracker.Services.Core.Models.Vehicle", b =>
                 {
                     b.OwnsMany("FleetTracker.Services.Core.Models.MaintenanceRecord", "MaintenanceHistory", b1 =>
@@ -340,38 +326,17 @@ namespace FleetTracker.Services.Data.Migrations
                             b1.Property<Guid>("VehicleId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<Guid?>("VehicleId1")
-                                .HasColumnType("uniqueidentifier");
-
                             b1.HasKey("Id");
 
                             b1.HasIndex("VehicleId");
 
-                            b1.HasIndex("VehicleId1");
-
-                            b1.ToTable("MaintenanceRecord");
+                            b1.ToTable("MaintenanceRecords", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("VehicleId");
-
-                            b1.HasOne("FleetTracker.Services.Core.Models.Vehicle", "Vehicle")
-                                .WithMany()
-                                .HasForeignKey("VehicleId1");
-
-                            b1.Navigation("Vehicle");
                         });
 
                     b.Navigation("MaintenanceHistory");
-                });
-
-            modelBuilder.Entity("FleetTracker.Services.Core.Models.Customer", b =>
-                {
-                    b.Navigation("RentalHistory");
-                });
-
-            modelBuilder.Entity("FleetTracker.Services.Core.Models.Vehicle", b =>
-                {
-                    b.Navigation("RentalHistory");
                 });
 #pragma warning restore 612, 618
         }

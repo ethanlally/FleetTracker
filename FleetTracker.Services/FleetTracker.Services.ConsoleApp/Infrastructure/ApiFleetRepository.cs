@@ -205,9 +205,9 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
             EnsureSuccess(response);
         }
 
-        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost, MaintenanceType type)
         {
-            var request = new { Description = description, Cost = cost, Type = 0 };
+            var request = new { Description = description, Cost = cost, Type = (int)type };
             var response = _httpClient.PostAsJsonAsync($"/api/vehicles/{vin}/maintenance/start", request).Result;
             EnsureSuccess(response);
         }
@@ -233,6 +233,22 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
         public IEnumerable<RentalAgreement> GetAllRentals()
         {
             var json = _httpClient.GetStringAsync("/api/rentals").Result;
+            return JsonConvert.DeserializeObject<List<RentalAgreement>>(json, _jsonSettings) ?? new List<RentalAgreement>();
+        }
+
+        public IEnumerable<RentalAgreement> GetRentalsByCustomerId(Guid customerId)
+        {
+            var response = _httpClient.GetAsync($"/api/rentals/customer/{customerId}").Result;
+            if (!response.IsSuccessStatusCode) return new List<RentalAgreement>();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<List<RentalAgreement>>(json, _jsonSettings) ?? new List<RentalAgreement>();
+        }
+
+        public IEnumerable<RentalAgreement> GetRentalsByVehicleId(Guid vehicleId)
+        {
+            var response = _httpClient.GetAsync($"/api/rentals/vehicle/{vehicleId}").Result;
+            if (!response.IsSuccessStatusCode) return new List<RentalAgreement>();
+            var json = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<List<RentalAgreement>>(json, _jsonSettings) ?? new List<RentalAgreement>();
         }
 

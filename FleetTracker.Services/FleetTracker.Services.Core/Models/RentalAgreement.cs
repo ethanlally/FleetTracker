@@ -14,10 +14,8 @@ namespace FleetTracker.Services.Core.Models
         public RentalStatus Status { get; private set; }
 
         public Guid? CustomerId { get; private set; }
-        public Customer? Customer { get; private set; }
 
         public Guid? VehicleId { get; private set; }
-        public Vehicle? Vehicle { get; private set; }
 
 #pragma warning disable CS8618
         private RentalAgreement() : base() { } // Required for EF Core

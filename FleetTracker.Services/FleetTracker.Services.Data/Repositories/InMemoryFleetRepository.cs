@@ -44,7 +44,7 @@ namespace FleetTracker.Services.Data.Repositories
             var customer = GetCustomerById(id);
             if (customer != null)
             {
-                if (customer.RentalHistory.Any(r => r.Status == RentalStatus.Active))
+                if (_rentals.Any(r => r.CustomerId == id && r.Status == RentalStatus.Active))
                 {
                     throw new InvalidOperationException("Cannot delete customer with active rentals. Complete the rental first.");
                 }
@@ -58,10 +58,10 @@ namespace FleetTracker.Services.Data.Repositories
             if (index != -1) _vehicles[index] = vehicle;
         }
 
-        public void SendVehicleToMaintenance(string vin, string description, decimal cost)
+        public void SendVehicleToMaintenance(string vin, string description, decimal cost, MaintenanceType type)
         {
             var vehicle = GetVehicleByVin(vin);
-            vehicle?.SendToMaintenance(description, cost, MaintenanceType.Repair);
+            vehicle?.SendToMaintenance(description, cost, type);
         }
 
         public void ReturnVehicleFromMaintenance(string vin)
@@ -93,6 +93,16 @@ namespace FleetTracker.Services.Data.Repositories
         {
             var index = _rentals.FindIndex(r => r.Id == rental.Id);
             if (index != -1) _rentals[index] = rental;
+        }
+
+        public IEnumerable<RentalAgreement> GetRentalsByCustomerId(Guid customerId)
+        {
+            return _rentals.Where(r => r.CustomerId == customerId).ToList();
+        }
+
+        public IEnumerable<RentalAgreement> GetRentalsByVehicleId(Guid vehicleId)
+        {
+            return _rentals.Where(r => r.VehicleId == vehicleId).ToList();
         }
 
         public void CompleteRental(Guid id, int endingMileage)

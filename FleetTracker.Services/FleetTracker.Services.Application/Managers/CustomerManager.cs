@@ -11,12 +11,14 @@ namespace FleetTracker.Services.Application.Managers
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IVehicleRepository _vehicleRepository;
+        private readonly IRentalRepository _rentalRepository;
         private readonly IConsoleService _console;
 
-        public CustomerManager(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository, IConsoleService console)
+        public CustomerManager(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository, IRentalRepository rentalRepository, IConsoleService console)
         {
             _customerRepository = customerRepository;
             _vehicleRepository = vehicleRepository;
+            _rentalRepository = rentalRepository;
             _console = console;
         }
 
@@ -60,7 +62,7 @@ namespace FleetTracker.Services.Application.Managers
         {
             string license = GetUniqueLicense();
 
-            string name = _console.PromptForInput("Enter Full Name: ");
+            string name = _console.PromptForNameCityCountry("Enter Full Name: ");
             string email = _console.PromptForEmail("Enter Email: ");
             string phone = _console.PromptForPhone("Enter Phone Number: ");
 
@@ -72,20 +74,20 @@ namespace FleetTracker.Services.Application.Managers
                 dob = _console.PromptForDate("Enter Date of Birth (yyyy-mm-dd): ");
             }
 
-            string street = _console.PromptForInput("Enter Street Address: ");
-            string city = _console.PromptForInput("Enter City: ");
+            string street = _console.PromptForStreet("Enter Street Address: ");
+            string city = _console.PromptForNameCityCountry("Enter City: ");
             string state = _console.PromptForState("Enter State: ");
             string zip = _console.PromptForZip("Enter Zip Code: ");
-            string country = _console.PromptForInput("Enter Country: ");
+            string country = _console.PromptForNameCityCountry("Enter Country: ");
             var address = new Address(street, city, state, zip, country);
 
             var contact = new ContactInfo(name, email, phone);
 
             _console.WriteLine("--- Payment Information ---");
-            string ccNumber = _console.PromptForInput("Enter Credit Card Number: ");
-            string ccName = _console.PromptForInput("Enter Name on Card: ");
-            string ccExp = _console.PromptForInput("Enter Expiration Date (mm/yy): ");
-            string ccCvv = _console.PromptForInput("Enter CVV: ");
+            string ccNumber = _console.PromptForCreditCard("Enter Credit Card Number: ");
+            string ccName = _console.PromptForNameCityCountry("Enter Name on Card: ");
+            string ccExp = _console.PromptForExpirationDate("Enter Expiration Date (mm/yy): ");
+            string ccCvv = _console.PromptForCvv("Enter CVV: ");
             var creditCard = new CreditCard(ccNumber, ccName, ccExp, ccCvv);
 
             var paymentInfo = new PaymentInformation(address, creditCard);
@@ -98,11 +100,11 @@ namespace FleetTracker.Services.Application.Managers
 
         private string GetUniqueLicense()
         {
-            string license = _console.PromptForInput("Enter Driver's License: ");
+            string license = _console.PromptForDriversLicense("Enter Driver's License: ");
 
             while (_customerRepository.GetCustomerByLicense(license) != null)
             {
-                license = _console.PromptForInput("A customer with this license already exists. Please try another: ");
+                license = _console.PromptForDriversLicense("A customer with this license already exists. Please try another: ");
             }
 
             return license;
@@ -117,12 +119,12 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string license = _console.PromptForInput("Enter Driver's License: ");
+            string license = _console.PromptForDriversLicense("Enter Driver's License: ");
 
             var customer = _customerRepository.GetCustomerByLicense(license);
             while (customer == null)
             {
-                license = _console.PromptForInput("Customer not found. Try another license or type 'CANCEL' to go back: ");
+                license = _console.PromptForDriversLicense("Customer not found. Try another license or type 'CANCEL' to go back: ");
                 if (license.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 customer = _customerRepository.GetCustomerByLicense(license);
             }
@@ -145,15 +147,17 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine($"Payment Info - Card Number: {customer.PaymentInformation.CreditCard.CardNumber}");
             _console.WriteLine($"Payment Info - Exp: {customer.PaymentInformation.CreditCard.ExpirationDate} | CVV: {customer.PaymentInformation.CreditCard.Cvv}");
 
-            if (customer.RentalHistory.Count == 0)
+            var rentals = _rentalRepository.GetRentalsByCustomerId(customer.Id).ToList();
+
+            if (rentals.Count == 0)
             {
                 _console.WriteLine("Total Rentals: 0");
             }
             else
             {
-                _console.WriteLine($"Total Rentals: {customer.RentalHistory.Count}");
+                _console.WriteLine($"Total Rentals: {rentals.Count}");
                 _console.WriteLine("Rental History:");
-                foreach (var rh in customer.RentalHistory)
+                foreach (var rh in rentals)
                 {
                     var vehicle = rh.VehicleId.HasValue ? _vehicleRepository.GetVehicleById(rh.VehicleId.Value) : null;
                     string vInfo = vehicle != null ? $"{vehicle.Year} {vehicle.Make} {vehicle.Model} (VIN: {vehicle.VIN})" : "Unknown Vehicle";
@@ -190,24 +194,24 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string license = _console.PromptForInput("Enter Driver's License to edit: ");
+            string license = _console.PromptForDriversLicense("Enter Driver's License to edit: ");
             var customer = _customerRepository.GetCustomerByLicense(license);
             while (customer == null)
             {
-                license = _console.PromptForInput("Customer not found. Try another license or type 'CANCEL' to go back: ");
+                license = _console.PromptForDriversLicense("Customer not found. Try another license or type 'CANCEL' to go back: ");
                 if (license.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 customer = _customerRepository.GetCustomerByLicense(license);
             }
 
             _console.WriteLine("Enter new values or press Enter to keep current values.");
 
-            string newLicense = _console.PromptForOptionalInput($"Drivers License ({customer.DriversLicense}): ", customer.DriversLicense);
+            string newLicense = _console.PromptForOptionalDriversLicense($"Drivers License ({customer.DriversLicense}): ", customer.DriversLicense);
             if (newLicense != customer.DriversLicense)
             {
                 // checking the repository to make sure new license isn't taken already
                 while (_customerRepository.GetCustomerByLicense(newLicense) != null)
                 {
-                    newLicense = _console.PromptForOptionalInput($"License {newLicense} is already taken. Try another or press Enter to keep ({customer.DriversLicense}): ", customer.DriversLicense);
+                    newLicense = _console.PromptForOptionalDriversLicense($"License {newLicense} is already taken. Try another or press Enter to keep ({customer.DriversLicense}): ", customer.DriversLicense);
                 }
             }
 
@@ -220,22 +224,22 @@ namespace FleetTracker.Services.Application.Managers
 
             customer.UpdateBasicInfo(newLicense, newDob);
 
-            string newName = _console.PromptForOptionalInput($"Name ({customer.Contact.Name}): ", customer.Contact.Name);
+            string newName = _console.PromptForOptionalNameCityCountry($"Name ({customer.Contact.Name}): ", customer.Contact.Name);
             string newEmail = _console.PromptForOptionalEmail($"Email ({customer.Contact.Email}): ", customer.Contact.Email);
             string newPhone = _console.PromptForOptionalPhone($"Phone ({customer.Contact.PhoneNumber}): ", customer.Contact.PhoneNumber);
             customer.UpdateContact(new ContactInfo(newName, newEmail, newPhone));
 
-            string newStreet = _console.PromptForOptionalInput($"Street ({customer.HomeAddress.Street}): ", customer.HomeAddress.Street);
-            string newCity = _console.PromptForOptionalInput($"City ({customer.HomeAddress.City}): ", customer.HomeAddress.City);
+            string newStreet = _console.PromptForOptionalStreet($"Street ({customer.HomeAddress.Street}): ", customer.HomeAddress.Street);
+            string newCity = _console.PromptForOptionalNameCityCountry($"City ({customer.HomeAddress.City}): ", customer.HomeAddress.City);
             string newState = _console.PromptForOptionalState($"State ({customer.HomeAddress.State}): ", customer.HomeAddress.State);
             string newZip = _console.PromptForOptionalZip($"Zip ({customer.HomeAddress.Zip}): ", customer.HomeAddress.Zip);
-            string newCountry = _console.PromptForOptionalInput($"Country ({customer.HomeAddress.Country}): ", customer.HomeAddress.Country);
+            string newCountry = _console.PromptForOptionalNameCityCountry($"Country ({customer.HomeAddress.Country}): ", customer.HomeAddress.Country);
             customer.UpdateAddress(new Address(newStreet, newCity, newState, newZip, newCountry));
 
-            string ccNumber = _console.PromptForOptionalInput($"CC Number ({customer.PaymentInformation.CreditCard.CardNumber}): ", customer.PaymentInformation.CreditCard.CardNumber);
-            string ccName = _console.PromptForOptionalInput($"CC Name ({customer.PaymentInformation.CreditCard.CardHolderName}): ", customer.PaymentInformation.CreditCard.CardHolderName);
-            string ccExp = _console.PromptForOptionalInput($"CC Exp (mm/yy) ({customer.PaymentInformation.CreditCard.ExpirationDate}): ", customer.PaymentInformation.CreditCard.ExpirationDate);
-            string ccCvv = _console.PromptForOptionalInput($"CC CVV ({customer.PaymentInformation.CreditCard.Cvv}): ", customer.PaymentInformation.CreditCard.Cvv);
+            string ccNumber = _console.PromptForOptionalCreditCard($"CC Number ({customer.PaymentInformation.CreditCard.CardNumber}): ", customer.PaymentInformation.CreditCard.CardNumber);
+            string ccName = _console.PromptForOptionalNameCityCountry($"CC Name ({customer.PaymentInformation.CreditCard.CardHolderName}): ", customer.PaymentInformation.CreditCard.CardHolderName);
+            string ccExp = _console.PromptForOptionalExpirationDate($"CC Exp (mm/yy) ({customer.PaymentInformation.CreditCard.ExpirationDate}): ", customer.PaymentInformation.CreditCard.ExpirationDate);
+            string ccCvv = _console.PromptForOptionalCvv($"CC CVV ({customer.PaymentInformation.CreditCard.Cvv}): ", customer.PaymentInformation.CreditCard.Cvv);
 
             var newCc = new CreditCard(ccNumber, ccName, ccExp, ccCvv);
             customer.UpdatePayment(new PaymentInformation(customer.PaymentInformation.BillingAddress, newCc));
@@ -255,7 +259,7 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string license = _console.PromptForInput("Enter Driver's License to delete: ");
+            string license = _console.PromptForDriversLicense("Enter Driver's License to delete: ");
             var customer = _customerRepository.GetCustomerByLicense(license);
 
             if (customer == null)

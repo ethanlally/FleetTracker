@@ -65,12 +65,12 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string license = _console.PromptForInput("Enter Customer Driver's License: ");
+            string license = _console.PromptForDriversLicense("Enter Customer Driver's License: ");
 
             var customer = _customerRepository.GetCustomerByLicense(license);
             while (customer == null)
             {
-                license = _console.PromptForInput("Customer not found. Try another license or type 'CANCEL' to go back: ");
+                license = _console.PromptForDriversLicense("Customer not found. Try another license or type 'CANCEL' to go back: ");
                 if (license.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 customer = _customerRepository.GetCustomerByLicense(license);
             }
@@ -91,15 +91,15 @@ namespace FleetTracker.Services.Application.Managers
             }
             _console.WriteLine();
 
-            string vin = _console.PromptForInput("Enter VIN of vehicle to rent (7 characters): ");
+            string vin = _console.PromptForVin("Enter VIN of vehicle to rent: ");
 
             var vehicle = _vehicleRepository.GetVehicleByVin(vin);
             while (vehicle == null || vehicle.Status != VehicleStatus.Available)
             {
                 if (vehicle == null)
-                    vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
+                    vin = _console.PromptForVin("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
                 else
-                    vin = _console.PromptForInput("Vehicle is not available. Try another VIN or type 'CANCEL' to go back: ");
+                    vin = _console.PromptForVin("Vehicle is not available. Try another VIN or type 'CANCEL' to go back: ");
 
                 if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
