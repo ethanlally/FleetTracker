@@ -12,6 +12,7 @@ namespace FleetTracker.Services.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<RentalAgreement> RentalAgreements { get; set; }
+        public DbSet<MaintenanceRecord> MaintenanceRecords { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,11 +70,10 @@ namespace FleetTracker.Services.Data
                 entity.HasKey(v => v.Id);
                 entity.HasIndex(v => v.VIN).IsUnique();
 
-                entity.OwnsMany(v => v.MaintenanceHistory, maintenance =>
-                {
-                    maintenance.HasKey(m => m.Id);
-                    maintenance.WithOwner().HasForeignKey("VehicleId");
-                });
+                entity.HasMany(v => v.MaintenanceHistory)
+                      .WithOne(m => m.Vehicle)
+                      .HasForeignKey(m => m.VehicleId)
+                      .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasMany(v => v.RentalHistory)
                       .WithOne(r => r.Vehicle)
