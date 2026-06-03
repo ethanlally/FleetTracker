@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
+using FleetTracker.Services.Application.Interfaces;
 using FleetTracker.Services.Core.Interfaces;
 using FleetTracker.Services.Core.Models;
-
-using FleetTracker.Services.Application.Interfaces;
 
 namespace FleetTracker.Services.Application.Managers
 {
@@ -32,7 +29,7 @@ namespace FleetTracker.Services.Application.Managers
                 _console.WriteLine("3. List Vehicles In Maintenance");
                 _console.WriteLine("4. Change Vehicle Status (Maintenance / Availability)");
                 _console.WriteLine("5. List All Vehicles");
-                _console.WriteLine("6. View Vehicle Rental History");
+                _console.WriteLine("6. View Single Vehicle");
                 _console.WriteLine("7. Edit Vehicle Information");
                 _console.WriteLine("8. Delete Vehicle");
                 _console.WriteLine("9. Go Back to Main Menu");
@@ -48,7 +45,7 @@ namespace FleetTracker.Services.Application.Managers
                         case "3": ListVehiclesInMaintenance(); break;
                         case "4": ChangeVehicleStatus(); break;
                         case "5": ListAllVehicles(); break;
-                        case "6": ViewVehicleRentalHistory(); break;
+                        case "6": ViewSingleVehicleDetails(); break;
                         case "7": EditVehicle(); break;
                         case "8": DeleteVehicle(); break;
                         case "9": back = true; break;
@@ -66,13 +63,13 @@ namespace FleetTracker.Services.Application.Managers
         {
             string vin = GetUniqueVin();
 
-            string license = _console.PromptForInput("Enter License Plate: ");
-            string make = _console.PromptForInput("Enter Make: ");
-            string model = _console.PromptForInput("Enter Model: ");
+            string license = _console.PromptForLicensePlate("Enter License Plate: ");
+            string make = _console.PromptForMakeModel("Enter Make: ");
+            string model = _console.PromptForMakeModel("Enter Model: ");
             int year = _console.PromptForInt("Enter Year: ");
             decimal rate = _console.PromptForDecimal("Enter Daily Rate: ");
 
-            var vehicle = new Vehicle(vin, license, make, model, year, VehicleClass.Sedan, rate);
+            Vehicle vehicle = new(vin, license, make, model, year, VehicleClass.Sedan, rate);
             _vehicleRepository.AddVehicle(vehicle);
 
             _console.WriteLine("Vehicle created successfully.");
@@ -80,17 +77,17 @@ namespace FleetTracker.Services.Application.Managers
 
         private string GetUniqueVin()
         {
-            string vin = _console.PromptForInput("Enter VIN (7 characters): ");
+            string vin = _console.PromptForVin("Enter VIN (17 characters): ");
 
-            while (vin.Length != 7 || _vehicleRepository.GetVehicleByVin(vin) != null)
+            while (vin.Length != 17 || _vehicleRepository.GetVehicleByVin(vin) != null)
             {
-                if (vin.Length != 7)
+                if (vin.Length != 17)
                 {
-                    vin = _console.PromptForInput("VIN must be exactly 7 characters. Try again: ");
+                    vin = _console.PromptForVin("VIN must be exactly 17 characters. Try again: ");
                 }
                 else
                 {
-                    vin = _console.PromptForInput("A vehicle with this VIN already exists. Try another: ");
+                    vin = _console.PromptForVin("A vehicle with this VIN already exists. Try another: ");
                 }
             }
 
@@ -156,7 +153,7 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine("--------------------------------------------------");
         }
 
-        private void ViewVehicleRentalHistory()
+        private void ViewSingleVehicleDetails()
         {
             _console.WriteLine("All Vehicles:");
             foreach (var v in _vehicleRepository.GetAllVehicles())
@@ -171,7 +168,11 @@ namespace FleetTracker.Services.Application.Managers
             while (vehicle == null)
             {
                 vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
-                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
+                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
 
@@ -181,11 +182,22 @@ namespace FleetTracker.Services.Application.Managers
         private void PrintVehicleDetails(Vehicle vehicle)
         {
             _console.WriteLine("------------------------------------------------");
+            PrintBasicVehicleStats(vehicle);
+            PrintRentalHistory(vehicle);
+            PrintMaintenanceHistory(vehicle);
+            _console.WriteLine("------------------------------------------------");
+        }
+
+        private void PrintBasicVehicleStats(Vehicle vehicle)
+        {
             _console.WriteLine($"ID (Guid): {vehicle.Id}");
             _console.WriteLine($"[{vehicle.VIN}] {vehicle.Year} {vehicle.Make} {vehicle.Model}");
             _console.WriteLine($"License Plate: {vehicle.LicensePlate} | Class: {vehicle.Class}");
             _console.WriteLine($"Daily Rate: ${vehicle.DailyRate} | Status: {vehicle.Status}");
+        }
 
+        private void PrintRentalHistory(Vehicle vehicle)
+        {
             if (vehicle.RentalHistory.Count == 0)
             {
                 _console.WriteLine("Total Rentals: 0");
@@ -202,7 +214,24 @@ namespace FleetTracker.Services.Application.Managers
                     _console.WriteLine($"    Dates: {rh.PickupDate.ToShortDateString()} - {rh.ExpectedReturnDate.ToShortDateString()} | Status: {rh.Status}");
                 }
             }
-            _console.WriteLine("------------------------------------------------");
+        }
+
+        private void PrintMaintenanceHistory(Vehicle vehicle)
+        {
+            if (vehicle.MaintenanceHistory.Count == 0)
+            {
+                _console.WriteLine("Total Maintenance Records: 0");
+            }
+            else
+            {
+                _console.WriteLine($"Total Maintenance Records: {vehicle.MaintenanceHistory.Count}");
+                _console.WriteLine("Maintenance History:");
+                foreach (var m in vehicle.MaintenanceHistory)
+                {
+                    _console.WriteLine($"  - Date: {m.ServiceDate.ToShortDateString()} | Type: {m.Type} | Cost: ${m.Cost}");
+                    _console.WriteLine($"    Description: {m.Description}");
+                }
+            }
         }
 
         private void ChangeVehicleStatus()
@@ -230,7 +259,7 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine();
             _console.WriteLine("Vehicles that are Available or Unavailable:");
             // filtering the list to only include vehicles that can actually be toggled
-            var eligibleVehicles = _vehicleRepository.GetAllVehicles().Where(v => v.Status == VehicleStatus.Available || v.Status == VehicleStatus.Unavailable);
+            var eligibleVehicles = _vehicleRepository.GetAllVehicles().Where(v => v.Status is VehicleStatus.Available or VehicleStatus.Unavailable);
 
             if (!eligibleVehicles.Any())
             {
@@ -251,12 +280,15 @@ namespace FleetTracker.Services.Application.Managers
             var vehicle = _vehicleRepository.GetVehicleByVin(vin);
             while (vehicle == null || (vehicle.Status != VehicleStatus.Available && vehicle.Status != VehicleStatus.Unavailable))
             {
-                if (vehicle == null)
-                    vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
-                else
-                    vin = _console.PromptForInput($"Vehicle is {vehicle.Status} and cannot be toggled. Try another VIN or type 'CANCEL' to go back: ");
+                vin = vehicle == null
+                    ? _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ")
+                    : _console.PromptForInput($"Vehicle is {vehicle.Status} and cannot be toggled. Try another VIN or type 'CANCEL' to go back: ");
 
-                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
+                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
 
@@ -296,12 +328,15 @@ namespace FleetTracker.Services.Application.Managers
             var vehicle = _vehicleRepository.GetVehicleByVin(vin);
             while (vehicle == null || vehicle.Status != VehicleStatus.Available)
             {
-                if (vehicle == null)
-                    vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
-                else
-                    vin = _console.PromptForInput($"Vehicle is {vehicle.Status} and cannot be sent to maintenance. Try another VIN or type 'CANCEL' to go back: ");
+                vin = vehicle == null
+                    ? _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ")
+                    : _console.PromptForInput($"Vehicle is {vehicle.Status} and cannot be sent to maintenance. Try another VIN or type 'CANCEL' to go back: ");
 
-                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
+                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
 
@@ -338,12 +373,15 @@ namespace FleetTracker.Services.Application.Managers
             var vehicle = _vehicleRepository.GetVehicleByVin(vin);
             while (vehicle == null || vehicle.Status != VehicleStatus.InMaintenance)
             {
-                if (vehicle == null)
-                    vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
-                else
-                    vin = _console.PromptForInput("Vehicle is not in maintenance. Try another VIN or type 'CANCEL' to go back: ");
+                vin = vehicle == null
+                    ? _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ")
+                    : _console.PromptForInput("Vehicle is not in maintenance. Try another VIN or type 'CANCEL' to go back: ");
 
-                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
+                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
 
@@ -365,31 +403,35 @@ namespace FleetTracker.Services.Application.Managers
             while (vehicle == null)
             {
                 vin = _console.PromptForInput("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
-                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
+                if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
             }
 
             _console.WriteLine("Enter new values or press Enter to keep current values.");
 
-            string newVin = _console.PromptForOptionalInput($"VIN ({vehicle.VIN}): ", vehicle.VIN);
+            string newVin = _console.PromptForOptionalVin($"VIN ({vehicle.VIN}): ", vehicle.VIN);
             if (newVin != vehicle.VIN)
             {
-                while (newVin.Length != 7 || _vehicleRepository.GetVehicleByVin(newVin) != null)
+                while (newVin.Length != 17 || _vehicleRepository.GetVehicleByVin(newVin) != null)
                 {
-                    if (newVin.Length != 7)
+                    if (newVin.Length != 17)
                     {
-                        newVin = _console.PromptForOptionalInput($"VIN must be exactly 7 characters. Try again ({vehicle.VIN}): ", vehicle.VIN);
+                        newVin = _console.PromptForOptionalVin($"VIN must be exactly 17 characters. Try again ({vehicle.VIN}): ", vehicle.VIN);
                     }
                     else
                     {
-                        newVin = _console.PromptForOptionalInput($"VIN {newVin} is already taken. Try another or press Enter to keep ({vehicle.VIN}): ", vehicle.VIN);
+                        newVin = _console.PromptForOptionalVin($"VIN {newVin} is already taken. Try another or press Enter to keep ({vehicle.VIN}): ", vehicle.VIN);
                     }
                 }
             }
 
-            string newLicense = _console.PromptForOptionalInput($"License Plate ({vehicle.LicensePlate}): ", vehicle.LicensePlate);
-            string newMake = _console.PromptForOptionalInput($"Make ({vehicle.Make}): ", vehicle.Make);
-            string newModel = _console.PromptForOptionalInput($"Model ({vehicle.Model}): ", vehicle.Model);
+            string newLicense = _console.PromptForOptionalLicensePlate($"License Plate ({vehicle.LicensePlate}): ", vehicle.LicensePlate);
+            string newMake = _console.PromptForOptionalMakeModel($"Make ({vehicle.Make}): ", vehicle.Make);
+            string newModel = _console.PromptForOptionalMakeModel($"Model ({vehicle.Model}): ", vehicle.Model);
             int newYear = _console.PromptForOptionalInt($"Year ({vehicle.Year}): ", vehicle.Year);
             decimal newRate = _console.PromptForOptionalDecimal($"Daily Rate ({vehicle.DailyRate}): ", vehicle.DailyRate);
 
