@@ -348,7 +348,7 @@ namespace FleetTracker.Services.Application.Managers
                 _console.WriteLine("1 - Repair");
                 _console.WriteLine("2 - Inspection");
                 string typeInput = _console.PromptForInput("Enter choice (0-2): ");
-                
+
                 if (Enum.TryParse<MaintenanceType>(typeInput, true, out var parsedType) && Enum.IsDefined(typeof(MaintenanceType), parsedType))
                 {
                     type = parsedType;

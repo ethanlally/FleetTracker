@@ -39,7 +39,7 @@ namespace FleetTracker.Services.Application.Services
             Console.Write(prompt);
             string input = ReadLine();
             if (string.IsNullOrWhiteSpace(input)) return currentValue;
-            
+
             T parsed;
             string error;
             while (!validateMethod(input, out parsed, out error))
