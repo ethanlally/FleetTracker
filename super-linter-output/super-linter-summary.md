@@ -29,7 +29,7 @@
 
 All files and directories linted successfully
 
-For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/26909545861)
+For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/26909876087)
 
 Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
@@ -40,7 +40,7 @@ Powered by [Super-linter](https://github.com/super-linter/super-linter)
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 6.
-Checked 27 files in 23ms. No fixes applied.
+Checked 27 files in 24ms. No fixes applied.
 Found 26 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
@@ -857,7 +857,7 @@ format ━━━━━━━━━━━━━━━━━━━━━━━━�
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 1.
-Checked 28 files in 35ms. No fixes applied.
+Checked 28 files in 39ms. No fixes applied.
 Found 20 warnings.
 Found 1 info.FleetTracker.Client/src/index.html:11:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1325,7 +1325,7 @@ Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 [37m      L9 |[90m  <script>[39m
 [37m            ^ [31mThe <script> tag cannot be used in a <head> tag. (head-script-disabled)[39m
 
-Scanned 1 files, found 1 errors in 1 files (18 ms)
+Scanned 1 files, found 1 errors in 1 files (17 ms)
 ```
 
 </details>
