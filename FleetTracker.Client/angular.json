@@ -44,6 +44,10 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
+            "index": "src/index.html",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -88,6 +92,9 @@
             "development": {
               "buildTarget": "FleetTracker.Client:build:development"
             }
+          },
+          "options": {
+            "proxyConfig": "proxy.conf.js"
           },
           "defaultConfiguration": "development"
         }

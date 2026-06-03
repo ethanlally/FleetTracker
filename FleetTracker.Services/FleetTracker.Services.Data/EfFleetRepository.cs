@@ -77,6 +77,7 @@ namespace FleetTracker.Services.Data
         public IEnumerable<Vehicle> GetAllVehicles()
         {
             return _context.Vehicles
+                .Include(v => v.MaintenanceHistory)
                 .ToList();
         }
 
