@@ -12,8 +12,6 @@ namespace FleetTracker.Services.Core.Models
         public MaintenanceType Type { get; private set; }
 
         public Guid VehicleId { get; private set; }
-        public Vehicle? Vehicle { get; private set; }
-
         public MaintenanceRecord(Guid vehicleId, DateTime serviceDate, string description, decimal cost, MaintenanceType type)
             : base()
         {

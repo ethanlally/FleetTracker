@@ -91,11 +91,19 @@ namespace FleetTracker.Services.Data
             rentalRepo.AddRental(active3);
 
             v6.SendToMaintenance("Routine Oil Change", 75.00m, MaintenanceType.Routine);
+            vehicleRepo.UpdateVehicle(v6);
+
             v7.SendToMaintenance("Brake Pad Replacement", 250.00m, MaintenanceType.Repair);
+            vehicleRepo.UpdateVehicle(v7);
+
             v8.SendToMaintenance("Annual Inspection", 50.00m, MaintenanceType.Inspection);
+            vehicleRepo.UpdateVehicle(v8);
+
             v12.SendToMaintenance("Tire Rotation", 40.00m, MaintenanceType.Routine);
+            vehicleRepo.UpdateVehicle(v12);
 
             v11.ToggleAvailability();
+            vehicleRepo.UpdateVehicle(v11);
         }
     }
 }

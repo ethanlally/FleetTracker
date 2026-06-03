@@ -11,12 +11,14 @@ namespace FleetTracker.Services.Application.Managers
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IVehicleRepository _vehicleRepository;
+        private readonly IRentalRepository _rentalRepository;
         private readonly IConsoleService _console;
 
-        public CustomerManager(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository, IConsoleService console)
+        public CustomerManager(ICustomerRepository customerRepository, IVehicleRepository vehicleRepository, IRentalRepository rentalRepository, IConsoleService console)
         {
             _customerRepository = customerRepository;
             _vehicleRepository = vehicleRepository;
+            _rentalRepository = rentalRepository;
             _console = console;
         }
 
@@ -145,15 +147,17 @@ namespace FleetTracker.Services.Application.Managers
             _console.WriteLine($"Payment Info - Card Number: {customer.PaymentInformation.CreditCard.CardNumber}");
             _console.WriteLine($"Payment Info - Exp: {customer.PaymentInformation.CreditCard.ExpirationDate} | CVV: {customer.PaymentInformation.CreditCard.Cvv}");
 
-            if (customer.RentalHistory.Count == 0)
+            var rentals = _rentalRepository.GetRentalsByCustomerId(customer.Id).ToList();
+
+            if (rentals.Count == 0)
             {
                 _console.WriteLine("Total Rentals: 0");
             }
             else
             {
-                _console.WriteLine($"Total Rentals: {customer.RentalHistory.Count}");
+                _console.WriteLine($"Total Rentals: {rentals.Count}");
                 _console.WriteLine("Rental History:");
-                foreach (var rh in customer.RentalHistory)
+                foreach (var rh in rentals)
                 {
                     var vehicle = rh.VehicleId.HasValue ? _vehicleRepository.GetVehicleById(rh.VehicleId.Value) : null;
                     string vInfo = vehicle != null ? $"{vehicle.Year} {vehicle.Make} {vehicle.Model} (VIN: {vehicle.VIN})" : "Unknown Vehicle";

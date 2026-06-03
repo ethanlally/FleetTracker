@@ -236,6 +236,22 @@ namespace FleetTracker.Services.ConsoleApp.Infrastructure
             return JsonConvert.DeserializeObject<List<RentalAgreement>>(json, _jsonSettings) ?? new List<RentalAgreement>();
         }
 
+        public IEnumerable<RentalAgreement> GetRentalsByCustomerId(Guid customerId)
+        {
+            var response = _httpClient.GetAsync($"/api/rentals/customer/{customerId}").Result;
+            if (!response.IsSuccessStatusCode) return new List<RentalAgreement>();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<List<RentalAgreement>>(json, _jsonSettings) ?? new List<RentalAgreement>();
+        }
+
+        public IEnumerable<RentalAgreement> GetRentalsByVehicleId(Guid vehicleId)
+        {
+            var response = _httpClient.GetAsync($"/api/rentals/vehicle/{vehicleId}").Result;
+            if (!response.IsSuccessStatusCode) return new List<RentalAgreement>();
+            var json = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<List<RentalAgreement>>(json, _jsonSettings) ?? new List<RentalAgreement>();
+        }
+
         public RentalAgreement? GetRentalById(Guid id)
         {
             var rentals = GetAllRentals();

@@ -8,12 +8,14 @@ namespace FleetTracker.Services.Application.Managers
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly ICustomerRepository _customerRepository;
+        private readonly IRentalRepository _rentalRepository;
         private readonly IConsoleService _console;
 
-        public VehicleManager(IVehicleRepository vehicleRepository, ICustomerRepository customerRepository, IConsoleService console)
+        public VehicleManager(IVehicleRepository vehicleRepository, ICustomerRepository customerRepository, IRentalRepository rentalRepository, IConsoleService console)
         {
             _vehicleRepository = vehicleRepository;
             _customerRepository = customerRepository;
+            _rentalRepository = rentalRepository;
             _console = console;
         }
 
@@ -198,15 +200,17 @@ namespace FleetTracker.Services.Application.Managers
 
         private void PrintRentalHistory(Vehicle vehicle)
         {
-            if (vehicle.RentalHistory.Count == 0)
+            var rentals = _rentalRepository.GetRentalsByVehicleId(vehicle.Id).ToList();
+
+            if (rentals.Count == 0)
             {
                 _console.WriteLine("Total Rentals: 0");
             }
             else
             {
-                _console.WriteLine($"Total Rentals: {vehicle.RentalHistory.Count}");
+                _console.WriteLine($"Total Rentals: {rentals.Count}");
                 _console.WriteLine("Rental History:");
-                foreach (var rh in vehicle.RentalHistory)
+                foreach (var rh in rentals)
                 {
                     var customer = _customerRepository.GetCustomerById(rh.CustomerId.GetValueOrDefault());
                     string cInfo = customer != null ? $"{customer.Contact.Name} (DL: {customer.DriversLicense})" : "Unknown Customer";

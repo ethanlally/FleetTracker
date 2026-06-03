@@ -7,6 +7,8 @@ namespace FleetTracker.Services.Core.Interfaces
     public interface IRentalRepository
     {
         IEnumerable<RentalAgreement> GetAllRentals();
+        IEnumerable<RentalAgreement> GetRentalsByCustomerId(Guid customerId);
+        IEnumerable<RentalAgreement> GetRentalsByVehicleId(Guid vehicleId);
         RentalAgreement? GetRentalById(Guid id);
         RentalAgreement? GetRentalByAgreementNumber(string agreementNumber);
         void AddRental(RentalAgreement rental);
