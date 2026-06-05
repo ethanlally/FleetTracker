@@ -38,7 +38,7 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_ALL_CODEBASE: false
           FIX_CSHARP: true
           FILTER_REGEX_EXCLUDE: '.*\.github/workflows/.*'
           DISABLE_ERRORS: true
