@@ -6,8 +6,8 @@
 | BIOME_LINT                 | Fail ❌           |
 | CHECKOV                    | Fail ❌           |
 | CSHARP                     | Pass ✅           |
-| CSS                        | Pass ✅           |
-| CSS_PRETTIER               | Pass ✅           |
+| CSS                        | Fail ❌           |
+| CSS_PRETTIER               | Fail ❌           |
 | EDITORCONFIG               | Fail ❌           |
 | GITLEAKS                   | Pass ✅           |
 | GIT_MERGE_CONFLICT_MARKERS | Pass ✅           |
@@ -23,13 +23,14 @@
 | NATURAL_LANGUAGE           | Fail ❌           |
 | PRE_COMMIT                 | Pass ✅           |
 | SPELL_CODESPELL            | Fail ❌           |
+| SQLFLUFF                   | Fail ❌           |
 | TRIVY                      | Pass ✅           |
 | TYPESCRIPT_ES              | Fail ❌           |
 | TYPESCRIPT_PRETTIER        | Fail ❌           |
 
 All files and directories linted successfully
 
-For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/26909876087)
+For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27019568873)
 
 Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
@@ -39,9 +40,9 @@ Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
-Diagnostics not shown: 6.
-Checked 27 files in 24ms. No fixes applied.
-Found 26 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Diagnostics not shown: 16.
+Checked 36 files in 61ms. No fixes applied.
+Found 36 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
 
@@ -349,51 +350,52 @@ FleetTracker.Client/angular.json format ━━━━━━━━━━━━━�
      56     │ - ··············}
      57     │ - ············],
      58     │ - ············"styles":·[
-     59     │ - ··············"src/styles.css"
-     60     │ - ············]
-     61     │ - ··········},
-     62     │ - ··········"configurations":·{
-     63     │ - ············"production":·{
-     64     │ - ··············"budgets":·[
-     65     │ - ················{
-     66     │ - ··················"type":·"initial",
-     67     │ - ··················"maximumWarning":·"500kB",
-     68     │ - ··················"maximumError":·"1MB"
-     69     │ - ················},
-     70     │ - ················{
-     71     │ - ··················"type":·"anyComponentStyle",
-     72     │ - ··················"maximumWarning":·"4kB",
-     73     │ - ··················"maximumError":·"8kB"
-     74     │ - ················}
-     75     │ - ··············],
-     76     │ - ··············"outputHashing":·"all"
-     77     │ - ············},
-     78     │ - ············"development":·{
-     79     │ - ··············"optimization":·false,
-     80     │ - ··············"extractLicenses":·false,
-     81     │ - ··············"sourceMap":·true
-     82     │ - ············}
-     83     │ - ··········},
-     84     │ - ··········"defaultConfiguration":·"production"
-     85     │ - ········},
-     86     │ - ········"serve":·{
-     87     │ - ··········"builder":·"@angular/build:dev-server",
-     88     │ - ··········"configurations":·{
-     89     │ - ············"production":·{
-     90     │ - ··············"buildTarget":·"FleetTracker.Client:build:production"
-     91     │ - ············},
-     92     │ - ············"development":·{
-     93     │ - ··············"buildTarget":·"FleetTracker.Client:build:development"
-     94     │ - ············}
-     95     │ - ··········},
-     96     │ - ··········"options":·{
-     97     │ - ············"proxyConfig":·"proxy.conf.js"
-     98     │ - ··········},
-     99     │ - ··········"defaultConfiguration":·"development"
-    100     │ - ········}
-    101     │ - ······}
-    102     │ - ····}
-    103     │ - ··}
+     59     │ - ··············"@angular/material/prebuilt-themes/indigo-pink.css",
+     60     │ - ··············"src/styles.css"
+     61     │ - ············]
+     62     │ - ··········},
+     63     │ - ··········"configurations":·{
+     64     │ - ············"production":·{
+     65     │ - ··············"budgets":·[
+     66     │ - ················{
+     67     │ - ··················"type":·"initial",
+     68     │ - ··················"maximumWarning":·"500kB",
+     69     │ - ··················"maximumError":·"1MB"
+     70     │ - ················},
+     71     │ - ················{
+     72     │ - ··················"type":·"anyComponentStyle",
+     73     │ - ··················"maximumWarning":·"4kB",
+     74     │ - ··················"maximumError":·"8kB"
+     75     │ - ················}
+     76     │ - ··············],
+     77     │ - ··············"outputHashing":·"all"
+     78     │ - ············},
+     79     │ - ············"development":·{
+     80     │ - ··············"optimization":·false,
+     81     │ - ··············"extractLicenses":·false,
+     82     │ - ··············"sourceMap":·true
+     83     │ - ············}
+     84     │ - ··········},
+     85     │ - ··········"defaultConfiguration":·"production"
+     86     │ - ········},
+     87     │ - ········"serve":·{
+     88     │ - ··········"builder":·"@angular/build:dev-server",
+     89     │ - ··········"configurations":·{
+     90     │ - ············"production":·{
+     91     │ - ··············"buildTarget":·"FleetTracker.Client:build:production"
+     92     │ - ············},
+     93     │ - ············"development":·{
+     94     │ - ··············"buildTarget":·"FleetTracker.Client:build:development"
+     95     │ - ············}
+     96     │ - ··········},
+     97     │ - ··········"options":·{
+     98     │ - ············"proxyConfig":·"proxy.conf.js"
+     99     │ - ··········},
+    100     │ - ··········"defaultConfiguration":·"development"
+    101     │ - ········}
+    102     │ - ······}
+    103     │ - ····}
+    104     │ - ··}
           2 │ + → "$schema":·"./node_modules/@angular/cli/lib/config/schema.json",
           3 │ + → "version":·1,
           4 │ + → "cli":·{
@@ -440,8 +442,7 @@ FleetTracker.Client/angular.json format ━━━━━━━━━━━━━�
          45 │ + → → → → → "options":·{
          46 │ + → → → → → → "browser":·"src/main.ts",
          47 │ + → → → → → → "index":·"src/index.html",
-         48 │ + → → → → → → "polyfills":·["zone.js"],
-  53 more lines truncated
+  57 more lines truncated
 
 
 FleetTracker.Client/package.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -453,7 +454,7 @@ FleetTracker.Client/package.json format ━━━━━━━━━━━━━�
      3    │ - ··"version":·"0.0.0",
      4    │ - ··"scripts":·{
      5    │ - ····"ng":·"ng",
-     6    │ - ····"start":·"ng·serve·--host·127.0.0.1",
+     6    │ - ····"start":·"ng·serve·--host·127.0.0.1·--open",
      7    │ - ····"build":·"ng·build",
      8    │ - ····"watch":·"ng·build·--watch·--configuration·development"
      9    │ - ··},
@@ -461,31 +462,36 @@ FleetTracker.Client/package.json format ━━━━━━━━━━━━━�
     11    │ - ··"packageManager":·"npm@11.12.1",
     12    │ - ··"dependencies":·{
     13    │ - ····"@angular/animations":·"^21.2.16",
-    14    │ - ····"@angular/common":·"^21.2.0",
-    15    │ - ····"@angular/compiler":·"^21.2.0",
-    16    │ - ····"@angular/core":·"^21.2.0",
-    17    │ - ····"@angular/forms":·"^21.2.0",
-    18    │ - ····"@angular/platform-browser":·"^21.2.0",
-    19    │ - ····"@angular/platform-browser-dynamic":·"^21.2.16",
-    20    │ - ····"@angular/router":·"^21.2.0",
-    21    │ - ····"rxjs":·"~7.8.0",
-    22    │ - ····"tslib":·"^2.3.0",
-    23    │ - ····"zone.js":·"^0.16.2"
-    24    │ - ··},
-    25    │ - ··"devDependencies":·{
-    26    │ - ····"@angular/build":·"^21.2.14",
-    27    │ - ····"@angular/cli":·"^21.2.14",
-    28    │ - ····"@angular/compiler-cli":·"^21.2.0",
-    29    │ - ····"@types/node":·"^25.9.1",
-    30    │ - ····"eslint":·"^10.4.1",
-    31    │ - ····"prettier":·"^3.8.1",
-    32    │ - ····"typescript":·"~5.9.2"
-    33    │ - ··}
+    14    │ - ····"@angular/cdk":·"^21.2.14",
+    15    │ - ····"@angular/common":·"^21.2.0",
+    16    │ - ····"@angular/compiler":·"^21.2.0",
+    17    │ - ····"@angular/core":·"^21.2.0",
+    18    │ - ····"@angular/forms":·"^21.2.0",
+    19    │ - ····"@angular/material":·"^21.2.14",
+    20    │ - ····"@angular/platform-browser":·"^21.2.0",
+    21    │ - ····"@angular/platform-browser-dynamic":·"^21.2.16",
+    22    │ - ····"@angular/router":·"^21.2.0",
+    23    │ - ····"@ngrx/operators":·"^21.1.0",
+    24    │ - ····"@ngrx/signals":·"^21.1.0",
+    25    │ - ····"chart.js":·"^4.5.1",
+    26    │ - ····"rxjs":·"~7.8.0",
+    27    │ - ····"tslib":·"^2.3.0",
+    28    │ - ····"zone.js":·"^0.16.2"
+    29    │ - ··},
+    30    │ - ··"devDependencies":·{
+    31    │ - ····"@angular/build":·"^21.2.14",
+    32    │ - ····"@angular/cli":·"^21.2.14",
+    33    │ - ····"@angular/compiler-cli":·"^21.2.0",
+    34    │ - ····"@types/node":·"^25.9.1",
+    35    │ - ····"eslint":·"^10.4.1",
+    36    │ - ····"prettier":·"^3.8.1",
+    37    │ - ····"typescript":·"~5.9.2"
+    38    │ - ··}
         2 │ + → "name":·"fleet-tracker.client",
         3 │ + → "version":·"0.0.0",
         4 │ + → "scripts":·{
         5 │ + → → "ng":·"ng",
-        6 │ + → → "start":·"ng·serve·--host·127.0.0.1",
+        6 │ + → → "start":·"ng·serve·--host·127.0.0.1·--open",
         7 │ + → → "build":·"ng·build",
         8 │ + → → "watch":·"ng·build·--watch·--configuration·development"
         9 │ + → },
@@ -493,28 +499,33 @@ FleetTracker.Client/package.json format ━━━━━━━━━━━━━�
        11 │ + → "packageManager":·"npm@11.12.1",
        12 │ + → "dependencies":·{
        13 │ + → → "@angular/animations":·"^21.2.16",
-       14 │ + → → "@angular/common":·"^21.2.0",
-       15 │ + → → "@angular/compiler":·"^21.2.0",
-       16 │ + → → "@angular/core":·"^21.2.0",
-       17 │ + → → "@angular/forms":·"^21.2.0",
-       18 │ + → → "@angular/platform-browser":·"^21.2.0",
-       19 │ + → → "@angular/platform-browser-dynamic":·"^21.2.16",
-       20 │ + → → "@angular/router":·"^21.2.0",
-       21 │ + → → "rxjs":·"~7.8.0",
-       22 │ + → → "tslib":·"^2.3.0",
-       23 │ + → → "zone.js":·"^0.16.2"
-       24 │ + → },
-       25 │ + → "devDependencies":·{
-       26 │ + → → "@angular/build":·"^21.2.14",
-       27 │ + → → "@angular/cli":·"^21.2.14",
-       28 │ + → → "@angular/compiler-cli":·"^21.2.0",
-       29 │ + → → "@types/node":·"^25.9.1",
-       30 │ + → → "eslint":·"^10.4.1",
-       31 │ + → → "prettier":·"^3.8.1",
-       32 │ + → → "typescript":·"~5.9.2"
-       33 │ + → }
-    34 34 │   }
-    35 35 │
+       14 │ + → → "@angular/cdk":·"^21.2.14",
+       15 │ + → → "@angular/common":·"^21.2.0",
+       16 │ + → → "@angular/compiler":·"^21.2.0",
+       17 │ + → → "@angular/core":·"^21.2.0",
+       18 │ + → → "@angular/forms":·"^21.2.0",
+       19 │ + → → "@angular/material":·"^21.2.14",
+       20 │ + → → "@angular/platform-browser":·"^21.2.0",
+       21 │ + → → "@angular/platform-browser-dynamic":·"^21.2.16",
+       22 │ + → → "@angular/router":·"^21.2.0",
+       23 │ + → → "@ngrx/operators":·"^21.1.0",
+       24 │ + → → "@ngrx/signals":·"^21.1.0",
+       25 │ + → → "chart.js":·"^4.5.1",
+       26 │ + → → "rxjs":·"~7.8.0",
+       27 │ + → → "tslib":·"^2.3.0",
+       28 │ + → → "zone.js":·"^0.16.2"
+       29 │ + → },
+       30 │ + → "devDependencies":·{
+       31 │ + → → "@angular/build":·"^21.2.14",
+       32 │ + → → "@angular/cli":·"^21.2.14",
+       33 │ + → → "@angular/compiler-cli":·"^21.2.0",
+       34 │ + → → "@types/node":·"^25.9.1",
+       35 │ + → → "eslint":·"^10.4.1",
+       36 │ + → → "prettier":·"^3.8.1",
+       37 │ + → → "typescript":·"~5.9.2"
+       38 │ + → }
+    39 39 │   }
+    40 40 │
 
 
 FleetTracker.Client/proxy.conf.js format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -539,6 +550,19 @@ FleetTracker.Client/proxy.conf.js format ━━━━━━━━━━━━━
     8 11 │
 
 
+FleetTracker.Client/src/app/app.component.css format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+
+    1 1 │   .active {
+    2   │ - ··font-weight:·bold;
+    3   │ - ··text-decoration:·underline·!important;
+      2 │ + → font-weight:·bold;
+      3 │ + → text-decoration:·underline·!important;
+    4 4 │   }
+    5 5 │
+
+
 FleetTracker.Client/src/app/app.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
@@ -546,55 +570,29 @@ FleetTracker.Client/src/app/app.config.ts format ━━━━━━━━━━�
      1    │ - import·{·ApplicationConfig,·provideZoneChangeDetection·}·from·'@angular/core';
      2    │ - import·{·provideRouter·}·from·'@angular/router';
      3    │ - import·{·provideHttpClient·}·from·'@angular/common/http';
-     4    │ - import·{·routes·}·from·'./app.routes';
+     4    │ - import·{·provideAnimations·}·from·'@angular/platform-browser/animations';
+     5    │ - import·{·routes·}·from·'./app.routes';
         1 │ + import·{·ApplicationConfig,·provideZoneChangeDetection·}·from·"@angular/core";
         2 │ + import·{·provideRouter·}·from·"@angular/router";
         3 │ + import·{·provideHttpClient·}·from·"@angular/common/http";
-        4 │ + import·{·routes·}·from·"./app.routes";
-     5  5 │
-     6  6 │   export const appConfig: ApplicationConfig = {
-     7    │ - ··providers:·[
-     8    │ - ····provideZoneChangeDetection({·eventCoalescing:·true·}),
-     9    │ - ····provideRouter(routes),
-    10    │ - ····provideHttpClient(),
-    11    │ - ··],
-        7 │ + → providers:·[
-        8 │ + → → provideZoneChangeDetection({·eventCoalescing:·true·}),
-        9 │ + → → provideRouter(routes),
-       10 │ + → → provideHttpClient(),
-       11 │ + → ],
-    12 12 │   };
-    13 13 │
-
-
-FleetTracker.Client/src/app/app.routes.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Formatter would have printed the following content:
-
-     1    │ - import·{·Routes·}·from·'@angular/router';
-     2    │ - import·{·DashboardComponent·}·from·'./dashboard/dashboard.component';
-     3    │ - import·{·VehiclesComponent·}·from·'./vehicles/vehicles.component';
-     4    │ - import·{·RentalsComponent·}·from·'./rentals/rentals.component';
-     5    │ - import·{·CustomersComponent·}·from·'./customers/customers.component';
-        1 │ + import·{·Routes·}·from·"@angular/router";
-        2 │ + import·{·DashboardComponent·}·from·"./dashboard/dashboard.component";
-        3 │ + import·{·VehiclesComponent·}·from·"./vehicles/vehicles.component";
-        4 │ + import·{·RentalsComponent·}·from·"./rentals/rentals.component";
-        5 │ + import·{·CustomersComponent·}·from·"./customers/customers.component";
+        4 │ + import·{·provideAnimations·}·from·"@angular/platform-browser/animations";
+        5 │ + import·{·routes·}·from·"./app.routes";
      6  6 │
-     7  7 │   export const routes: Routes = [
-     8    │ - ··{·path:·'',·redirectTo:·'/dashboard',·pathMatch:·'full'·},
-     9    │ - ··{·path:·'dashboard',·component:·DashboardComponent·},
-    10    │ - ··{·path:·'vehicles',·component:·VehiclesComponent·},
-    11    │ - ··{·path:·'rentals',·component:·RentalsComponent·},
-    12    │ - ··{·path:·'customers',·component:·CustomersComponent·},
-        8 │ + → {·path:·"",·redirectTo:·"/dashboard",·pathMatch:·"full"·},
-        9 │ + → {·path:·"dashboard",·component:·DashboardComponent·},
-       10 │ + → {·path:·"vehicles",·component:·VehiclesComponent·},
-       11 │ + → {·path:·"rentals",·component:·RentalsComponent·},
-       12 │ + → {·path:·"customers",·component:·CustomersComponent·},
-    13 13 │   ];
-    14 14 │
+     7  7 │   export const appConfig: ApplicationConfig = {
+     8    │ - ··providers:·[
+     9    │ - ····provideZoneChangeDetection({·eventCoalescing:·true·}),
+    10    │ - ····provideRouter(routes),
+    11    │ - ····provideHttpClient(),
+    12    │ - ····provideAnimations(),
+    13    │ - ··],
+        8 │ + → providers:·[
+        9 │ + → → provideZoneChangeDetection({·eventCoalescing:·true·}),
+       10 │ + → → provideRouter(routes),
+       11 │ + → → provideHttpClient(),
+       12 │ + → → provideAnimations(),
+       13 │ + → ],
+    14 14 │   };
+    15 15 │
 
 
 FleetTracker.Client/src/app/app.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -610,29 +608,15 @@ FleetTracker.Client/src/app/app.ts format ━━━━━━━━━━━━�
      5    │ - ··selector:·'app-root',
      6    │ - ··standalone:·true,
      7    │ - ··imports:·[RouterOutlet,·RouterLink,·RouterLinkActive],
-     8    │ - ··template:·`
+     8    │ - ··templateUrl:·'./app.component.html',
+     9    │ - ··styleUrls:·['./app.component.css'],
         5 │ + → selector:·"app-root",
         6 │ + → standalone:·true,
         7 │ + → imports:·[RouterOutlet,·RouterLink,·RouterLinkActive],
-        8 │ + → template:·`
-     9  9 │       <div style="font-family: sans-serif; padding: 20px;">
-    10 10 │         <h1>FleetTracker Dashboard</h1>
-    ····· │
-    41 41 │       </div>
-    42 42 │     `,
-    43    │ - ··styles:·[
-    44    │ - ····`
-       43 │ + → styles:·[
-       44 │ + → → `
-    45 45 │         .active {
-    46 46 │           font-weight: bold;
-    ····· │
-    48 48 │         }
-    49 49 │       `,
-    50    │ - ··],
-       50 │ + → ],
-    51 51 │   })
-    52 52 │   export class App {}
+        8 │ + → templateUrl:·"./app.component.html",
+        9 │ + → styleUrls:·["./app.component.css"],
+    10 10 │   })
+    11 11 │   export class App {}
 
 
 FleetTracker.Client/tsconfig.app.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -856,19 +840,20 @@ format ━━━━━━━━━━━━━━━━━━━━━━━━�
 
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
-Diagnostics not shown: 1.
-Checked 28 files in 39ms. No fixes applied.
-Found 20 warnings.
-Found 1 info.FleetTracker.Client/src/index.html:11:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+Diagnostics not shown: 61.
+Checked 42 files in 120ms. No fixes applied.
+Found 38 errors.
+Found 42 warnings.
+Found 1 info.FleetTracker.Client/src/index.html:15:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   i Template literals are preferred over string concatenation.
 
-     9 │   <script>
-    10 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
-  > 11 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
+    13 │   <script>
+    14 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
+  > 15 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
        │                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    12 │       return false;
-    13 │     };
+    16 │       return false;
+    17 │     };
 
   i Unsafe fix: Use a template literal.
 
@@ -879,6 +864,24 @@ Found 1 info.FleetTracker.Client/src/index.html:11:34 lint/style/useTemplate  FI
     4 4 │         return false;
     5 5 │       };
 
+
+FleetTracker.Client/src/app/app.component.css:3:30 lint/complexity/noImportantStyles  FIXABLE  ━━━━━━━━━━
+
+  ! Avoid the use of the !important style.
+
+    1 │ .active {
+    2 │   font-weight: bold;
+  > 3 │   text-decoration: underline !important;
+      │                              ^^^^^^^^^^
+    4 │ }
+    5 │
+
+  i This style reverses the cascade logic, and precedence is reversed. This could lead to having styles with higher specificity being overridden by styles with lower specificity.
+
+  i Unsafe fix: Remove the style.
+
+    3 │ ··text-decoration:·underline·!important;
+      │                             -----------
 
 FleetTracker.Client/src/app/app.config.ts:1:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━━━━━━━━━━
 
@@ -923,253 +926,39 @@ FleetTracker.Client/src/app/customers/customers.component.ts:1:8 lint/style/useI
 
   ! Some named imports are only used as types.
 
-  > 1 │ import { Component, OnInit } from '@angular/core';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 1 │ import { Component, OnInit, inject } from '@angular/core';
+      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Customer } from '../services/api.service';
+    3 │ import { RouterLink } from '@angular/router';
 
   i This import is only used as a type.
 
-  > 1 │ import { Component, OnInit } from '@angular/core';
+  > 1 │ import { Component, OnInit, inject } from '@angular/core';
       │                     ^^^^^^
     2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Customer } from '../services/api.service';
+    3 │ import { RouterLink } from '@angular/router';
 
   i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
 
   i Safe fix: Add inline type keywords.
 
-    1 │ import·{·Component,·type·OnInit·}·from·'@angular/core';
+    1 │ import·{·Component,·type·OnInit,·inject·}·from·'@angular/core';
       │                     +++++
 
-FleetTracker.Client/src/app/customers/customers.component.ts:3:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! All these imports are only used as types.
-
-    1 │ import { Component, OnInit } from '@angular/core';
-    2 │ import { CommonModule } from '@angular/common';
-  > 3 │ import { ApiService, Customer } from '../services/api.service';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    4 │
-    5 │ @Component({
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Use import type.
-
-    3 │ import·type·{·ApiService,·Customer·}·from·'../services/api.service';
-      │        +++++
-
-FleetTracker.Client/src/app/dashboard/dashboard.component.ts:92:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
-
-  ! Unexpected any. Specify a different type.
-
-    90 │   }
-    91 │
-  > 92 │   getStatusName(statusEnum: any): string {
-       │                             ^^^
-    93 │     if (statusEnum === undefined || statusEnum === null) return '';
-    94 │     const statusMap: { [key: number]: string } = {
-
-  i any disables many type checking rules. Its use should be avoided.
-
-
-FleetTracker.Client/src/app/dashboard/dashboard.component.ts:1:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! Some named imports are only used as types.
-
-  > 1 │ import { Component, OnInit } from '@angular/core';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Vehicle, Rental } from '../services/api.service';
-
-  i This import is only used as a type.
-
-  > 1 │ import { Component, OnInit } from '@angular/core';
-      │                     ^^^^^^
-    2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Vehicle, Rental } from '../services/api.service';
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Add inline type keywords.
-
-    1 │ import·{·Component,·type·OnInit·}·from·'@angular/core';
-      │                     +++++
-
-FleetTracker.Client/src/app/dashboard/dashboard.component.ts:3:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! All these imports are only used as types.
-
-    1 │ import { Component, OnInit } from '@angular/core';
-    2 │ import { CommonModule } from '@angular/common';
-  > 3 │ import { ApiService, Vehicle, Rental } from '../services/api.service';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    4 │
-    5 │ @Component({
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Use import type.
-
-    3 │ import·type·{·ApiService,·Vehicle,·Rental·}·from·'../services/api.service';
-      │        +++++
-
-FleetTracker.Client/src/app/rentals/rentals.component.ts:51:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
-
-  ! Unexpected any. Specify a different type.
-
-    49 │   }
-    50 │
-  > 51 │   getStatusName(statusEnum: any): string {
-       │                             ^^^
-    52 │     const statusMap: { [key: number]: string } = {
-    53 │       0: 'Active',
-
-  i any disables many type checking rules. Its use should be avoided.
-
-
-FleetTracker.Client/src/app/rentals/rentals.component.ts:1:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! Some named imports are only used as types.
-
-  > 1 │ import { Component, OnInit } from '@angular/core';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Rental } from '../services/api.service';
-
-  i This import is only used as a type.
-
-  > 1 │ import { Component, OnInit } from '@angular/core';
-      │                     ^^^^^^
-    2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Rental } from '../services/api.service';
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Add inline type keywords.
-
-    1 │ import·{·Component,·type·OnInit·}·from·'@angular/core';
-      │                     +++++
-
-FleetTracker.Client/src/app/rentals/rentals.component.ts:3:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! All these imports are only used as types.
-
-    1 │ import { Component, OnInit } from '@angular/core';
-    2 │ import { CommonModule } from '@angular/common';
-  > 3 │ import { ApiService, Rental } from '../services/api.service';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    4 │
-    5 │ @Component({
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Use import type.
-
-    3 │ import·type·{·ApiService,·Rental·}·from·'../services/api.service';
-      │        +++++
-
-FleetTracker.Client/src/app/services/api.service.ts:2:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! All these imports are only used as types.
-
-    1 │ import { Injectable } from '@angular/core';
-  > 2 │ import { HttpClient } from '@angular/common/http';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    3 │ import { Observable } from 'rxjs';
-    4 │
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Use import type.
-
-    2 │ import·type·{·HttpClient·}·from·'@angular/common/http';
-      │        +++++
-
-FleetTracker.Client/src/app/services/api.service.ts:3:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! All these imports are only used as types.
-
-    1 │ import { Injectable } from '@angular/core';
-    2 │ import { HttpClient } from '@angular/common/http';
-  > 3 │ import { Observable } from 'rxjs';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^
-    4 │
-    5 │ export interface Vehicle {
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Use import type.
-
-    3 │ import·type·{·Observable·}·from·'rxjs';
-      │        +++++
-
-FleetTracker.Client/src/app/vehicles/vehicles.component.ts:59:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
-
-  ! Unexpected any. Specify a different type.
-
-    57 │   }
-    58 │
-  > 59 │   getStatusName(statusEnum: any): string {
-       │                             ^^^
-    60 │     const statusMap: { [key: number]: string } = {
-    61 │       0: 'Available',
-
-  i any disables many type checking rules. Its use should be avoided.
-
-
-FleetTracker.Client/src/app/vehicles/vehicles.component.ts:73:43 lint/suspicious/noExplicitAny ━━━━━━━━━━
-
-  ! Unexpected any. Specify a different type.
-
-    71 │   }
-    72 │
-  > 73 │   getLatestMaintenance(vehicle: Vehicle): any {
-       │                                           ^^^
-    74 │     if (vehicle.maintenanceHistory && vehicle.maintenanceHistory.length > 0) {
-    75 │       return vehicle.maintenanceHistory[vehicle.maintenanceHistory.length - 1];
-
-  i any disables many type checking rules. Its use should be avoided.
-
-
-FleetTracker.Client/src/app/vehicles/vehicles.component.ts:1:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━
-
-  ! Some named imports are only used as types.
-
-  > 1 │ import { Component, OnInit } from '@angular/core';
-      │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Vehicle } from '../services/api.service';
-
-  i This import is only used as a type.
-
-  > 1 │ import { Component, OnInit } from '@angular/core';
-      │                     ^^^^^^
-    2 │ import { CommonModule } from '@angular/common';
-    3 │ import { ApiService, Vehicle } from '../services/api.service';
-
-  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
-
-  i Safe fix: Add inline type keywords.
-
-    1 │ import·{·Component,·type·OnInit·}·from·'@angular/core';
-      │                     +++++
-
-FleetTracker.Client/src/index.html:10:22 lint/complexity/useArrowFunction  FIXABLE  ━━━━━━━━━━━━━━━━
+FleetTracker.Client/src/index.html:14:22 lint/complexity/useArrowFunction  FIXABLE  ━━━━━━━━━━━━━━━━
 
   ! This function expression can be turned into an arrow function.
 
-     8 │   <link rel="icon" type="image/x-icon" href="favicon.ico">
-     9 │   <script>
-  > 10 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
+    12 │   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    13 │   <script>
+  > 14 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
        │                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  > 11 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
-  > 12 │       return false;
-  > 13 │     };
+  > 15 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
+  > 16 │       return false;
+  > 17 │     };
        │     ^
-    14 │   </script>
-    15 │ </head>
+    18 │   </script>
+    19 │ </head>
 
   i Function expressions that don't use this can be turned into arrow functions.
 
@@ -1182,16 +971,16 @@ FleetTracker.Client/src/index.html:10:22 lint/complexity/useArrowFunction  FIXAB
     4 4 │         return false;
 
 
-FleetTracker.Client/src/index.html:10:36 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+FleetTracker.Client/src/index.html:14:36 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
 
   ! This parameter is unused.
 
-     8 │   <link rel="icon" type="image/x-icon" href="favicon.ico">
-     9 │   <script>
-  > 10 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
+    12 │   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    13 │   <script>
+  > 14 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
        │                                    ^^^
-    11 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
-    12 │       return false;
+    15 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
+    16 │       return false;
 
   i Unused parameters might be the result of an incomplete refactoring.
 
@@ -1204,16 +993,16 @@ FleetTracker.Client/src/index.html:10:36 lint/correctness/noUnusedFunctionParame
     4 4 │         return false;
 
 
-FleetTracker.Client/src/index.html:10:49 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+FleetTracker.Client/src/index.html:14:49 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
 
   ! This parameter is unused.
 
-     8 │   <link rel="icon" type="image/x-icon" href="favicon.ico">
-     9 │   <script>
-  > 10 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
+    12 │   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    13 │   <script>
+  > 14 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
        │                                                 ^^^^^^^^
-    11 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
-    12 │       return false;
+    15 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
+    16 │       return false;
 
   i Unused parameters might be the result of an incomplete refactoring.
 
@@ -1226,16 +1015,16 @@ FleetTracker.Client/src/index.html:10:49 lint/correctness/noUnusedFunctionParame
     4 4 │         return false;
 
 
-FleetTracker.Client/src/index.html:11:162 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━━━━━━
+FleetTracker.Client/src/index.html:15:162 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━━━━━━
 
   ! Change to an optional chain.
 
-     9 │   <script>
-    10 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
-  > 11 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
+    13 │   <script>
+    14 │     window.onerror = function(msg, url, lineNo, columnNo, error) {
+  > 15 │       document.body.innerHTML += '<div style="color:red; margin: 20px; font-family: monospace;"><b>Error:</b> ' + msg + '<br>Line: ' + lineNo + '<br>Stack: ' + (error && error.stack) + '</div>';
        │                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^
-    12 │       return false;
-    13 │     };
+    16 │       return false;
+    17 │     };
 
   i Unsafe fix: Change to an optional chain.
 
@@ -1245,6 +1034,162 @@ FleetTracker.Client/src/index.html:11:162 lint/complexity/useOptionalChain  FIXA
       3 │ + ······document.body.innerHTML·+=·'<div·style="color:red;·margin:·20px;·font-family:·monospace;"><b>Error:</b>·'·+·msg·+·'<br>Line:·'·+·lineNo·+·'<br>Stack:·'·+·(error?.stack)·+·'</div>';
     4 4 │         return false;
     5 5 │       };
+
+
+FleetTracker.Client/src/app/customers/customers.component.html:6:54 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    4 │   <div>Loading customers...</div>
+    5 │ } @else if (store.error()) {
+  > 6 │   <div style="color: red; font-weight: bold;">Error: {{ store.error() }}</div>
+      │                                                      ^^^^^^^^^^^^^^^^^^^
+    7 │ } @else {
+    8 │   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/customers/customers.component.html:25:15 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    23 │       @for (customer of filteredCustomers; track customer.id) {
+    24 │         <tr [routerLink]="['/customers', customer.id]" style="cursor: pointer; background-color: #fafafa;">
+  > 25 │           <td>{{ customer.contact?.name }}</td>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    26 │           <td>{{ customer.contact?.email }}</td>
+    27 │           <td>{{ customer.contact?.phoneNumber | phone }}</td>
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/customers/customers.component.html:26:15 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    24 │         <tr [routerLink]="['/customers', customer.id]" style="cursor: pointer; background-color: #fafafa;">
+    25 │           <td>{{ customer.contact?.name }}</td>
+  > 26 │           <td>{{ customer.contact?.email }}</td>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    27 │           <td>{{ customer.contact?.phoneNumber | phone }}</td>
+    28 │           <td>{{ customer.driversLicense }}</td>
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/customers/customers.component.html:27:15 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    25 │           <td>{{ customer.contact?.name }}</td>
+    26 │           <td>{{ customer.contact?.email }}</td>
+  > 27 │           <td>{{ customer.contact?.phoneNumber | phone }}</td>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    28 │           <td>{{ customer.driversLicense }}</td>
+    29 │           <td>{{ customer.dateOfBirth | date: 'shortDate' }}</td>
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/customers/customers.component.html:28:15 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    26 │           <td>{{ customer.contact?.email }}</td>
+    27 │           <td>{{ customer.contact?.phoneNumber | phone }}</td>
+  > 28 │           <td>{{ customer.driversLicense }}</td>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    29 │           <td>{{ customer.dateOfBirth | date: 'shortDate' }}</td>
+    30 │         </tr>
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/customers/customers.component.html:29:15 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    27 │           <td>{{ customer.contact?.phoneNumber | phone }}</td>
+    28 │           <td>{{ customer.driversLicense }}</td>
+  > 29 │           <td>{{ customer.dateOfBirth | date: 'shortDate' }}</td>
+       │               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    30 │         </tr>
+    31 │       } @empty {
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/customers/customers.component.html:10:5 lint/a11y/useButtonType ━━━━━━━━━━
+
+  × Provide an explicit type attribute for the button element.
+
+     8 │   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+     9 │     <input type="text" [(ngModel)]="filterText" placeholder="Filter by name or email..." style="padding: 8px; width: 300px;" />
+  > 10 │     <button routerLink="/customers/new" style="padding: 8px 16px; cursor: pointer;">+ New Customer</button>
+       │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    11 │   </div>
+    12 │   <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left;">
+
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element.
+
+  i Allowed button types are: submit, button or reset
+
+
+FleetTracker.Client/src/app/dashboard/dashboard.component.html:5:54 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    3 │   <div>Loading...</div>
+    4 │ } @else if (store.error()) {
+  > 5 │   <div style="color: red; font-weight: bold;">Error: {{ store.error() }}</div>
+      │                                                      ^^^^^^^^^^^^^^^^^^^
+    6 │ } @else {
+    7 │   <div style="display: flex; flex-direction: column; gap: 30px;">
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/dashboard/dashboard.component.html:32:21 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    30 │             @for (vehicle of filteredAvailableVehicles; track vehicle.id) {
+    31 │               <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color: #fafafa;">
+  > 32 │                 <td>{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.licensePlate }})</td>
+       │                     ^^^^^^^^^^^^^^^^^^
+    33 │                 <td>{{ getStatusName(vehicle.status) }}</td>
+    34 │                 <td>{{ vehicle.dailyRate | currency }}</td>
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/dashboard/dashboard.component.html:32:40 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    30 │             @for (vehicle of filteredAvailableVehicles; track vehicle.id) {
+    31 │               <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color: #fafafa;">
+  > 32 │                 <td>{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.licensePlate }})</td>
+       │                                        ^^^^^^^^^^^^^^^^^^^
+    33 │                 <td>{{ getStatusName(vehicle.status) }}</td>
+    34 │                 <td>{{ vehicle.dailyRate | currency }}</td>
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
+
+
+FleetTracker.Client/src/app/dashboard/dashboard.component.html:32:61 parse ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Text expressions aren't supported.
+
+    30 │             @for (vehicle of filteredAvailableVehicles; track vehicle.id) {
+    31 │               <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color: #fafafa;">
+  > 32 │                 <td>{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.licensePlate }})</td>
+       │                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    33 │                 <td>{{ getStatusName(vehicle.status) }}</td>
+    34 │                 <td>{{ vehicle.dailyRate | currency }}</td>
+
+  i Remove it or enable the parsing using the html.parser.interpolation option.
 
 
 lint ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1277,34 +1222,59 @@ Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 
 <details>
 
+<summary>CSS</summary>
+
+```text
+
+FleetTracker.Client/src/styles.css
+  [2m2:6[22m  [31m[31m✖[39m  Expected no more than 1 declaration  [2mdeclaration-block-single-line-max-declarations[22m
+
+[31m✖[39m 1 problem ([31m1 error[39m, [33m0 warnings[39m)
+```
+
+</details>
+
+<details>
+
+<summary>CSS_PRETTIER</summary>
+
+```text
+Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/styles.css
+[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
+```
+
+</details>
+
+<details>
+
 <summary>EDITORCONFIG</summary>
 
 ```text
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602154919_MaintenanceCostPrecision.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153426_AddCustomerLicenseIndex.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
 [33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603152232_DecoupleRentalHistory.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.Designer.cs:[33;0m
 [31;1m	No final newline expected[33;0m
 [31;1m	Not all lines have the correct end of line character[33;0m
 [33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153037_AddRentalIndexes.Designer.cs:[33;0m
 [31;1m	No final newline expected[33;0m
 [31;1m	Not all lines have the correct end of line character[33;0m
+[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.Designer.cs:[33;0m
+[31;1m	No final newline expected[33;0m
+[31;1m	Not all lines have the correct end of line character[33;0m
+[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153426_AddCustomerLicenseIndex.Designer.cs:[33;0m
+[31;1m	No final newline expected[33;0m
+[31;1m	Not all lines have the correct end of line character[33;0m
+[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.Designer.cs:[33;0m
+[31;1m	No final newline expected[33;0m
+[31;1m	Not all lines have the correct end of line character[33;0m
+[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs:[33;0m
+[31;1m	No final newline expected[33;0m
+[31;1m	Not all lines have the correct end of line character[33;0m
+[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602154919_MaintenanceCostPrecision.Designer.cs:[33;0m
+[31;1m	No final newline expected[33;0m
+[31;1m	Not all lines have the correct end of line character[33;0m
 [33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/FleetTrackerDbContextModelSnapshot.cs:[33;0m
+[31;1m	No final newline expected[33;0m
+[31;1m	Not all lines have the correct end of line character[33;0m
+[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.Designer.cs:[33;0m
 [31;1m	No final newline expected[33;0m
 [31;1m	Not all lines have the correct end of line character[33;0m
 [31;1m
@@ -1321,11 +1291,93 @@ Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 
    Config loaded: /action/lib/.automation/.htmlhintrc
 
-   /github/workspace/FleetTracker.Client/src/index.html
-[37m      L9 |[90m  <script>[39m
-[37m            ^ [31mThe <script> tag cannot be used in a <head> tag. (head-script-disabled)[39m
+   /github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.html
+[37m      L1 |[90m<h2>Dashboard Overview</h2>[39m
+[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
+[37m      L11 |[90m...     <div style="height: 200px;"><canvas #fleetChart></canvas></div>[39m
+[37m                                                      ^ [31mThe attribute name of [ #fleetChart ] must be in lowercase. (attr-lowercase)[39m
+[37m      L19 |[90m          <input type="text" [(ngModel)]="searchAvailable" placeholder="Search available..." style="p...[39m
+[37m                                       ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L31 |[90m              <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color:...[39m
+[37m                            ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L48 |[90m          <input type="text" [(ngModel)]="searchRented" placeholder="Search rented..." style="padding...[39m
+[37m                                       ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L61 |[90m              <tr [routerLink]="rentalInfo.vehicle ? ['/vehicles', rentalInfo.vehicle.vin] : null" st...[39m
+[37m                            ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
 
-Scanned 1 files, found 1 errors in 1 files (17 ms)
+   Config loaded: /action/lib/.automation/.htmlhintrc
+
+   /github/workspace/FleetTracker.Client/src/app/app.component.html
+[37m      L1 |[90m<div style="font-family: sans-serif; padding: 20px;">[39m
+[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
+[37m      L5 |[90m      routerLink="/dashboard"[39m
+[37m          ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
+[37m      L6 |[90m      routerLinkActive="active"[39m
+[37m          ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
+[37m      L11 |[90m      routerLink="/vehicles"[39m
+[37m           ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
+[37m      L12 |[90m      routerLinkActive="active"[39m
+[37m           ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
+[37m      L17 |[90m      routerLink="/rentals"[39m
+[37m           ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
+[37m      L18 |[90m      routerLinkActive="active"[39m
+[37m           ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
+[37m      L23 |[90m      routerLink="/customers"[39m
+[37m           ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
+[37m      L24 |[90m      routerLinkActive="active"[39m
+[37m           ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
+
+   Config loaded: /action/lib/.automation/.htmlhintrc
+
+   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.html
+[37m      L1 |[90m<h2>Rentals</h2>[39m
+[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
+[37m      L10 |[90m      <select [(ngModel)]="statusFilter" style="padding: 8px;">[39m
+[37m                        ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L15 |[90m      <input type="text" [(ngModel)]="searchQuery" placeholder="Search customer, vehicle, agreement.....[39m
+[37m                                   ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L17 |[90m    <button routerLink="/rentals/new" style="padding: 8px 16px; cursor: pointer;">+ New Rental</butto...[39m
+[37m                      ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
+[37m      L34 |[90m...ground-color: #fafafa; cursor: pointer;" [routerLink]="['/rentals', rental.id]">[39m
+[37m                                                      ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L37 |[90m            <a [routerLink]="['/vehicles', rental.vehicleId]" (click)="$event.stopPropagation()" styl...[39m
+[37m                         ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L42 |[90m            <a [routerLink]="['/customers', rental.customerId]" (click)="$event.stopPropagation()" st...[39m
+[37m                         ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
+
+   Config loaded: /action/lib/.automation/.htmlhintrc
+
+   /github/workspace/FleetTracker.Client/src/app/customers/customers.component.html
+[37m      L1 |[90m<h2>Customers</h2>[39m
+[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
+[37m      L9 |[90m    <input type="text" [(ngModel)]="filterText" placeholder="Filter by name or email..." style="paddi...[39m
+[37m                                ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L10 |[90m    <button routerLink="/customers/new" style="padding: 8px 16px; cursor: pointer;">+ New Customer</b...[39m
+[37m                      ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
+[37m      L24 |[90m        <tr [routerLink]="['/customers', customer.id]" style="cursor: pointer; background-color: #faf...[39m
+[37m                      ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
+
+   Config loaded: /action/lib/.automation/.htmlhintrc
+
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicles.component.html
+[37m      L1 |[90m<h2>Vehicles</h2>[39m
+[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
+[37m      L10 |[90m      <select [(ngModel)]="statusFilter" style="padding: 8px;">[39m
+[37m                        ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L17 |[90m      <input type="text" [(ngModel)]="searchQuery" placeholder="Search make, model, plate..." style="...[39m
+[37m                                   ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
+[37m      L19 |[90m    <button routerLink="/vehicles/new" style="padding: 8px 16px; cursor: pointer;">+ New Vehicle</but...[39m
+[37m                      ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
+[37m      L35 |[90m        <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color: #fafa...[39m
+[37m                      ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
+
+   Config loaded: /action/lib/.automation/.htmlhintrc
+
+   /github/workspace/FleetTracker.Client/src/index.html
+[37m      L13 |[90m  <script>[39m
+[37m             ^ [31mThe <script> tag cannot be used in a <head> tag. (head-script-disabled)[39m
+
+Scanned 6 files, found 32 errors in 6 files (30 ms)
 ```
 
 </details>
@@ -1335,8 +1387,13 @@ Scanned 1 files, found 1 errors in 1 files (17 ms)
 <summary>HTML_PRETTIER</summary>
 
 ```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/index.html
-[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
+Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/app/dashboard/dashboard.component.html
+[[33mwarn[39m] FleetTracker.Client/src/app/app.component.html
+[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rentals.component.html
+[[33mwarn[39m] FleetTracker.Client/src/app/customers/customers.component.html
+[[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicles.component.html
+[[33mwarn[39m] FleetTracker.Client/src/index.html
+[[33mwarn[39m] Code style issues found in 6 files. Run Prettier with --write to fix.
 ```
 
 </details>
@@ -1357,6 +1414,42 @@ Checking formatting...[[33mwarn[39m] FleetTracker.Client/proxy.conf.js
 <summary>JSCPD</summary>
 
 ```text
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts [130:4 - 140:2] (10 lines, 97 tokens)
+   /github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts [118:8 - 127:2]
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [55:3 - 64:15] (9 lines, 101 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts [207:2 - 216:16]
+
+Clone found (markup):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.html [4:11 - 11:8] (7 lines, 91 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicles.component.html [4:12 - 11:9]
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts [53:2 - 61:9] (8 lines, 86 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts [157:2 - 165:11]
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts [80:5 - 87:2] (7 lines, 134 tokens)
+   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [48:5 - 55:3]
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts [87:2 - 96:15] (9 lines, 104 tokens)
+   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [55:2 - 216:16]
+
+Clone found (markup):
+ - /github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.html [48:17 - 55:6] (7 lines, 75 tokens)
+   /github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.html [19:20 - 26:6]
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/customers/customer-manage.component.ts [115:2 - 123:11] (8 lines, 86 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts [157:2 - 165:11]
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/customers/customer-manage.component.ts [169:13 - 178:17] (9 lines, 101 tokens)
+   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [49:14 - 90:16]
+
 Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs [19:17 - 347:2] (328 lines, 2062 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/FleetTrackerDbContextModelSnapshot.cs [16:11 - 344:2]
@@ -1510,8 +1603,8 @@ Clone found (csharp):
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [83:8 - 88:9] (5 lines, 133 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [53:12 - 58:4]
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 133 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [54:11 - 59:4]
 
 Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 102 tokens)
@@ -1520,6 +1613,134 @@ Clone found (csharp):
 Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [184:12 - 196:9] (12 lines, 113 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [105:7 - 117:2]
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts [130:4 - 140:2] (10 lines, 97 tokens)
+   /github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts [118:8 - 127:2]
+
+ 130 │ 118 │ ).pipe(
+ 131 │ 119 │           tapResponse({
+ 132 │ 120 │             next: () => {
+ 133 │ 121 │               apiService.getVehicles().subscribe(vehicles => patchState(store, { vehicles }));
+ 134 │ 122 │             },
+ 135 │ 123 │             error: (err: Error) => patchState(store, { error: err.message })
+ 136 │ 124 │           })
+ 137 │ 125 │         ))
+ 138 │ 126 │       )
+ 139 │ 127 │     )
+ 140 │ 128 │   }
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [55:3 - 64:15] (9 lines, 101 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts [207:2 - 216:16]
+
+ 55 │ 207 │ ;
+ 56 │ 208 │   }
+ 57 │ 209 │
+ 58 │ 210 │   getCustomerName(id: string | undefined): string {
+ 59 │ 211 │     if (!id) return 'Unknown Customer';
+ 60 │ 212 │     const c = this.store.customers().find(x => x.id === id);
+ 61 │ 213 │     return c && c.contact ? c.contact.name || id : id;
+ 62 │ 214 │   }
+ 63 │ 215 │
+ 64 │ 216 │   completeRental
+
+Clone found (markup):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.html [4:11 - 11:8] (7 lines, 91 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicles.component.html [4:12 - 11:9]
+
+ 4  │ 4  │ </div>
+ 5  │ 5  │ } @else if (store.error()) {
+ 6  │ 6  │   <div style="color: red; font-weight: bold;">Error: {{ store.error() }}</div>
+ 7  │ 7  │ } @else {
+ 8  │ 8  │   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+ 9  │ 9  │     <div style="display: flex; gap: 10px; align-items: center;">
+ 10 │ 10 │       <select [(ngModel)]="statusFilter" style="padding: 8px;">
+ 11 │ 11 │         <option value="">All Rentals
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts [53:2 - 61:9] (8 lines, 86 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts [157:2 - 165:11]
+
+ 53 │ 157 │ implements OnInit {
+ 54 │ 158 │   private fb = inject(FormBuilder);
+ 55 │ 159 │   private route = inject(ActivatedRoute);
+ 56 │ 160 │   private router = inject(Router);
+ 57 │ 161 │   private apiService = inject(ApiService);
+ 58 │ 162 │   private toast = inject(ToastService);
+ 59 │ 163 │   private store = inject(FleetStore);
+ 60 │ 164 │
+ 61 │ 165 │   rentalId
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts [80:5 - 87:2] (7 lines, 134 tokens)
+   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [48:5 - 55:3]
+
+ 80 │ 48 │ if (!this.store.vehicles().length) this.store.loadVehicles();
+ 81 │ 49 │     if (!this.store.customers().length) this.store.loadCustomers();
+ 82 │ 50 │   }
+ 83 │ 51 │
+ 84 │ 52 │   getVehicleName(id: string | undefined): string {
+ 85 │ 53 │     if (!id) return 'Unknown Vehicle';
+ 86 │ 54 │     const v = this.store.vehicles().find(x => x.id === id);
+ 87 │ 55 │     return v ? `${v.make} ${v.model}`
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts [87:2 - 96:15] (9 lines, 104 tokens)
+   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [55:2 - 216:16]
+
+ 87 │ 55 │ : id;
+ 88 │ 56 │   }
+ 89 │ 57 │
+ 90 │ 58 │   getCustomerName(id: string | undefined): string {
+ 91 │ 59 │     if (!id) return 'Unknown Customer';
+ 92 │ 60 │     const c = this.store.customers().find(x => x.id === id);
+ 93 │ 61 │     return c && c.contact ? c.contact.name || id : id;
+ 94 │ 62 │   }
+ 95 │ 63 │
+ 96 │ 64 │   loadRentalData
+
+Clone found (markup):
+ - /github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.html [48:17 - 55:6] (7 lines, 75 tokens)
+   /github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.html [19:20 - 26:6]
+
+ 48 │ 19 │ " style="padding: 6px; width: 200px;">
+ 49 │ 20 │         </div>
+ 50 │ 21 │         <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left;">
+ 51 │ 22 │           <thead>
+ 52 │ 23 │             <tr>
+ 53 │ 24 │               <th>Name</th>
+ 54 │ 25 │               <th>Status</th>
+ 55 │ 26 │               <th>Start
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/customers/customer-manage.component.ts [115:2 - 123:11] (8 lines, 86 tokens)
+   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts [157:2 - 165:11]
+
+ 115 │ 157 │ implements OnInit {
+ 116 │ 158 │   private fb = inject(FormBuilder);
+ 117 │ 159 │   private route = inject(ActivatedRoute);
+ 118 │ 160 │   private router = inject(Router);
+ 119 │ 161 │   private apiService = inject(ApiService);
+ 120 │ 162 │   private toast = inject(ToastService);
+ 121 │ 163 │   private store = inject(FleetStore);
+ 122 │ 164 │
+ 123 │ 165 │   customerId
+
+Clone found (typescript):
+ - /github/workspace/FleetTracker.Client/src/app/customers/customer-manage.component.ts [169:13 - 178:17] (9 lines, 101 tokens)
+   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts [49:14 - 90:16]
+
+ 169 │ 49 │ ();
+ 170 │ 50 │   }
+ 171 │ 51 │
+ 172 │ 52 │   getVehicleName(id: string | undefined): string {
+ 173 │ 53 │     if (!id) return 'Unknown Vehicle';
+ 174 │ 54 │     const v = this.store.vehicles().find(x => x.id === id);
+ 175 │ 55 │     return v ? `${v.make} ${v.model}` : id;
+ 176 │ 56 │   }
+ 177 │ 57 │
+ 178 │ 58 │   toggleSameAsHome
 
 Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs [19:17 - 347:2] (328 lines, 2062 tokens)
@@ -4889,20 +5110,20 @@ Clone found (csharp):
  12 │ 12 │     public class CustomersController
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [83:8 - 88:9] (5 lines, 133 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [53:12 - 58:4]
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 133 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [54:11 - 59:4]
 
- 83 │ 53 │ );
+ 85 │ 54 │ );
 
- 84 │ 54 │
+ 86 │ 55 │
 
- 85 │ 55 │             var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
+ 87 │ 56 │             var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
 
- 86 │ 56 │             var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
+ 88 │ 57 │             var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
 
- 87 │ 57 │             var paymentInfo = new PaymentInformation(billingAddress, creditCard);
+ 89 │ 58 │             var paymentInfo = new PaymentInformation(billingAddress, creditCard);
 
- 88 │ 58 │             customer
+ 90 │ 59 │             customer
 
 Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 102 tokens)
@@ -4962,13 +5183,13 @@ Clone found (csharp):
 
  196 │ 117 │                     _context
 
-Found 41 clones.
-Error: ERROR: jscpd found too many duplicates (35.51%) over threshold (0%)
+Found 50 clones.
+Error: ERROR: jscpd found too many duplicates (31.21%) over threshold (0%)
     at ThresholdReporter.report (/node_modules/@jscpd/finder/dist/index.js:615:13)
     at /node_modules/@jscpd/finder/dist/index.js:109:18
     at Array.forEach (<anonymous>)
     at /node_modules/@jscpd/finder/dist/index.js:108:22
-    at async /node_modules/jscpd/dist/bin/jscpd.js:9:5ERROR: jscpd found too many duplicates (35.51%) over threshold (0%)
+    at async /node_modules/jscpd/dist/bin/jscpd.js:9:5ERROR: jscpd found too many duplicates (31.21%) over threshold (0%)
 ```
 
 </details>
@@ -5009,8 +5230,8 @@ Error: ERROR: jscpd found too many duplicates (35.51%) over threshold (0%)
 <summary>JSON_PRETTIER</summary>
 
 ```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/tsconfig.app.json
-[[33mwarn[39m] FleetTracker.Client/angular.json
+Checking formatting...[[33mwarn[39m] FleetTracker.Client/angular.json
+[[33mwarn[39m] FleetTracker.Client/tsconfig.app.json
 [[33mwarn[39m] github_conf/branch_protection_rules.json
 [[33mwarn[39m] Code style issues found in 3 files. Run Prettier with --write to fix.
 ```
@@ -5070,6 +5291,118 @@ Try to run: $ textlint --fix [file]
 /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153426_AddCustomerLicenseIndex.Designer.cs:188: HomeState ==> home state
 /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs:188: HomeState ==> home state
 /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/FleetTrackerDbContextModelSnapshot.cs:185: HomeState ==> home state
+/github/workspace/SeedData.sql:1: HomeState ==> home state
+/github/workspace/SeedData.sql:2: HomeState ==> home state
+/github/workspace/SeedData.sql:3: HomeState ==> home state
+/github/workspace/SeedData.sql:4: HomeState ==> home state
+/github/workspace/SeedData.sql:5: HomeState ==> home state
+/github/workspace/SeedData.sql:6: HomeState ==> home state
+/github/workspace/SeedData.sql:7: HomeState ==> home state
+/github/workspace/SeedData.sql:8: HomeState ==> home state
+/github/workspace/SeedData.sql:9: HomeState ==> home state
+/github/workspace/SeedData.sql:10: HomeState ==> home state
+/github/workspace/SeedData.sql:11: HomeState ==> home state
+/github/workspace/SeedData.sql:12: HomeState ==> home state
+/github/workspace/SeedData.sql:13: HomeState ==> home state
+/github/workspace/SeedData.sql:14: HomeState ==> home state
+/github/workspace/SeedData.sql:15: HomeState ==> home state
+/github/workspace/SeedData.sql:16: HomeState ==> home state
+/github/workspace/SeedData.sql:17: HomeState ==> home state
+/github/workspace/SeedData.sql:18: HomeState ==> home state
+/github/workspace/SeedData.sql:19: HomeState ==> home state
+/github/workspace/SeedData.sql:20: HomeState ==> home state
+/github/workspace/SeedData.sql:21: HomeState ==> home state
+/github/workspace/SeedData.sql:22: HomeState ==> home state
+/github/workspace/SeedData.sql:23: HomeState ==> home state
+/github/workspace/SeedData.sql:24: HomeState ==> home state
+/github/workspace/SeedData.sql:25: HomeState ==> home state
+/github/workspace/SeedData.sql:26: HomeState ==> home state
+/github/workspace/SeedData.sql:27: HomeState ==> home state
+/github/workspace/SeedData.sql:28: HomeState ==> home state
+/github/workspace/SeedData.sql:29: HomeState ==> home state
+/github/workspace/SeedData.sql:30: HomeState ==> home state
+/github/workspace/SeedData.sql:31: HomeState ==> home state
+/github/workspace/SeedData.sql:32: HomeState ==> home state
+/github/workspace/SeedData.sql:33: HomeState ==> home state
+/github/workspace/SeedData.sql:34: HomeState ==> home state
+/github/workspace/SeedData.sql:35: HomeState ==> home state
+/github/workspace/SeedData.sql:36: HomeState ==> home state
+/github/workspace/SeedData.sql:37: HomeState ==> home state
+/github/workspace/SeedData.sql:38: HomeState ==> home state
+/github/workspace/SeedData.sql:39: HomeState ==> home state
+/github/workspace/SeedData.sql:40: HomeState ==> home state
+/github/workspace/SeedData.sql:41: HomeState ==> home state
+/github/workspace/SeedData.sql:42: HomeState ==> home state
+/github/workspace/SeedData.sql:43: HomeState ==> home state
+/github/workspace/SeedData.sql:44: HomeState ==> home state
+/github/workspace/SeedData.sql:45: HomeState ==> home state
+/github/workspace/SeedData.sql:46: HomeState ==> home state
+/github/workspace/SeedData.sql:47: HomeState ==> home state
+/github/workspace/SeedData.sql:48: HomeState ==> home state
+/github/workspace/SeedData.sql:49: HomeState ==> home state
+/github/workspace/SeedData.sql:50: HomeState ==> home state
+/github/workspace/SeedData.sql:51: HomeState ==> home state
+/github/workspace/SeedData.sql:52: HomeState ==> home state
+/github/workspace/SeedData.sql:53: HomeState ==> home state
+/github/workspace/SeedData.sql:54: HomeState ==> home state
+/github/workspace/SeedData.sql:55: HomeState ==> home state
+/github/workspace/SeedData.sql:56: HomeState ==> home state
+/github/workspace/SeedData.sql:57: HomeState ==> home state
+/github/workspace/SeedData.sql:58: HomeState ==> home state
+/github/workspace/SeedData.sql:59: HomeState ==> home state
+/github/workspace/SeedData.sql:60: HomeState ==> home state
+/github/workspace/SeedData.sql:61: HomeState ==> home state
+/github/workspace/SeedData.sql:62: HomeState ==> home state
+/github/workspace/SeedData.sql:63: HomeState ==> home state
+/github/workspace/SeedData.sql:64: HomeState ==> home state
+/github/workspace/SeedData.sql:65: HomeState ==> home state
+/github/workspace/SeedData.sql:66: HomeState ==> home state
+/github/workspace/SeedData.sql:67: HomeState ==> home state
+/github/workspace/SeedData.sql:68: HomeState ==> home state
+/github/workspace/SeedData.sql:69: HomeState ==> home state
+/github/workspace/SeedData.sql:70: HomeState ==> home state
+/github/workspace/SeedData.sql:71: HomeState ==> home state
+/github/workspace/SeedData.sql:72: HomeState ==> home state
+/github/workspace/SeedData.sql:73: HomeState ==> home state
+/github/workspace/SeedData.sql:74: HomeState ==> home state
+/github/workspace/SeedData.sql:75: HomeState ==> home state
+/github/workspace/SeedData.sql:76: HomeState ==> home state
+/github/workspace/SeedData.sql:77: HomeState ==> home state
+/github/workspace/SeedData.sql:78: HomeState ==> home state
+/github/workspace/SeedData.sql:79: HomeState ==> home state
+/github/workspace/SeedData.sql:80: HomeState ==> home state
+/github/workspace/SeedData.sql:81: HomeState ==> home state
+/github/workspace/SeedData.sql:82: HomeState ==> home state
+/github/workspace/SeedData.sql:83: HomeState ==> home state
+/github/workspace/SeedData.sql:84: HomeState ==> home state
+/github/workspace/SeedData.sql:85: HomeState ==> home state
+/github/workspace/SeedData.sql:86: HomeState ==> home state
+/github/workspace/SeedData.sql:87: HomeState ==> home state
+/github/workspace/SeedData.sql:88: HomeState ==> home state
+/github/workspace/SeedData.sql:89: HomeState ==> home state
+/github/workspace/SeedData.sql:90: HomeState ==> home state
+/github/workspace/SeedData.sql:91: HomeState ==> home state
+/github/workspace/SeedData.sql:92: HomeState ==> home state
+/github/workspace/SeedData.sql:93: HomeState ==> home state
+/github/workspace/SeedData.sql:94: HomeState ==> home state
+/github/workspace/SeedData.sql:95: HomeState ==> home state
+/github/workspace/SeedData.sql:96: HomeState ==> home state
+/github/workspace/SeedData.sql:97: HomeState ==> home state
+/github/workspace/SeedData.sql:98: HomeState ==> home state
+/github/workspace/SeedData.sql:99: HomeState ==> home state
+/github/workspace/SeedData.sql:100: HomeState ==> home state
+```
+
+</details>
+
+<details>
+
+<summary>SQLFLUFF</summary>
+
+```text
+
+User Error: No dialect was specified. You must configure a dialect or specify one on the command line using --dialect after the command. Available dialects:
+ansi, athena, bigquery, clickhouse, databricks, db2, doris, duckdb, exasol, flink, greenplum, hive, impala, mariadb, materialize, mysql, oracle, postgres, redshift, snowflake, soql, sparksql, sqlite, starrocks, teradata, trino, tsql, vertica
 ```
 
 </details>
@@ -5081,57 +5414,137 @@ Try to run: $ textlint --fix [file]
 ```text
 
 /github/workspace/FleetTracker.Client/src/app/app.config.ts
-  1:63  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app'         n/no-missing-import
-  2:31  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'       n/no-missing-import
-  3:35  error  Can't resolve '@angular/common/http' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
-  4:24  error  Can't resolve './app.routes' in '/github/workspace/FleetTracker.Client/src/app'          n/no-missing-import
+  1:63  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app'                         n/no-missing-import
+  2:31  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'                       n/no-missing-import
+  3:35  error  Can't resolve '@angular/common/http' in '/github/workspace/FleetTracker.Client/src/app'                  n/no-missing-import
+  4:35  error  Can't resolve '@angular/platform-browser/animations' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
+  5:24  error  Can't resolve './app.routes' in '/github/workspace/FleetTracker.Client/src/app'                          n/no-missing-import
 
 /github/workspace/FleetTracker.Client/src/app/app.routes.ts
-  1:24  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'                  n/no-missing-import
-  2:36  error  Can't resolve './dashboard/dashboard.component' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
-  3:35  error  Can't resolve './vehicles/vehicles.component' in '/github/workspace/FleetTracker.Client/src/app'    n/no-missing-import
-  4:34  error  Can't resolve './rentals/rentals.component' in '/github/workspace/FleetTracker.Client/src/app'      n/no-missing-import
-  5:36  error  Can't resolve './customers/customers.component' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
+  1:24  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'                        n/no-missing-import
+  2:36  error  Can't resolve './dashboard/dashboard.component' in '/github/workspace/FleetTracker.Client/src/app'        n/no-missing-import
+  3:35  error  Can't resolve './vehicles/vehicles.component' in '/github/workspace/FleetTracker.Client/src/app'          n/no-missing-import
+  4:40  error  Can't resolve './vehicles/vehicle-manage.component' in '/github/workspace/FleetTracker.Client/src/app'    n/no-missing-import
+  5:34  error  Can't resolve './rentals/rentals.component' in '/github/workspace/FleetTracker.Client/src/app'            n/no-missing-import
+  6:39  error  Can't resolve './rentals/rental-create.component' in '/github/workspace/FleetTracker.Client/src/app'      n/no-missing-import
+  7:36  error  Can't resolve './customers/customers.component' in '/github/workspace/FleetTracker.Client/src/app'        n/no-missing-import
+  8:41  error  Can't resolve './customers/customer-manage.component' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
+  9:39  error  Can't resolve './rentals/rental-manage.component' in '/github/workspace/FleetTracker.Client/src/app'      n/no-missing-import
 
 /github/workspace/FleetTracker.Client/src/app/app.ts
   1:27  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app'    n/no-missing-import
   2:60  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
 
+/github/workspace/FleetTracker.Client/src/app/customers/customer-manage.component.ts
+    1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/customers'              n/no-missing-import
+    2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/customers'             n/no-missing-import
+    3:52  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/customers'            n/no-missing-import
+    4:46  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/customers'    n/no-missing-import
+    5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/customers'  n/no-missing-import
+    6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/customers'       n/no-missing-import
+    7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/customers'            n/no-missing-import
+    8:37  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/customers'            n/no-missing-import
+  178:27  error  Unexpected any. Specify a different type                                                                @typescript-eslint/no-explicit-any
+
 /github/workspace/FleetTracker.Client/src/app/customers/customers.component.ts
-  1:35  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/customers'            n/no-missing-import
-  2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/customers'          n/no-missing-import
-  3:38  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/customers'  n/no-missing-import
+  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/customers'         n/no-missing-import
+  2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/customers'       n/no-missing-import
+  3:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/customers'       n/no-missing-import
+  4:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/customers'        n/no-missing-import
+  5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/customers'  n/no-missing-import
+  6:27  error  Can't resolve '../pipes/phone.pipe' in '/github/workspace/FleetTracker.Client/src/app/customers'   n/no-missing-import
 
 /github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.ts
-   1:35  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/dashboard'            n/no-missing-import
-   2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/dashboard'          n/no-missing-import
-   3:45  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/dashboard'  n/no-missing-import
-  92:29  error  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+   1:74  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/dashboard'         n/no-missing-import
+   2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/dashboard'       n/no-missing-import
+   3:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/dashboard'        n/no-missing-import
+   4:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/dashboard'       n/no-missing-import
+   5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/dashboard'  n/no-missing-import
+   6:38  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/dashboard'       n/no-missing-import
+   7:19  error  Can't resolve 'chart.js/auto' in '/github/workspace/FleetTracker.Client/src/app/dashboard'         n/no-missing-import
+  67:38  error  Unexpected any. Specify a different type                                                           @typescript-eslint/no-explicit-any
+  96:29  error  Unexpected any. Specify a different type                                                           @typescript-eslint/no-explicit-any
+
+/github/workspace/FleetTracker.Client/src/app/pipes/phone.pipe.ts
+  1:37  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/pipes'  n/no-missing-import
+
+/github/workspace/FleetTracker.Client/src/app/rentals/rental-create.component.ts
+  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/rentals'              n/no-missing-import
+  2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/rentals'             n/no-missing-import
+  3:24  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
+  4:28  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'    n/no-missing-import
+  5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'  n/no-missing-import
+  6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/rentals'       n/no-missing-import
+  7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
+
+/github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts
+  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/rentals'              n/no-missing-import
+  2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/rentals'             n/no-missing-import
+  3:52  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
+  4:36  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'    n/no-missing-import
+  5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'  n/no-missing-import
+  6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/rentals'       n/no-missing-import
+  7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
+  8:37  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
 
 /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts
-   1:35  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-   2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/rentals'          n/no-missing-import
-   3:36  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'  n/no-missing-import
-  51:29  error  Unexpected any. Specify a different type                                                            @typescript-eslint/no-explicit-any
+  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/rentals'              n/no-missing-import
+  2:40  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
+  3:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
+  4:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/rentals'             n/no-missing-import
+  5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/rentals'       n/no-missing-import
+  6:28  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'    n/no-missing-import
+  7:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'  n/no-missing-import
 
 /github/workspace/FleetTracker.Client/src/app/services/api.service.ts
-  1:28  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/services'         n/no-missing-import
-  2:28  error  Can't resolve '@angular/common/http' in '/github/workspace/FleetTracker.Client/src/app/services'  n/no-missing-import
-  3:28  error  Can't resolve 'rxjs' in '/github/workspace/FleetTracker.Client/src/app/services'                  n/no-missing-import
+    1:28  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/services'         n/no-missing-import
+    2:47  error  Can't resolve '@angular/common/http' in '/github/workspace/FleetTracker.Client/src/app/services'  n/no-missing-import
+    3:40  error  Can't resolve 'rxjs' in '/github/workspace/FleetTracker.Client/src/app/services'                  n/no-missing-import
+    4:28  error  Can't resolve 'rxjs/operators' in '/github/workspace/FleetTracker.Client/src/app/services'        n/no-missing-import
+   96:47  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
+   97:27  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
+  100:42  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
+  129:36  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
+  162:90  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
+
+/github/workspace/FleetTracker.Client/src/app/services/toast.service.ts
+  1:36  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/services'                n/no-missing-import
+  2:29  error  Can't resolve '@angular/material/snack-bar' in '/github/workspace/FleetTracker.Client/src/app/services'  n/no-missing-import
+
+/github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts
+    1:34  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/store'               n/no-missing-import
+    2:79  error  Can't resolve '@ngrx/signals' in '/github/workspace/FleetTracker.Client/src/app/store'               n/no-missing-import
+    3:26  error  Can't resolve '@ngrx/signals/rxjs-interop' in '/github/workspace/FleetTracker.Client/src/app/store'  n/no-missing-import
+    4:29  error  Can't resolve '@ngrx/operators' in '/github/workspace/FleetTracker.Client/src/app/store'             n/no-missing-import
+    5:48  error  Can't resolve 'rxjs' in '/github/workspace/FleetTracker.Client/src/app/store'                        n/no-missing-import
+    6:55  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/store'     n/no-missing-import
+  116:56  error  Unexpected any. Specify a different type                                                             @typescript-eslint/no-explicit-any
+
+/github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts
+  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/vehicles'              n/no-missing-import
+  2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/vehicles'             n/no-missing-import
+  3:52  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/vehicles'            n/no-missing-import
+  4:45  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/vehicles'    n/no-missing-import
+  5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/vehicles'  n/no-missing-import
+  6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
+  7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/vehicles'            n/no-missing-import
+  8:61  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/vehicles'            n/no-missing-import
 
 /github/workspace/FleetTracker.Client/src/app/vehicles/vehicles.component.ts
-   1:35  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/vehicles'            n/no-missing-import
-   2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/vehicles'          n/no-missing-import
-   3:37  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/vehicles'  n/no-missing-import
-  59:29  error  Unexpected any. Specify a different type                                                             @typescript-eslint/no-explicit-any
-  73:43  error  Unexpected any. Specify a different type                                                             @typescript-eslint/no-explicit-any
+   1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/vehicles'         n/no-missing-import
+   2:44  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
+   3:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
+   4:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/vehicles'        n/no-missing-import
+   5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/vehicles'  n/no-missing-import
+   6:38  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
+  38:29  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
 
 /github/workspace/FleetTracker.Client/src/main.ts
   1:38  error  Can't resolve '@angular/platform-browser' in '/github/workspace/FleetTracker.Client/src'  n/no-missing-import
   2:27  error  Can't resolve './app/app.config' in '/github/workspace/FleetTracker.Client/src'           n/no-missing-import
   3:21  error  Can't resolve './app/app' in '/github/workspace/FleetTracker.Client/src'                  n/no-missing-import
 
-✖ 33 problems (33 errors, 0 warnings)Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
+✖ 99 problems (99 errors, 0 warnings)Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
 ```
 
 </details>
@@ -5141,8 +5554,20 @@ Try to run: $ textlint --fix [file]
 <summary>TYPESCRIPT_PRETTIER</summary>
 
 ```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/main.ts
-[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
+Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/app/customers/customers.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/dashboard/dashboard.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/models/enums.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/pipes/phone.pipe.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rental-create.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rental-manage.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rentals.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/services/api.service.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/customers/customer-manage.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/store/fleet.store.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicles.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/main.ts
+[[33mwarn[39m] Code style issues found in 13 files. Run Prettier with --write to fix.
 ```
 
 </details>

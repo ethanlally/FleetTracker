@@ -1,0 +1,60 @@
+<h2>Rentals</h2>
+
+@if (store.isLoading()) {
+  <div>Loading rentals...</div>
+} @else if (store.error()) {
+  <div style="color: red; font-weight: bold;">Error: {{ store.error() }}</div>
+} @else {
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <select [(ngModel)]="statusFilter" style="padding: 8px;">
+        <option value="">All Rentals</option>
+        <option value="Active">Active</option>
+        <option value="Completed">Completed</option>
+      </select>
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search customer, vehicle, agreement..." style="padding: 8px; width: 300px;">
+    </div>
+    <button routerLink="/rentals/new" style="padding: 8px 16px; cursor: pointer;">+ New Rental</button>
+  </div>
+
+  <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left;">
+    <thead>
+      <tr>
+        <th>Agreement #</th>
+        <th>Vehicle</th>
+        <th>Customer</th>
+        <th>Pickup</th>
+        <th>Expected Return</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (rental of filteredRentals; track rental.id) {
+        <tr style="background-color: #fafafa; cursor: pointer;" [routerLink]="['/rentals', rental.id]">
+          <td>{{ rental.agreementNumber }}</td>
+          <td>
+            <a [routerLink]="['/vehicles', rental.vehicleId]" (click)="$event.stopPropagation()" style="color: #007bff; text-decoration: none;">
+              {{ getVehicleName(rental.vehicleId) }}
+            </a>
+          </td>
+          <td>
+            <a [routerLink]="['/customers', rental.customerId]" (click)="$event.stopPropagation()" style="color: #007bff; text-decoration: none;">
+              {{ getCustomerName(rental.customerId) }}
+            </a>
+          </td>
+          <td>{{ rental.pickupDate | date: 'short' }}</td>
+          <td>{{ rental.expectedReturnDate | date: 'short' }}</td>
+          <td>{{ rental.status == 0 ? 'Active' : 'Completed' }}</td>
+          <td>
+            @if (rental.status == 0) {
+              <button (click)="completeRental(rental.id, $event); $event.stopPropagation();" style="padding: 4px 8px; cursor: pointer;">Complete</button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="7">No rentals found.</td></tr>
+      }
+    </tbody>
+  </table>
+}

@@ -50,7 +50,8 @@ namespace FleetTracker.Services.Api.Controllers
             }
 
             var address = new Address(request.HomeAddress.Street, request.HomeAddress.City, request.HomeAddress.State, request.HomeAddress.Zip, request.HomeAddress.Country);
-            var contact = new ContactInfo(request.Contact.Name, request.Contact.Email, request.Contact.PhoneNumber);
+            var cleanPhone = new string(request.Contact.PhoneNumber.Where(char.IsDigit).ToArray());
+            var contact = new ContactInfo(request.Contact.Name, request.Contact.Email, cleanPhone);
             var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
             var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
             var paymentInfo = new PaymentInformation(billingAddress, creditCard);
@@ -76,7 +77,8 @@ namespace FleetTracker.Services.Api.Controllers
 
             customer.UpdateBasicInfo(request.DriversLicense, request.DateOfBirth);
 
-            var contact = new ContactInfo(request.Contact.Name, request.Contact.Email, request.Contact.PhoneNumber);
+            var cleanPhone = new string(request.Contact.PhoneNumber.Where(char.IsDigit).ToArray());
+            var contact = new ContactInfo(request.Contact.Name, request.Contact.Email, cleanPhone);
             customer.UpdateContact(contact);
 
             var address = new Address(request.HomeAddress.Street, request.HomeAddress.City, request.HomeAddress.State, request.HomeAddress.Zip, request.HomeAddress.Country);
