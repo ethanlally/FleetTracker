@@ -30,7 +30,7 @@
 
 All files and directories linted successfully
 
-For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27019568873)
+For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27019802397)
 
 Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
@@ -41,7 +41,7 @@ Powered by [Super-linter](https://github.com/super-linter/super-linter)
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 16.
-Checked 36 files in 61ms. No fixes applied.
+Checked 36 files in 76ms. No fixes applied.
 Found 36 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
@@ -841,7 +841,7 @@ format ━━━━━━━━━━━━━━━━━━━━━━━━�
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 61.
-Checked 42 files in 120ms. No fixes applied.
+Checked 42 files in 157ms. No fixes applied.
 Found 38 errors.
 Found 42 warnings.
 Found 1 info.FleetTracker.Client/src/index.html:15:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1377,7 +1377,7 @@ Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/styles.css
 [37m      L13 |[90m  <script>[39m
 [37m             ^ [31mThe <script> tag cannot be used in a <head> tag. (head-script-disabled)[39m
 
-Scanned 6 files, found 32 errors in 6 files (30 ms)
+Scanned 6 files, found 32 errors in 6 files (33 ms)
 ```
 
 </details>
@@ -5561,8 +5561,8 @@ Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/app/customers/cus
 [[33mwarn[39m] FleetTracker.Client/src/app/rentals/rental-create.component.ts
 [[33mwarn[39m] FleetTracker.Client/src/app/rentals/rental-manage.component.ts
 [[33mwarn[39m] FleetTracker.Client/src/app/rentals/rentals.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/services/api.service.ts
 [[33mwarn[39m] FleetTracker.Client/src/app/customers/customer-manage.component.ts
+[[33mwarn[39m] FleetTracker.Client/src/app/services/api.service.ts
 [[33mwarn[39m] FleetTracker.Client/src/app/store/fleet.store.ts
 [[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts
 [[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicles.component.ts
