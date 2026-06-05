@@ -1,0 +1,78 @@
+<h2>Dashboard Overview</h2>
+@if (store.isLoading()) {
+  <div>Loading...</div>
+} @else if (store.error()) {
+  <div style="color: red; font-weight: bold;">Error: {{ store.error() }}</div>
+} @else {
+  <div style="display: flex; flex-direction: column; gap: 30px;">
+    
+    <div style="height: 250px; width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+      <h3 style="margin-top: 0;">Fleet Status</h3>
+      <div style="height: 200px;"><canvas #fleetChart></canvas></div>
+    </div>
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; width: 100%;">
+      
+      <div style="flex: 1; min-width: 400px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h3 style="margin: 0;">Available Vehicles</h3>
+          <input type="text" [(ngModel)]="searchAvailable" placeholder="Search available..." style="padding: 6px; width: 200px;">
+        </div>
+        <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left;">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Daily Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (vehicle of filteredAvailableVehicles; track vehicle.id) {
+              <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color: #fafafa;">
+                <td>{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.licensePlate }})</td>
+                <td>{{ getStatusName(vehicle.status) }}</td>
+                <td>{{ vehicle.dailyRate | currency }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="3">No vehicles available.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div style="flex: 1; min-width: 400px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h3 style="margin: 0;">Currently Rented Vehicles</h3>
+          <input type="text" [(ngModel)]="searchRented" placeholder="Search rented..." style="padding: 6px; width: 200px;">
+        </div>
+        <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left;">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Start Date</th>
+              <th>Expected Return</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (rentalInfo of filteredRentedVehiclesInfo; track rentalInfo.rental.id) {
+              <tr [routerLink]="rentalInfo.vehicle ? ['/vehicles', rentalInfo.vehicle.vin] : null" style="cursor: pointer; background-color: #fafafa;">
+                <td>{{ rentalInfo.vehicle?.make }} {{ rentalInfo.vehicle?.model }} ({{ rentalInfo.vehicle?.licensePlate }})</td>
+                <td>{{ getStatusName(rentalInfo.vehicle?.status) }}</td>
+                <td>{{ rentalInfo.rental.pickupDate | date: 'shortDate' }}</td>
+                <td>{{ rentalInfo.rental.expectedReturnDate | date: 'shortDate' }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="4">No active rentals.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+}

@@ -1,0 +1,36 @@
+<h2>Customers</h2>
+
+@if (store.isLoading()) {
+  <div>Loading customers...</div>
+} @else if (store.error()) {
+  <div style="color: red; font-weight: bold;">Error: {{ store.error() }}</div>
+} @else {
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <input type="text" [(ngModel)]="filterText" placeholder="Filter by name or email..." style="padding: 8px; width: 300px;" />
+    <button routerLink="/customers/new" style="padding: 8px 16px; cursor: pointer;">+ New Customer</button>
+  </div>
+  <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>License</th>
+        <th>DOB</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (customer of filteredCustomers; track customer.id) {
+        <tr [routerLink]="['/customers', customer.id]" style="cursor: pointer; background-color: #fafafa;">
+          <td>{{ customer.contact?.name }}</td>
+          <td>{{ customer.contact?.email }}</td>
+          <td>{{ customer.contact?.phoneNumber | phone }}</td>
+          <td>{{ customer.driversLicense }}</td>
+          <td>{{ customer.dateOfBirth | date: 'shortDate' }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5">No customers found.</td></tr>
+      }
+    </tbody>
+  </table>
+}

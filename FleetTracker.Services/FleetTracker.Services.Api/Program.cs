@@ -1,10 +1,9 @@
 using FleetTracker.Services.Core.Interfaces;
-using FleetTracker.Services.Data.Repositories;
 using FleetTracker.Services.Data;
-using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
@@ -28,18 +27,18 @@ builder.Services.AddScoped<ICustomerRepository>(sp => sp.GetRequiredService<EfFl
 builder.Services.AddScoped<IVehicleRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
 builder.Services.AddScoped<IRentalRepository>(sp => sp.GetRequiredService<EfFleetRepository>());
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Apply migrations and seed data on startup
-using (var scope = app.Services.CreateScope())
+using (IServiceScope scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<FleetTrackerDbContext>();
+    FleetTrackerDbContext context = scope.ServiceProvider.GetRequiredService<FleetTrackerDbContext>();
     context.Database.Migrate(); // Applies migrations (creates DB if it doesn't exist)
 
     // Seed data only if the database is empty
     if (!context.Customers.Any())
     {
-        var repo = scope.ServiceProvider.GetRequiredService<EfFleetRepository>();
+        EfFleetRepository repo = scope.ServiceProvider.GetRequiredService<EfFleetRepository>();
         FakeDataSeeder.Seed(repo, repo, repo);
     }
 }

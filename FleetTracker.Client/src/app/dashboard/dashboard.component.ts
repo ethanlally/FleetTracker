@@ -1,106 +1,99 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, inject, effect, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService, Vehicle, Rental } from '../services/api.service';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { FleetStore } from '../store/fleet.store';
+import { getVehicleStatusName } from '../models/enums';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
-  template: `
-    <h2>Dashboard Overview</h2>
-    <div *ngIf="loading">Loading...</div>
-    <div *ngIf="!loading">
-      <h3>Available Vehicles</h3>
-      <table border="1" cellpadding="5" cellspacing="0" style="margin-bottom: 20px;">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>License Plate</th>
-            <th>Status</th>
-            <th>Daily Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let vehicle of availableVehicles">
-            <td>{{ vehicle.make }} {{ vehicle.model }}</td>
-            <td>{{ vehicle.licensePlate }}</td>
-            <td>{{ getStatusName(vehicle.status) }}</td>
-            <td>{{ vehicle.dailyRate | currency }}</td>
-          </tr>
-          <tr *ngIf="availableVehicles.length === 0">
-            <td colspan="4">No vehicles available.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>Currently Rented Vehicles</h3>
-      <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>License Plate</th>
-            <th>Status</th>
-            <th>Daily Rate</th>
-            <th>Start Date</th>
-            <th>Expected Return</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let rentalInfo of rentedVehiclesInfo">
-            <td>{{ rentalInfo.vehicle?.make }} {{ rentalInfo.vehicle?.model }}</td>
-            <td>{{ rentalInfo.vehicle?.licensePlate }}</td>
-            <td>{{ getStatusName(rentalInfo.vehicle?.status) }}</td>
-            <td>{{ rentalInfo.vehicle?.dailyRate | currency }}</td>
-            <td>{{ rentalInfo.rental.pickupDate | date: 'shortDate' }}</td>
-            <td>{{ rentalInfo.rental.expectedReturnDate | date: 'shortDate' }}</td>
-          </tr>
-          <tr *ngIf="rentedVehiclesInfo.length === 0">
-            <td colspan="6">No active rentals.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  `,
+  imports: [CommonModule, FormsModule, RouterLink],
+  templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
-  vehicles: Vehicle[] = [];
-  availableVehicles: Vehicle[] = [];
-  activeRentals: Rental[] = [];
-  rentedVehiclesInfo: { vehicle: Vehicle | undefined; rental: Rental }[] = [];
-  loading = true;
+  store = inject(FleetStore);
+  chartRef = viewChild<ElementRef<HTMLCanvasElement>>('fleetChart');
+  chartInstance: Chart | null = null;
 
-  constructor(private apiService: ApiService) {}
+  searchAvailable = '';
+  searchRented = '';
 
-  ngOnInit() {
-    this.apiService.getVehicles().subscribe((v) => {
-      this.vehicles = v;
-      this.availableVehicles = this.vehicles.filter((veh) => this.isAvailable(veh));
+  get filteredAvailableVehicles() {
+    let v = this.store.availableVehicles();
+    if (this.searchAvailable) {
+      const q = this.searchAvailable.toLowerCase();
+      v = v.filter(x => `${x.make} ${x.model} ${x.licensePlate}`.toLowerCase().includes(q));
+    }
+    return v;
+  }
 
-      this.apiService.getActiveRentals().subscribe((r) => {
-        this.activeRentals = r;
-        this.rentedVehiclesInfo = this.activeRentals.map((rental) => {
-          return {
-            rental: rental,
-            vehicle: this.vehicles.find((veh) => veh.id === rental.vehicleId),
-          };
-        });
-        this.loading = false;
+  get filteredRentedVehiclesInfo() {
+    let info = this.store.rentedVehiclesInfo();
+    if (this.searchRented) {
+      const q = this.searchRented.toLowerCase();
+      info = info.filter(x => {
+        const vStr = x.vehicle ? `${x.vehicle.make} ${x.vehicle.model} ${x.vehicle.licensePlate}`.toLowerCase() : '';
+        return vStr.includes(q);
       });
+    }
+    return info;
+  }
+
+  constructor() {
+    effect(() => {
+      const canvasRef = this.chartRef();
+      const vehicles = this.store.vehicles();
+
+      if (canvasRef && vehicles.length > 0) {
+        if (!this.chartInstance) {
+          this.chartInstance = new Chart(canvasRef.nativeElement, {
+            type: 'doughnut',
+            data: {
+              labels: ['Available', 'Rented', 'Maintenance', 'Unavailable'],
+              datasets: [{
+                data: [0, 0, 0, 0],
+                backgroundColor: ['#4caf50', '#2196f3', '#ff9800', '#f44336']
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: 'right' },
+                tooltip: {
+                  callbacks: {
+                    label: (context: any) => {
+                      const label = context.label || '';
+                      const value = context.raw || 0;
+                      const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                      const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                      return `${label}: ${value} (${percentage}%)`;
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
+
+        const available = vehicles.filter(v => Number(v.status) === 0 || String(v.status) === 'Available').length;
+        const rented = vehicles.filter(v => Number(v.status) === 1 || String(v.status) === 'Rented').length;
+        const maintenance = vehicles.filter(v => Number(v.status) === 2 || String(v.status) === 'InMaintenance').length;
+        const unavailable = vehicles.filter(v => Number(v.status) === 3 || String(v.status) === 'Unavailable').length;
+        
+        this.chartInstance.data.datasets[0].data = [available, rented, maintenance, unavailable];
+        this.chartInstance.update();
+      }
     });
   }
 
-  getStatusName(statusEnum: any): string {
-    if (statusEnum === undefined || statusEnum === null) return '';
-    const statusMap: { [key: number]: string } = {
-      0: 'Available',
-      1: 'Rented',
-      2: 'InMaintenance',
-      3: 'Unavailable',
-    };
-    return statusMap[Number(statusEnum)] || statusEnum;
+  ngOnInit() {
+    this.store.loadDashboardData();
   }
 
-  isAvailable(vehicle: Vehicle): boolean {
-    return Number(vehicle.status) === 0 || vehicle.status === 'Available';
+  getStatusName(statusEnum: any): string {
+    return getVehicleStatusName(statusEnum);
   }
 }
