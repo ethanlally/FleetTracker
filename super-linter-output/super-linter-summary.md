@@ -1,36 +1,17 @@
 # Super-linter summary
 
-| Language                   | Validation result |
-| -------------------------- | ----------------- |
-| BIOME_FORMAT               | Fail ❌           |
-| BIOME_LINT                 | Fail ❌           |
-| CHECKOV                    | Fail ❌           |
-| CSHARP                     | Pass ✅           |
-| CSS                        | Fail ❌           |
-| CSS_PRETTIER               | Fail ❌           |
-| EDITORCONFIG               | Fail ❌           |
-| GITLEAKS                   | Pass ✅           |
-| GIT_MERGE_CONFLICT_MARKERS | Pass ✅           |
-| HTML                       | Fail ❌           |
-| HTML_PRETTIER              | Fail ❌           |
-| JAVASCRIPT_ES              | Pass ✅           |
-| JAVASCRIPT_PRETTIER        | Fail ❌           |
-| JSCPD                      | Fail ❌           |
-| JSON                       | Fail ❌           |
-| JSON_PRETTIER              | Fail ❌           |
-| MARKDOWN                   | Pass ✅           |
-| MARKDOWN_PRETTIER          | Fail ❌           |
-| NATURAL_LANGUAGE           | Fail ❌           |
-| PRE_COMMIT                 | Pass ✅           |
-| SPELL_CODESPELL            | Fail ❌           |
-| SQLFLUFF                   | Fail ❌           |
-| TRIVY                      | Pass ✅           |
-| TYPESCRIPT_ES              | Fail ❌           |
-| TYPESCRIPT_PRETTIER        | Fail ❌           |
+| Language     | Validation result |
+| ------------ | ----------------- |
+| BIOME_FORMAT | Fail ❌           |
+| BIOME_LINT   | Fail ❌           |
+| CHECKOV      | Fail ❌           |
+| JSCPD        | Fail ❌           |
+| PRE_COMMIT   | Pass ✅           |
+| TRIVY        | Pass ✅           |
 
 All files and directories linted successfully
 
-For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27019802397)
+For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27020082273)
 
 Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
@@ -41,7 +22,7 @@ Powered by [Super-linter](https://github.com/super-linter/super-linter)
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 16.
-Checked 36 files in 76ms. No fixes applied.
+Checked 36 files in 57ms. No fixes applied.
 Found 36 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
@@ -841,7 +822,7 @@ format ━━━━━━━━━━━━━━━━━━━━━━━━�
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 61.
-Checked 42 files in 157ms. No fixes applied.
+Checked 42 files in 119ms. No fixes applied.
 Found 38 errors.
 Found 42 warnings.
 Found 1 info.FleetTracker.Client/src/index.html:15:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1222,195 +1203,6 @@ Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 
 <details>
 
-<summary>CSS</summary>
-
-```text
-
-FleetTracker.Client/src/styles.css
-  [2m2:6[22m  [31m[31m✖[39m  Expected no more than 1 declaration  [2mdeclaration-block-single-line-max-declarations[22m
-
-[31m✖[39m 1 problem ([31m1 error[39m, [33m0 warnings[39m)
-```
-
-</details>
-
-<details>
-
-<summary>CSS_PRETTIER</summary>
-
-```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/styles.css
-[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
-```
-
-</details>
-
-<details>
-
-<summary>EDITORCONFIG</summary>
-
-```text
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603152232_DecoupleRentalHistory.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153037_AddRentalIndexes.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153426_AddCustomerLicenseIndex.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602154919_MaintenanceCostPrecision.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/FleetTrackerDbContextModelSnapshot.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[33;1mFleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.Designer.cs:[33;0m
-[31;1m	No final newline expected[33;0m
-[31;1m	Not all lines have the correct end of line character[33;0m
-[31;1m
-18 errors found[33;0m
-```
-
-</details>
-
-<details>
-
-<summary>HTML</summary>
-
-```text
-
-   Config loaded: /action/lib/.automation/.htmlhintrc
-
-   /github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.html
-[37m      L1 |[90m<h2>Dashboard Overview</h2>[39m
-[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
-[37m      L11 |[90m...     <div style="height: 200px;"><canvas #fleetChart></canvas></div>[39m
-[37m                                                      ^ [31mThe attribute name of [ #fleetChart ] must be in lowercase. (attr-lowercase)[39m
-[37m      L19 |[90m          <input type="text" [(ngModel)]="searchAvailable" placeholder="Search available..." style="p...[39m
-[37m                                       ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L31 |[90m              <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color:...[39m
-[37m                            ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L48 |[90m          <input type="text" [(ngModel)]="searchRented" placeholder="Search rented..." style="padding...[39m
-[37m                                       ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L61 |[90m              <tr [routerLink]="rentalInfo.vehicle ? ['/vehicles', rentalInfo.vehicle.vin] : null" st...[39m
-[37m                            ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
-
-   Config loaded: /action/lib/.automation/.htmlhintrc
-
-   /github/workspace/FleetTracker.Client/src/app/app.component.html
-[37m      L1 |[90m<div style="font-family: sans-serif; padding: 20px;">[39m
-[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
-[37m      L5 |[90m      routerLink="/dashboard"[39m
-[37m          ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
-[37m      L6 |[90m      routerLinkActive="active"[39m
-[37m          ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
-[37m      L11 |[90m      routerLink="/vehicles"[39m
-[37m           ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
-[37m      L12 |[90m      routerLinkActive="active"[39m
-[37m           ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
-[37m      L17 |[90m      routerLink="/rentals"[39m
-[37m           ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
-[37m      L18 |[90m      routerLinkActive="active"[39m
-[37m           ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
-[37m      L23 |[90m      routerLink="/customers"[39m
-[37m           ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
-[37m      L24 |[90m      routerLinkActive="active"[39m
-[37m           ^ [31mThe attribute name of [ routerLinkActive ] must be in lowercase. (attr-lowercase)[39m
-
-   Config loaded: /action/lib/.automation/.htmlhintrc
-
-   /github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.html
-[37m      L1 |[90m<h2>Rentals</h2>[39m
-[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
-[37m      L10 |[90m      <select [(ngModel)]="statusFilter" style="padding: 8px;">[39m
-[37m                        ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L15 |[90m      <input type="text" [(ngModel)]="searchQuery" placeholder="Search customer, vehicle, agreement.....[39m
-[37m                                   ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L17 |[90m    <button routerLink="/rentals/new" style="padding: 8px 16px; cursor: pointer;">+ New Rental</butto...[39m
-[37m                      ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
-[37m      L34 |[90m...ground-color: #fafafa; cursor: pointer;" [routerLink]="['/rentals', rental.id]">[39m
-[37m                                                      ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L37 |[90m            <a [routerLink]="['/vehicles', rental.vehicleId]" (click)="$event.stopPropagation()" styl...[39m
-[37m                         ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L42 |[90m            <a [routerLink]="['/customers', rental.customerId]" (click)="$event.stopPropagation()" st...[39m
-[37m                         ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
-
-   Config loaded: /action/lib/.automation/.htmlhintrc
-
-   /github/workspace/FleetTracker.Client/src/app/customers/customers.component.html
-[37m      L1 |[90m<h2>Customers</h2>[39m
-[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
-[37m      L9 |[90m    <input type="text" [(ngModel)]="filterText" placeholder="Filter by name or email..." style="paddi...[39m
-[37m                                ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L10 |[90m    <button routerLink="/customers/new" style="padding: 8px 16px; cursor: pointer;">+ New Customer</b...[39m
-[37m                      ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
-[37m      L24 |[90m        <tr [routerLink]="['/customers', customer.id]" style="cursor: pointer; background-color: #faf...[39m
-[37m                      ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
-
-   Config loaded: /action/lib/.automation/.htmlhintrc
-
-   /github/workspace/FleetTracker.Client/src/app/vehicles/vehicles.component.html
-[37m      L1 |[90m<h2>Vehicles</h2>[39m
-[37m          ^ [31mDoctype must be declared before any non-comment content. (doctype-first)[39m
-[37m      L10 |[90m      <select [(ngModel)]="statusFilter" style="padding: 8px;">[39m
-[37m                        ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L17 |[90m      <input type="text" [(ngModel)]="searchQuery" placeholder="Search make, model, plate..." style="...[39m
-[37m                                   ^ [31mThe attribute name of [ [(ngModel)] ] must be in lowercase. (attr-lowercase)[39m
-[37m      L19 |[90m    <button routerLink="/vehicles/new" style="padding: 8px 16px; cursor: pointer;">+ New Vehicle</but...[39m
-[37m                      ^ [31mThe attribute name of [ routerLink ] must be in lowercase. (attr-lowercase)[39m
-[37m      L35 |[90m        <tr [routerLink]="['/vehicles', vehicle.vin]" style="cursor: pointer; background-color: #fafa...[39m
-[37m                      ^ [31mThe attribute name of [ [routerLink] ] must be in lowercase. (attr-lowercase)[39m
-
-   Config loaded: /action/lib/.automation/.htmlhintrc
-
-   /github/workspace/FleetTracker.Client/src/index.html
-[37m      L13 |[90m  <script>[39m
-[37m             ^ [31mThe <script> tag cannot be used in a <head> tag. (head-script-disabled)[39m
-
-Scanned 6 files, found 32 errors in 6 files (33 ms)
-```
-
-</details>
-
-<details>
-
-<summary>HTML_PRETTIER</summary>
-
-```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/app/dashboard/dashboard.component.html
-[[33mwarn[39m] FleetTracker.Client/src/app/app.component.html
-[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rentals.component.html
-[[33mwarn[39m] FleetTracker.Client/src/app/customers/customers.component.html
-[[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicles.component.html
-[[33mwarn[39m] FleetTracker.Client/src/index.html
-[[33mwarn[39m] Code style issues found in 6 files. Run Prettier with --write to fix.
-```
-
-</details>
-
-<details>
-
-<summary>JAVASCRIPT_PRETTIER</summary>
-
-```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/proxy.conf.js
-[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
-```
-
-</details>
-
-<details>
-
 <summary>JSCPD</summary>
 
 ```text
@@ -1487,7 +1279,7 @@ Clone found (csharp):
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/FleetTrackerDbContextModelSnapshot.cs [90:12 - 344:2]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [59:12 - 65:23] (6 lines, 85 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [59:12 - 65:23] (6 lines, 79 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [24:16 - 30:24]
 
 Clone found (csharp):
@@ -1519,11 +1311,11 @@ Clone found (csharp):
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/FleetTrackerDbContextModelSnapshot.cs [302:2 - 329:7]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [36:19 - 55:19] (19 lines, 131 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [36:19 - 55:19] (19 lines, 112 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603152232_DecoupleRentalHistory.cs [41:12 - 59:2]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [56:5 - 70:6] (14 lines, 101 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [56:5 - 70:6] (14 lines, 87 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [12:3 - 26:5]
 
 Clone found (csharp):
@@ -1535,11 +1327,11 @@ Clone found (csharp):
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs [17:5 - 382:2]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [64:20 - 72:2] (8 lines, 172 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [64:20 - 72:2] (8 lines, 164 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [18:21 - 27:2]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [73:5 - 91:12] (18 lines, 157 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [73:5 - 91:12] (18 lines, 139 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [61:6 - 79:12]
 
 Clone found (csharp):
@@ -1563,55 +1355,55 @@ Clone found (csharp):
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602154919_MaintenanceCostPrecision.Designer.cs [315:8 - 382:2]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Core/DataModels/DataModels.cs [133:5 - 151:21] (18 lines, 193 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Core/DataModels/DataModels.cs [133:5 - 151:21] (18 lines, 175 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Core/DataModels/DataModels.cs [73:5 - 91:19]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [97:13 - 134:15] (37 lines, 369 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [97:13 - 134:15] (37 lines, 332 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [53:13 - 90:16]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [249:35 - 255:16] (6 lines, 90 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [249:35 - 255:16] (6 lines, 84 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [241:37 - 247:12]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [415:22 - 428:9] (13 lines, 104 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [415:22 - 428:9] (13 lines, 91 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [160:14 - 174:20]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [179:13 - 188:19] (9 lines, 89 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [179:13 - 188:19] (9 lines, 80 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [127:13 - 137:4]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [122:27 - 132:21] (10 lines, 94 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [122:27 - 132:21] (10 lines, 84 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [68:36 - 78:9]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [150:9 - 162:8] (12 lines, 94 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [150:9 - 162:8] (12 lines, 82 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [196:8 - 208:9]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [197:35 - 206:58] (9 lines, 96 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [197:35 - 206:58] (9 lines, 87 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [68:36 - 78:2]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/RentalsController.cs [1:1 - 12:18] (11 lines, 96 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/RentalsController.cs [1:1 - 12:18] (11 lines, 85 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [1:1 - 12:20] (11 lines, 96 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [1:1 - 12:20] (11 lines, 85 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 133 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 128 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [54:11 - 59:4]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 102 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 91 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [77:9 - 88:10]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [184:12 - 196:9] (12 lines, 113 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [184:12 - 196:9] (12 lines, 101 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [105:7 - 117:2]
 
 Clone found (typescript):
@@ -3131,21 +2923,15 @@ Clone found (csharp):
  336 │ 340 │                     b.Navigation("Maintenance
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [59:12 - 65:23] (6 lines, 85 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [59:12 - 65:23] (6 lines, 79 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [24:16 - 30:24]
 
  59 │ 24 │ type: "datetime2", nullable: false),
-
  60 │ 25 │                     Type = table.Column<int>(type: "int", nullable: false),
-
  61 │ 26 │                     VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-
  62 │ 27 │                 },
-
  63 │ 28 │                 constraints: table =>
-
  64 │ 29 │                 {
-
  65 │ 30 │                     table.PrimaryKey("PK_M
 
 Clone found (csharp):
@@ -3848,81 +3634,48 @@ Clone found (csharp):
  346 │ 329 │                                 .HasColumnType("uniqueident
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [36:19 - 55:19] (19 lines, 131 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [36:19 - 55:19] (19 lines, 112 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603152232_DecoupleRentalHistory.cs [41:12 - 59:2]
 
  36 │ 41 │ uniqueidentifier");
-
  37 │ 42 │
-
  38 │ 43 │             migrationBuilder.AddForeignKey(
-
  39 │ 44 │                 name: "FK_RentalAgreements_Customers_CustomerId",
-
  40 │ 45 │                 table: "RentalAgreements",
-
  41 │ 46 │                 column: "CustomerId",
-
  42 │ 47 │                 principalTable: "Customers",
-
  43 │ 48 │                 principalColumn: "Id",
-
  44 │ 49 │                 onDelete: ReferentialAction.SetNull);
-
  45 │ 50 │
-
  46 │ 51 │             migrationBuilder.AddForeignKey(
-
  47 │ 52 │                 name: "FK_RentalAgreements_Vehicles_VehicleId",
-
  48 │ 53 │                 table: "RentalAgreements",
-
  49 │ 54 │                 column: "VehicleId",
-
  50 │ 55 │                 principalTable: "Vehicles",
-
  51 │ 56 │                 principalColumn: "Id",
-
  52 │ 57 │                 onDelete: ReferentialAction.SetNull);
-
  53 │ 58 │         }
-
  54 │ 59 │
-
  55 │ 60 │         /
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [56:5 - 70:6] (14 lines, 101 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [56:5 - 70:6] (14 lines, 87 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.cs [12:3 - 26:5]
 
  56 │ 12 │ verride void Down(MigrationBuilder migrationBuilder)
-
  57 │ 13 │         {
-
  58 │ 14 │             migrationBuilder.DropForeignKey(
-
  59 │ 15 │                 name: "FK_RentalAgreements_Customers_CustomerId",
-
  60 │ 16 │                 table: "RentalAgreements");
-
  61 │ 17 │
-
  62 │ 18 │             migrationBuilder.DropForeignKey(
-
  63 │ 19 │                 name: "FK_RentalAgreements_Vehicles_VehicleId",
-
  64 │ 20 │                 table: "RentalAgreements");
-
  65 │ 21 │
-
  66 │ 22 │             migrationBuilder.AlterColumn<Guid>(
-
  67 │ 23 │                 name: "VehicleId",
-
  68 │ 24 │                 table: "RentalAgreements",
-
  69 │ 25 │                 type: "uniqueidentifier",
-
  70 │ 26 │
 
 Clone found (csharp):
@@ -4313,67 +4066,41 @@ Clone found (csharp):
  378 │ 378 │                     b.Navigation("Rental
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [64:20 - 72:2] (8 lines, 172 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [64:20 - 72:2] (8 lines, 164 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [18:21 - 27:2]
 
  64 │ 18 │ aintenanceRecord",
-
  65 │ 19 │                 columns: table => new
-
  66 │ 20 │                 {
-
  67 │ 21 │                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-
  68 │ 22 │                     ServiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-
  69 │ 23 │                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-
  70 │ 24 │                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-
  71 │ 25 │                     Type = table.Column<int>(type: "int", nullable: false),
-
  72 │ 26 │                     VehicleId = table.Column<Guid>(type: "uniqueidentifier",
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [73:5 - 91:12] (18 lines, 157 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs [73:5 - 91:12] (18 lines, 139 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.cs [61:6 - 79:12]
 
  73 │ 61 │ ", nullable: true)
-
  74 │ 62 │                 },
-
  75 │ 63 │                 constraints: table =>
-
  76 │ 64 │                 {
-
  77 │ 65 │                     table.PrimaryKey("PK_MaintenanceRecord", x => x.Id);
-
  78 │ 66 │                     table.ForeignKey(
-
  79 │ 67 │                         name: "FK_MaintenanceRecord_Vehicles_VehicleId",
-
  80 │ 68 │                         column: x => x.VehicleId,
-
  81 │ 69 │                         principalTable: "Vehicles",
-
  82 │ 70 │                         principalColumn: "Id",
-
  83 │ 71 │                         onDelete: ReferentialAction.Cascade);
-
  84 │ 72 │                     table.ForeignKey(
-
  85 │ 73 │                         name: "FK_MaintenanceRecord_Vehicles_VehicleId1",
-
  86 │ 74 │                         column: x => x.VehicleId1,
-
  87 │ 75 │                         principalTable: "Vehicles",
-
  88 │ 76 │                         principalColumn: "Id");
-
  89 │ 77 │                 });
-
  90 │ 78 │
-
  91 │ 79 │             migrationBu
 
 Clone found (csharp):
@@ -4778,409 +4505,245 @@ Clone found (csharp):
  380 │ 378 │                     b.Navigation("Rental
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Core/DataModels/DataModels.cs [133:5 - 151:21] (18 lines, 193 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Core/DataModels/DataModels.cs [133:5 - 151:21] (18 lines, 175 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Core/DataModels/DataModels.cs [73:5 - 91:19]
 
  133 │ 73 │ {
-
  134 │ 74 │         [Required(ErrorMessage = "Input cannot be null or empty.")]
-
  135 │ 75 │         [RegularExpression(@"^[A-Z0-9\-]+$", ErrorMessage = "Drivers license contains invalid characters.")]
-
  136 │ 76 │         public string DriversLicense { get; set; } = string.Empty;
-
  137 │ 77 │
-
  138 │ 78 │         [Required]
-
  139 │ 79 │         public DateTime DateOfBirth { get; set; }
-
  140 │ 80 │
-
  141 │ 81 │         [Required]
-
  142 │ 82 │         public PaymentData PaymentInformation { get; set; } = new();
-
  143 │ 83 │
-
  144 │ 84 │         [Required]
-
  145 │ 85 │         public ContactData Contact { get; set; } = new();
-
  146 │ 86 │
-
  147 │ 87 │         [Required]
-
  148 │ 88 │         public AddressData HomeAddress { get; set; } = new();
-
  149 │ 89 │     }
-
  150 │ 90 │
-
  151 │ 91 │     public class CreateVehicleRequest
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [97:13 - 134:15] (37 lines, 369 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [97:13 - 134:15] (37 lines, 332 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [53:13 - 90:16]
 
  97  │ 53 │ {
-
  98  │ 54 │                 DriversLicense = customer.DriversLicense,
-
  99  │ 55 │                 DateOfBirth = customer.DateOfBirth,
-
  100 │ 56 │                 Contact = new ContactData
-
  101 │ 57 │                 {
-
  102 │ 58 │                     Name = customer.Contact.Name,
-
  103 │ 59 │                     Email = customer.Contact.Email,
-
  104 │ 60 │                     PhoneNumber = customer.Contact.PhoneNumber
-
  105 │ 61 │                 },
-
  106 │ 62 │                 HomeAddress = new AddressData
-
  107 │ 63 │                 {
-
  108 │ 64 │                     Street = customer.HomeAddress.Street,
-
  109 │ 65 │                     City = customer.HomeAddress.City,
-
  110 │ 66 │                     State = customer.HomeAddress.State,
-
  111 │ 67 │                     Zip = customer.HomeAddress.Zip,
-
  112 │ 68 │                     Country = customer.HomeAddress.Country
-
  113 │ 69 │                 },
-
  114 │ 70 │                 PaymentInformation = new PaymentData
-
  115 │ 71 │                 {
-
  116 │ 72 │                     BillingAddress = new AddressData
-
  117 │ 73 │                     {
-
  118 │ 74 │                         Street = customer.PaymentInformation.BillingAddress.Street,
-
  119 │ 75 │                         City = customer.PaymentInformation.BillingAddress.City,
-
  120 │ 76 │                         State = customer.PaymentInformation.BillingAddress.State,
-
  121 │ 77 │                         Zip = customer.PaymentInformation.BillingAddress.Zip,
-
  122 │ 78 │                         Country = customer.PaymentInformation.BillingAddress.Country
-
  123 │ 79 │                     },
-
  124 │ 80 │                     CreditCard = new CreditCardData
-
  125 │ 81 │                     {
-
  126 │ 82 │                         CardNumber = customer.PaymentInformation.CreditCard.CardNumber,
-
  127 │ 83 │                         CardHolderName = customer.PaymentInformation.CreditCard.CardHolderName,
-
  128 │ 84 │                         ExpirationDate = customer.PaymentInformation.CreditCard.ExpirationDate,
-
  129 │ 85 │                         Cvv = customer.PaymentInformation.CreditCard.Cvv
-
  130 │ 86 │                     }
-
  131 │ 87 │                 }
-
  132 │ 88 │             };
-
  133 │ 89 │
-
  134 │ 90 │             var response = _httpClient.PutAsJsonAsync
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [249:35 - 255:16] (6 lines, 90 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [249:35 - 255:16] (6 lines, 84 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.ConsoleApp/Infrastructure/ApiFleetRepository.cs [241:37 - 247:12]
 
  249 │ 241 │ ).Result;
-
  250 │ 242 │             if (!response.IsSuccessStatusCode) return new List<RentalAgreement>();
-
  251 │ 243 │             var json = response.Content.ReadAsStringAsync().Result;
-
  252 │ 244 │             return JsonConvert.DeserializeObject<List<RentalAgreement>>(json, _jsonSettings) ?? new List<RentalAgreement>();
-
  253 │ 245 │         }
-
  254 │ 246 │
-
  255 │ 247 │         public RentalAgreement
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [415:22 - 428:9] (13 lines, 104 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [415:22 - 428:9] (13 lines, 91 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [160:14 - 174:20]
 
  415 │ 160 │ );
-
  416 │ 161 │             var vehicle = _vehicleRepository.GetVehicleByVin(vin);
-
  417 │ 162 │             while (vehicle == null)
-
  418 │ 163 │             {
-
  419 │ 164 │                 vin = _console.PromptForVin("Vehicle not found. Try another VIN or type 'CANCEL' to go back: ");
-
  420 │ 165 │                 if (vin.Equals("CANCEL", StringComparison.OrdinalIgnoreCase))
-
  421 │ 166 │                 {
-
  422 │ 167 │                     return;
-
  423 │ 168 │                 }
-
  424 │ 169 │
-
  425 │ 170 │                 vehicle = _vehicleRepository.GetVehicleByVin(vin);
-
  426 │ 171 │             }
-
  427 │ 172 │
-
  428 │ 173 │             _console
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [179:13 - 188:19] (9 lines, 89 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [179:13 - 188:19] (9 lines, 80 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [127:13 - 137:4]
 
  179 │ 127 │ var activeRentals = _rentalRepository.GetAllRentals().Where(r => r.Status == RentalStatus.Active);
-
  180 │ 128 │             if (!activeRentals.Any())
-
  181 │ 129 │             {
-
  182 │ 130 │                 _console.WriteLine("No active rentals found.");
-
  183 │ 131 │                 return;
-
  184 │ 132 │             }
-
  185 │ 133 │
-
  186 │ 134 │             foreach (var r in activeRentals)
-
  187 │ 135 │             {
-
  188 │ 136 │                 PrintRentalDetails
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [122:27 - 132:21] (10 lines, 94 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [122:27 - 132:21] (10 lines, 84 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [68:36 - 78:9]
 
  122 │ 68 │ );
-
  123 │ 69 │
-
  124 │ 70 │             var customer = _customerRepository.GetCustomerByLicense(license);
-
  125 │ 71 │             while (customer == null)
-
  126 │ 72 │             {
-
  127 │ 73 │                 license = _console.PromptForDriversLicense("Customer not found. Try another license or type 'CANCEL' to go back: ");
-
  128 │ 74 │                 if (license.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
-
  129 │ 75 │                 customer = _customerRepository.GetCustomerByLicense(license);
-
  130 │ 76 │             }
-
  131 │ 77 │
-
  132 │ 78 │             PrintCustomerDetails
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [150:9 - 162:8] (12 lines, 94 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [150:9 - 162:8] (12 lines, 82 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/VehicleManager.cs [196:8 - 208:9]
 
  150 │ 196 │ .Id).ToList();
-
  151 │ 197 │
-
  152 │ 198 │             if (rentals.Count == 0)
-
  153 │ 199 │             {
-
  154 │ 200 │                 _console.WriteLine("Total Rentals: 0");
-
  155 │ 201 │             }
-
  156 │ 202 │             else
-
  157 │ 203 │             {
-
  158 │ 204 │                 _console.WriteLine($"Total Rentals: {rentals.Count}");
-
  159 │ 205 │                 _console.WriteLine("Rental History:");
-
  160 │ 206 │                 foreach (var rh in rentals)
-
  161 │ 207 │                 {
-
  162 │ 208 │                     var vehicle
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [197:35 - 206:58] (9 lines, 96 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/CustomerManager.cs [197:35 - 206:58] (9 lines, 87 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [68:36 - 78:2]
 
  197 │ 68 │ );
-
  198 │ 69 │             var customer = _customerRepository.GetCustomerByLicense(license);
-
  199 │ 70 │             while (customer == null)
-
  200 │ 71 │             {
-
  201 │ 72 │                 license = _console.PromptForDriversLicense("Customer not found. Try another license or type 'CANCEL' to go back: ");
-
  202 │ 73 │                 if (license.Equals("CANCEL", StringComparison.OrdinalIgnoreCase)) return;
-
  203 │ 74 │                 customer = _customerRepository.GetCustomerByLicense(license);
-
  204 │ 75 │             }
-
  205 │ 76 │
-
  206 │ 77 │             _console.WriteLine("Enter new values or press Enter to keep current values."
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/RentalsController.cs [1:1 - 12:18] (11 lines, 96 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/RentalsController.cs [1:1 - 12:18] (11 lines, 85 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
 
  1  │ 1  │ using System;
-
  2  │ 2  │ using System.Linq;
-
  3  │ 3  │ using Microsoft.AspNetCore.Mvc;
-
  4  │ 4  │ using FleetTracker.Services.Core.Interfaces;
-
  5  │ 5  │ using FleetTracker.Services.Core.Models;
-
  6  │ 6  │ using FleetTracker.Services.Core.DataModels;
-
  7  │ 7  │
-
  8  │ 8  │ namespace FleetTracker.Services.Api.Controllers
-
  9  │ 9  │ {
-
  10 │ 10 │     [ApiController]
-
  11 │ 11 │     [Route("api/[controller]")]
-
  12 │ 12 │     public class RentalsController
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [1:1 - 12:20] (11 lines, 96 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [1:1 - 12:20] (11 lines, 85 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
 
  1  │ 1  │ using System;
-
  2  │ 2  │ using System.Linq;
-
  3  │ 3  │ using Microsoft.AspNetCore.Mvc;
-
  4  │ 4  │ using FleetTracker.Services.Core.Interfaces;
-
  5  │ 5  │ using FleetTracker.Services.Core.Models;
-
  6  │ 6  │ using FleetTracker.Services.Core.DataModels;
-
  7  │ 7  │
-
  8  │ 8  │ namespace FleetTracker.Services.Api.Controllers
-
  9  │ 9  │ {
-
  10 │ 10 │     [ApiController]
-
  11 │ 11 │     [Route("api/[controller]")]
-
  12 │ 12 │     public class CustomersController
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 133 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 128 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [54:11 - 59:4]
 
  85 │ 54 │ );
-
  86 │ 55 │
-
  87 │ 56 │             var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
-
  88 │ 57 │             var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
-
  89 │ 58 │             var paymentInfo = new PaymentInformation(billingAddress, creditCard);
-
  90 │ 59 │             customer
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 102 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 91 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [77:9 - 88:10]
 
  126 │ 77 │ }
-
  127 │ 78 │
-
  128 │ 79 │         public void DeleteVehicle(Guid id)
-
  129 │ 80 │         {
-
  130 │ 81 │             var vehicle = GetVehicleById(id);
-
  131 │ 82 │             if (vehicle != null)
-
  132 │ 83 │             {
-
  133 │ 84 │                 if (vehicle.Status != VehicleStatus.Available && vehicle.Status != VehicleStatus.Unavailable)
-
  134 │ 85 │                 {
-
  135 │ 86 │                     throw new InvalidOperationException($"Cannot delete vehicle in status: {vehicle.Status}. Ensure the vehicle is Available or Unavailable first.");
-
  136 │ 87 │                 }
-
  137 │ 88 │                 _context
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [184:12 - 196:9] (12 lines, 113 tokens)
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [184:12 - 196:9] (12 lines, 101 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [105:7 - 117:2]
 
  184 │ 105 │ ();
-
  185 │ 106 │         }
-
  186 │ 107 │
-
  187 │ 108 │         public void CompleteRental(Guid id, int endingMileage)
-
  188 │ 109 │         {
-
  189 │ 110 │             var rental = GetRentalById(id);
-
  190 │ 111 │             if (rental != null)
-
  191 │ 112 │             {
-
  192 │ 113 │                 var vehicle = GetVehicleById(rental.VehicleId.GetValueOrDefault());
-
  193 │ 114 │                 if (vehicle != null)
-
  194 │ 115 │                 {
-
  195 │ 116 │                     vehicle.CompleteRental(rental, endingMileage);
-
  196 │ 117 │                     _context
 
 Found 50 clones.
@@ -5190,384 +4753,6 @@ Error: ERROR: jscpd found too many duplicates (31.21%) over threshold (0%)
     at Array.forEach (<anonymous>)
     at /node_modules/@jscpd/finder/dist/index.js:108:22
     at async /node_modules/jscpd/dist/bin/jscpd.js:9:5ERROR: jscpd found too many duplicates (31.21%) over threshold (0%)
-```
-
-</details>
-
-<details>
-
-<summary>JSON</summary>
-
-```text
-
-/github/workspace/FleetTracker.Client/.vscode/extensions.json
-  2:3  error  Unexpected comment  jsonc/no-comments
-
-/github/workspace/FleetTracker.Client/.vscode/launch.json
-  2:3  error  Unexpected comment  jsonc/no-comments
-
-/github/workspace/FleetTracker.Client/.vscode/mcp.json
-  2:3  error  Unexpected comment  jsonc/no-comments
-
-/github/workspace/FleetTracker.Client/.vscode/tasks.json
-  2:3  error  Unexpected comment  jsonc/no-comments
-
-/github/workspace/FleetTracker.Client/tsconfig.app.json
-  1:1  error  Unexpected comment  jsonc/no-comments
-  2:1  error  Unexpected comment  jsonc/no-comments
-
-/github/workspace/FleetTracker.Client/tsconfig.json
-  1:1  error  Unexpected comment  jsonc/no-comments
-  2:1  error  Unexpected comment  jsonc/no-comments
-
-✖ 8 problems (8 errors, 0 warnings)
-```
-
-</details>
-
-<details>
-
-<summary>JSON_PRETTIER</summary>
-
-```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/angular.json
-[[33mwarn[39m] FleetTracker.Client/tsconfig.app.json
-[[33mwarn[39m] github_conf/branch_protection_rules.json
-[[33mwarn[39m] Code style issues found in 3 files. Run Prettier with --write to fix.
-```
-
-</details>
-
-<details>
-
-<summary>MARKDOWN_PRETTIER</summary>
-
-```text
-Checking formatting...[[33mwarn[39m] README.md
-[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
-```
-
-</details>
-
-<details>
-
-<summary>NATURAL_LANGUAGE</summary>
-
-```text
-
-/github/workspace/FleetTracker.Client/README.md
-  49:17  ✓ error  Incorrect term: “e2e”, use “end-to-end” instead  terminology
-
-✖ 1 problem (1 error, 0 warnings, 0 infos)
-✓ 1 fixable problem.
-Try to run: $ textlint --fix [file]
-```
-
-</details>
-
-<details>
-
-<summary>SPELL_CODESPELL</summary>
-
-```text
-/github/workspace/.gitignore:22: elease ==> release
-/github/workspace/.gitignore:23: eleases ==> releases
-/github/workspace/.gitignore:183: ublish ==> publish
-/github/workspace/.gitignore:185: checkin ==> checking, check in
-/github/workspace/.gitignore:191: checkin ==> checking, check in
-/github/workspace/.gitignore:305: Paket ==> Packet
-/github/workspace/.gitignore:306: paket ==> packet
-/github/workspace/.gitignore:306: paket ==> packet
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Services/InputValidator.cs:77: ND ==> AND, 2ND
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Core/DataModels/DataModels.cs:17: ND ==> AND, 2ND
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/FleetTrackerDbContext.cs:37: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.Designer.cs:185: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260601134929_InitialCreate.cs:35: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602151152_MakeRentalIdsNullable.Designer.cs:185: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260602154919_MaintenanceCostPrecision.Designer.cs:185: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603140044_FixMaintenanceMapping.Designer.cs:214: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603152232_DecoupleRentalHistory.Designer.cs:181: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153037_AddRentalIndexes.Designer.cs:185: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603153426_AddCustomerLicenseIndex.Designer.cs:188: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/20260603155146_MakeMaintenanceRecordValueObject.Designer.cs:188: HomeState ==> home state
-/github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Migrations/FleetTrackerDbContextModelSnapshot.cs:185: HomeState ==> home state
-/github/workspace/SeedData.sql:1: HomeState ==> home state
-/github/workspace/SeedData.sql:2: HomeState ==> home state
-/github/workspace/SeedData.sql:3: HomeState ==> home state
-/github/workspace/SeedData.sql:4: HomeState ==> home state
-/github/workspace/SeedData.sql:5: HomeState ==> home state
-/github/workspace/SeedData.sql:6: HomeState ==> home state
-/github/workspace/SeedData.sql:7: HomeState ==> home state
-/github/workspace/SeedData.sql:8: HomeState ==> home state
-/github/workspace/SeedData.sql:9: HomeState ==> home state
-/github/workspace/SeedData.sql:10: HomeState ==> home state
-/github/workspace/SeedData.sql:11: HomeState ==> home state
-/github/workspace/SeedData.sql:12: HomeState ==> home state
-/github/workspace/SeedData.sql:13: HomeState ==> home state
-/github/workspace/SeedData.sql:14: HomeState ==> home state
-/github/workspace/SeedData.sql:15: HomeState ==> home state
-/github/workspace/SeedData.sql:16: HomeState ==> home state
-/github/workspace/SeedData.sql:17: HomeState ==> home state
-/github/workspace/SeedData.sql:18: HomeState ==> home state
-/github/workspace/SeedData.sql:19: HomeState ==> home state
-/github/workspace/SeedData.sql:20: HomeState ==> home state
-/github/workspace/SeedData.sql:21: HomeState ==> home state
-/github/workspace/SeedData.sql:22: HomeState ==> home state
-/github/workspace/SeedData.sql:23: HomeState ==> home state
-/github/workspace/SeedData.sql:24: HomeState ==> home state
-/github/workspace/SeedData.sql:25: HomeState ==> home state
-/github/workspace/SeedData.sql:26: HomeState ==> home state
-/github/workspace/SeedData.sql:27: HomeState ==> home state
-/github/workspace/SeedData.sql:28: HomeState ==> home state
-/github/workspace/SeedData.sql:29: HomeState ==> home state
-/github/workspace/SeedData.sql:30: HomeState ==> home state
-/github/workspace/SeedData.sql:31: HomeState ==> home state
-/github/workspace/SeedData.sql:32: HomeState ==> home state
-/github/workspace/SeedData.sql:33: HomeState ==> home state
-/github/workspace/SeedData.sql:34: HomeState ==> home state
-/github/workspace/SeedData.sql:35: HomeState ==> home state
-/github/workspace/SeedData.sql:36: HomeState ==> home state
-/github/workspace/SeedData.sql:37: HomeState ==> home state
-/github/workspace/SeedData.sql:38: HomeState ==> home state
-/github/workspace/SeedData.sql:39: HomeState ==> home state
-/github/workspace/SeedData.sql:40: HomeState ==> home state
-/github/workspace/SeedData.sql:41: HomeState ==> home state
-/github/workspace/SeedData.sql:42: HomeState ==> home state
-/github/workspace/SeedData.sql:43: HomeState ==> home state
-/github/workspace/SeedData.sql:44: HomeState ==> home state
-/github/workspace/SeedData.sql:45: HomeState ==> home state
-/github/workspace/SeedData.sql:46: HomeState ==> home state
-/github/workspace/SeedData.sql:47: HomeState ==> home state
-/github/workspace/SeedData.sql:48: HomeState ==> home state
-/github/workspace/SeedData.sql:49: HomeState ==> home state
-/github/workspace/SeedData.sql:50: HomeState ==> home state
-/github/workspace/SeedData.sql:51: HomeState ==> home state
-/github/workspace/SeedData.sql:52: HomeState ==> home state
-/github/workspace/SeedData.sql:53: HomeState ==> home state
-/github/workspace/SeedData.sql:54: HomeState ==> home state
-/github/workspace/SeedData.sql:55: HomeState ==> home state
-/github/workspace/SeedData.sql:56: HomeState ==> home state
-/github/workspace/SeedData.sql:57: HomeState ==> home state
-/github/workspace/SeedData.sql:58: HomeState ==> home state
-/github/workspace/SeedData.sql:59: HomeState ==> home state
-/github/workspace/SeedData.sql:60: HomeState ==> home state
-/github/workspace/SeedData.sql:61: HomeState ==> home state
-/github/workspace/SeedData.sql:62: HomeState ==> home state
-/github/workspace/SeedData.sql:63: HomeState ==> home state
-/github/workspace/SeedData.sql:64: HomeState ==> home state
-/github/workspace/SeedData.sql:65: HomeState ==> home state
-/github/workspace/SeedData.sql:66: HomeState ==> home state
-/github/workspace/SeedData.sql:67: HomeState ==> home state
-/github/workspace/SeedData.sql:68: HomeState ==> home state
-/github/workspace/SeedData.sql:69: HomeState ==> home state
-/github/workspace/SeedData.sql:70: HomeState ==> home state
-/github/workspace/SeedData.sql:71: HomeState ==> home state
-/github/workspace/SeedData.sql:72: HomeState ==> home state
-/github/workspace/SeedData.sql:73: HomeState ==> home state
-/github/workspace/SeedData.sql:74: HomeState ==> home state
-/github/workspace/SeedData.sql:75: HomeState ==> home state
-/github/workspace/SeedData.sql:76: HomeState ==> home state
-/github/workspace/SeedData.sql:77: HomeState ==> home state
-/github/workspace/SeedData.sql:78: HomeState ==> home state
-/github/workspace/SeedData.sql:79: HomeState ==> home state
-/github/workspace/SeedData.sql:80: HomeState ==> home state
-/github/workspace/SeedData.sql:81: HomeState ==> home state
-/github/workspace/SeedData.sql:82: HomeState ==> home state
-/github/workspace/SeedData.sql:83: HomeState ==> home state
-/github/workspace/SeedData.sql:84: HomeState ==> home state
-/github/workspace/SeedData.sql:85: HomeState ==> home state
-/github/workspace/SeedData.sql:86: HomeState ==> home state
-/github/workspace/SeedData.sql:87: HomeState ==> home state
-/github/workspace/SeedData.sql:88: HomeState ==> home state
-/github/workspace/SeedData.sql:89: HomeState ==> home state
-/github/workspace/SeedData.sql:90: HomeState ==> home state
-/github/workspace/SeedData.sql:91: HomeState ==> home state
-/github/workspace/SeedData.sql:92: HomeState ==> home state
-/github/workspace/SeedData.sql:93: HomeState ==> home state
-/github/workspace/SeedData.sql:94: HomeState ==> home state
-/github/workspace/SeedData.sql:95: HomeState ==> home state
-/github/workspace/SeedData.sql:96: HomeState ==> home state
-/github/workspace/SeedData.sql:97: HomeState ==> home state
-/github/workspace/SeedData.sql:98: HomeState ==> home state
-/github/workspace/SeedData.sql:99: HomeState ==> home state
-/github/workspace/SeedData.sql:100: HomeState ==> home state
-```
-
-</details>
-
-<details>
-
-<summary>SQLFLUFF</summary>
-
-```text
-
-User Error: No dialect was specified. You must configure a dialect or specify one on the command line using --dialect after the command. Available dialects:
-ansi, athena, bigquery, clickhouse, databricks, db2, doris, duckdb, exasol, flink, greenplum, hive, impala, mariadb, materialize, mysql, oracle, postgres, redshift, snowflake, soql, sparksql, sqlite, starrocks, teradata, trino, tsql, vertica
-```
-
-</details>
-
-<details>
-
-<summary>TYPESCRIPT_ES</summary>
-
-```text
-
-/github/workspace/FleetTracker.Client/src/app/app.config.ts
-  1:63  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app'                         n/no-missing-import
-  2:31  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'                       n/no-missing-import
-  3:35  error  Can't resolve '@angular/common/http' in '/github/workspace/FleetTracker.Client/src/app'                  n/no-missing-import
-  4:35  error  Can't resolve '@angular/platform-browser/animations' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
-  5:24  error  Can't resolve './app.routes' in '/github/workspace/FleetTracker.Client/src/app'                          n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/app.routes.ts
-  1:24  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'                        n/no-missing-import
-  2:36  error  Can't resolve './dashboard/dashboard.component' in '/github/workspace/FleetTracker.Client/src/app'        n/no-missing-import
-  3:35  error  Can't resolve './vehicles/vehicles.component' in '/github/workspace/FleetTracker.Client/src/app'          n/no-missing-import
-  4:40  error  Can't resolve './vehicles/vehicle-manage.component' in '/github/workspace/FleetTracker.Client/src/app'    n/no-missing-import
-  5:34  error  Can't resolve './rentals/rentals.component' in '/github/workspace/FleetTracker.Client/src/app'            n/no-missing-import
-  6:39  error  Can't resolve './rentals/rental-create.component' in '/github/workspace/FleetTracker.Client/src/app'      n/no-missing-import
-  7:36  error  Can't resolve './customers/customers.component' in '/github/workspace/FleetTracker.Client/src/app'        n/no-missing-import
-  8:41  error  Can't resolve './customers/customer-manage.component' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
-  9:39  error  Can't resolve './rentals/rental-manage.component' in '/github/workspace/FleetTracker.Client/src/app'      n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/app.ts
-  1:27  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app'    n/no-missing-import
-  2:60  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app'  n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/customers/customer-manage.component.ts
-    1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/customers'              n/no-missing-import
-    2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/customers'             n/no-missing-import
-    3:52  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/customers'            n/no-missing-import
-    4:46  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/customers'    n/no-missing-import
-    5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/customers'  n/no-missing-import
-    6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/customers'       n/no-missing-import
-    7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/customers'            n/no-missing-import
-    8:37  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/customers'            n/no-missing-import
-  178:27  error  Unexpected any. Specify a different type                                                                @typescript-eslint/no-explicit-any
-
-/github/workspace/FleetTracker.Client/src/app/customers/customers.component.ts
-  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/customers'         n/no-missing-import
-  2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/customers'       n/no-missing-import
-  3:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/customers'       n/no-missing-import
-  4:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/customers'        n/no-missing-import
-  5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/customers'  n/no-missing-import
-  6:27  error  Can't resolve '../pipes/phone.pipe' in '/github/workspace/FleetTracker.Client/src/app/customers'   n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/dashboard/dashboard.component.ts
-   1:74  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/dashboard'         n/no-missing-import
-   2:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/dashboard'       n/no-missing-import
-   3:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/dashboard'        n/no-missing-import
-   4:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/dashboard'       n/no-missing-import
-   5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/dashboard'  n/no-missing-import
-   6:38  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/dashboard'       n/no-missing-import
-   7:19  error  Can't resolve 'chart.js/auto' in '/github/workspace/FleetTracker.Client/src/app/dashboard'         n/no-missing-import
-  67:38  error  Unexpected any. Specify a different type                                                           @typescript-eslint/no-explicit-any
-  96:29  error  Unexpected any. Specify a different type                                                           @typescript-eslint/no-explicit-any
-
-/github/workspace/FleetTracker.Client/src/app/pipes/phone.pipe.ts
-  1:37  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/pipes'  n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/rentals/rental-create.component.ts
-  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/rentals'              n/no-missing-import
-  2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/rentals'             n/no-missing-import
-  3:24  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-  4:28  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'    n/no-missing-import
-  5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'  n/no-missing-import
-  6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/rentals'       n/no-missing-import
-  7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/rentals/rental-manage.component.ts
-  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/rentals'              n/no-missing-import
-  2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/rentals'             n/no-missing-import
-  3:52  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-  4:36  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'    n/no-missing-import
-  5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'  n/no-missing-import
-  6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/rentals'       n/no-missing-import
-  7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-  8:37  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/rentals/rentals.component.ts
-  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/rentals'              n/no-missing-import
-  2:40  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-  3:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/rentals'            n/no-missing-import
-  4:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/rentals'             n/no-missing-import
-  5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/rentals'       n/no-missing-import
-  6:28  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'    n/no-missing-import
-  7:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/rentals'  n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/services/api.service.ts
-    1:28  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/services'         n/no-missing-import
-    2:47  error  Can't resolve '@angular/common/http' in '/github/workspace/FleetTracker.Client/src/app/services'  n/no-missing-import
-    3:40  error  Can't resolve 'rxjs' in '/github/workspace/FleetTracker.Client/src/app/services'                  n/no-missing-import
-    4:28  error  Can't resolve 'rxjs/operators' in '/github/workspace/FleetTracker.Client/src/app/services'        n/no-missing-import
-   96:47  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
-   97:27  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
-  100:42  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
-  129:36  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
-  162:90  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
-
-/github/workspace/FleetTracker.Client/src/app/services/toast.service.ts
-  1:36  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/services'                n/no-missing-import
-  2:29  error  Can't resolve '@angular/material/snack-bar' in '/github/workspace/FleetTracker.Client/src/app/services'  n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts
-    1:34  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/store'               n/no-missing-import
-    2:79  error  Can't resolve '@ngrx/signals' in '/github/workspace/FleetTracker.Client/src/app/store'               n/no-missing-import
-    3:26  error  Can't resolve '@ngrx/signals/rxjs-interop' in '/github/workspace/FleetTracker.Client/src/app/store'  n/no-missing-import
-    4:29  error  Can't resolve '@ngrx/operators' in '/github/workspace/FleetTracker.Client/src/app/store'             n/no-missing-import
-    5:48  error  Can't resolve 'rxjs' in '/github/workspace/FleetTracker.Client/src/app/store'                        n/no-missing-import
-    6:55  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/store'     n/no-missing-import
-  116:56  error  Unexpected any. Specify a different type                                                             @typescript-eslint/no-explicit-any
-
-/github/workspace/FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts
-  1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/vehicles'              n/no-missing-import
-  2:73  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/vehicles'             n/no-missing-import
-  3:52  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/vehicles'            n/no-missing-import
-  4:45  error  Can't resolve '../services/api.service' in '/github/workspace/FleetTracker.Client/src/app/vehicles'    n/no-missing-import
-  5:30  error  Can't resolve '../services/toast.service' in '/github/workspace/FleetTracker.Client/src/app/vehicles'  n/no-missing-import
-  6:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
-  7:30  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/vehicles'            n/no-missing-import
-  8:61  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/vehicles'            n/no-missing-import
-
-/github/workspace/FleetTracker.Client/src/app/vehicles/vehicles.component.ts
-   1:43  error  Can't resolve '@angular/core' in '/github/workspace/FleetTracker.Client/src/app/vehicles'         n/no-missing-import
-   2:44  error  Can't resolve '@angular/common' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
-   3:28  error  Can't resolve '@angular/router' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
-   4:29  error  Can't resolve '@angular/forms' in '/github/workspace/FleetTracker.Client/src/app/vehicles'        n/no-missing-import
-   5:28  error  Can't resolve '../store/fleet.store' in '/github/workspace/FleetTracker.Client/src/app/vehicles'  n/no-missing-import
-   6:38  error  Can't resolve '../models/enums' in '/github/workspace/FleetTracker.Client/src/app/vehicles'       n/no-missing-import
-  38:29  error  Unexpected any. Specify a different type                                                          @typescript-eslint/no-explicit-any
-
-/github/workspace/FleetTracker.Client/src/main.ts
-  1:38  error  Can't resolve '@angular/platform-browser' in '/github/workspace/FleetTracker.Client/src'  n/no-missing-import
-  2:27  error  Can't resolve './app/app.config' in '/github/workspace/FleetTracker.Client/src'           n/no-missing-import
-  3:21  error  Can't resolve './app/app' in '/github/workspace/FleetTracker.Client/src'                  n/no-missing-import
-
-✖ 99 problems (99 errors, 0 warnings)Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
-```
-
-</details>
-
-<details>
-
-<summary>TYPESCRIPT_PRETTIER</summary>
-
-```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/src/app/customers/customers.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/dashboard/dashboard.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/models/enums.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/pipes/phone.pipe.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rental-create.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rental-manage.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/rentals/rentals.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/customers/customer-manage.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/services/api.service.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/store/fleet.store.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicle-manage.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/app/vehicles/vehicles.component.ts
-[[33mwarn[39m] FleetTracker.Client/src/main.ts
-[[33mwarn[39m] Code style issues found in 13 files. Run Prettier with --write to fix.
 ```
 
 </details>
