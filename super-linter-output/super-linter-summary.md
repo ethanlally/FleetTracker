@@ -1,17 +1,26 @@
 # Super-linter summary
 
-| Language     | Validation result |
-| ------------ | ----------------- |
-| BIOME_FORMAT | Fail ❌           |
-| BIOME_LINT   | Fail ❌           |
-| CHECKOV      | Fail ❌           |
-| JSCPD        | Fail ❌           |
-| PRE_COMMIT   | Pass ✅           |
-| TRIVY        | Pass ✅           |
+| Language                   | Validation result |
+| -------------------------- | ----------------- |
+| BIOME_FORMAT               | Fail ❌           |
+| BIOME_LINT                 | Fail ❌           |
+| CHECKOV                    | Fail ❌           |
+| CSHARP                     | Pass ✅           |
+| EDITORCONFIG               | Pass ✅           |
+| GITLEAKS                   | Pass ✅           |
+| GIT_MERGE_CONFLICT_MARKERS | Pass ✅           |
+| JAVASCRIPT_ES              | Pass ✅           |
+| JAVASCRIPT_PRETTIER        | Fail ❌           |
+| JSCPD                      | Fail ❌           |
+| JSON                       | Pass ✅           |
+| JSON_PRETTIER              | Pass ✅           |
+| PRE_COMMIT                 | Pass ✅           |
+| SPELL_CODESPELL            | Pass ✅           |
+| TRIVY                      | Pass ✅           |
 
 All files and directories linted successfully
 
-For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27020082273)
+For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27142149900)
 
 Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
@@ -22,7 +31,7 @@ Powered by [Super-linter](https://github.com/super-linter/super-linter)
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 16.
-Checked 36 files in 57ms. No fixes applied.
+Checked 36 files in 63ms. No fixes applied.
 Found 36 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
@@ -515,7 +524,7 @@ FleetTracker.Client/proxy.conf.js format ━━━━━━━━━━━━━
 
     1  1 │   module.exports = {
     2    │ - ··"/api":·{
-    3    │ - ····target:·process.env.services__api__https__0·||·process.env.services__api__http__0·||·"https://localhost:7240",
+    3    │ - ····target:·process.env.services__api__https__0·||·process.env.services__api__http__0·||·"https://localhost:7108",
     4    │ - ····secure:·false,
     5    │ - ····changeOrigin:·true
     6    │ - ··}
@@ -523,7 +532,7 @@ FleetTracker.Client/proxy.conf.js format ━━━━━━━━━━━━━
        3 │ + → → target:
        4 │ + → → → process.env.services__api__https__0·||
        5 │ + → → → process.env.services__api__http__0·||
-       6 │ + → → → "https://localhost:7240",
+       6 │ + → → → "https://localhost:7108",
        7 │ + → → secure:·false,
        8 │ + → → changeOrigin:·true,
        9 │ + → },
@@ -775,7 +784,7 @@ FleetTracker.Services/FleetTracker.Services.Api/appsettings.json format ━━�
      7    │ - ··},
      8    │ - ··"AllowedHosts":·"*",
      9    │ - ··"ConnectionStrings":·{
-    10    │ - ····"FleetTrackerConnection":·"Server=(localdb)\\mssqllocaldb;Database=FleetTrackerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+    10    │ - ····"FleetTrackerDb":·"Server=(localdb)\\mssqllocaldb;Database=FleetTrackerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
     11    │ - ··}
         2 │ + → "Logging":·{
         3 │ + → → "LogLevel":·{
@@ -785,7 +794,7 @@ FleetTracker.Services/FleetTracker.Services.Api/appsettings.json format ━━�
         7 │ + → },
         8 │ + → "AllowedHosts":·"*",
         9 │ + → "ConnectionStrings":·{
-       10 │ + → → "FleetTrackerConnection":·"Server=(localdb)\\mssqllocaldb;Database=FleetTrackerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+       10 │ + → → "FleetTrackerDb":·"Server=(localdb)\\mssqllocaldb;Database=FleetTrackerDb;Trusted_Connection=True;MultipleActiveResultSets=true"
        11 │ + → }
     12 12 │   }
     13 13 │
@@ -822,7 +831,7 @@ format ━━━━━━━━━━━━━━━━━━━━━━━━�
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 61.
-Checked 42 files in 119ms. No fixes applied.
+Checked 42 files in 126ms. No fixes applied.
 Found 38 errors.
 Found 42 warnings.
 Found 1 info.FleetTracker.Client/src/index.html:15:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1197,6 +1206,17 @@ Passed checks: 43, Failed checks: 1, Skipped checks: 0
 Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 	FAILED for resource: on(CodeQL Advanced)
 	File: /.github/workflows/codeql.yml:31-32
+```
+
+</details>
+
+<details>
+
+<summary>JAVASCRIPT_PRETTIER</summary>
+
+```text
+Checking formatting...[[33mwarn[39m] FleetTracker.Client/proxy.conf.js
+[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
 ```
 
 </details>
@@ -4747,12 +4767,12 @@ Clone found (csharp):
  196 │ 117 │                     _context
 
 Found 50 clones.
-Error: ERROR: jscpd found too many duplicates (31.21%) over threshold (0%)
+Error: ERROR: jscpd found too many duplicates (31.22%) over threshold (0%)
     at ThresholdReporter.report (/node_modules/@jscpd/finder/dist/index.js:615:13)
     at /node_modules/@jscpd/finder/dist/index.js:109:18
     at Array.forEach (<anonymous>)
     at /node_modules/@jscpd/finder/dist/index.js:108:22
-    at async /node_modules/jscpd/dist/bin/jscpd.js:9:5ERROR: jscpd found too many duplicates (31.21%) over threshold (0%)
+    at async /node_modules/jscpd/dist/bin/jscpd.js:9:5ERROR: jscpd found too many duplicates (31.22%) over threshold (0%)
 ```
 
 </details>
