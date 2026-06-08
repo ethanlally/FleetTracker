@@ -33,10 +33,10 @@ WebApplication app = builder.Build();
 using (IServiceScope scope = app.Services.CreateScope())
 {
     FleetTrackerDbContext context = scope.ServiceProvider.GetRequiredService<FleetTrackerDbContext>();
-    context.Database.Migrate(); // Applies migrations (creates DB if it doesn't exist)
+    await context.Database.MigrateAsync(); // Applies migrations (creates DB if it doesn't exist)
 
     // Seed data only if the database is empty
-    if (!context.Customers.Any())
+    if (!await context.Customers.AnyAsync())
     {
         EfFleetRepository repo = scope.ServiceProvider.GetRequiredService<EfFleetRepository>();
         FakeDataSeeder.Seed(repo, repo, repo);

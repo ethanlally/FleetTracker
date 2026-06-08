@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FleetTracker.Services\FleetTracker.Services.Api\FleetTracker.Services.Api.csproj" />
-    <ProjectReference Include="..\FleetTracker.Services\FleetTracker.Services.ConsoleApp\FleetTracker.Services.ConsoleApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
