@@ -10,13 +10,16 @@
 | GITLEAKS                   | Pass ✅           |
 | GIT_MERGE_CONFLICT_MARKERS | Pass ✅           |
 | JSCPD                      | Fail ❌           |
+| MARKDOWN                   | Pass ✅           |
+| MARKDOWN_PRETTIER          | Pass ✅           |
+| NATURAL_LANGUAGE           | Pass ✅           |
 | PRE_COMMIT                 | Pass ✅           |
 | SPELL_CODESPELL            | Pass ✅           |
 | TRIVY                      | Pass ✅           |
 
 All files and directories linted successfully
 
-For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27149804097)
+For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27149962674)
 
 Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
@@ -27,7 +30,7 @@ Powered by [Super-linter](https://github.com/super-linter/super-linter)
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 16.
-Checked 36 files in 74ms. No fixes applied.
+Checked 36 files in 76ms. No fixes applied.
 Found 36 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
@@ -581,28 +584,35 @@ FleetTracker.Client/src/app/app.config.ts format ━━━━━━━━━━�
     15 15 │
 
 
-FleetTracker.Client/src/app/app.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FleetTracker.Client/src/styles.css format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
 
-     1    │ - import·{·Component·}·from·'@angular/core';
-     2    │ - import·{·RouterOutlet,·RouterLink,·RouterLinkActive·}·from·'@angular/router';
-        1 │ + import·{·Component·}·from·"@angular/core";
-        2 │ + import·{·RouterOutlet,·RouterLink,·RouterLinkActive·}·from·"@angular/router";
-     3  3 │
-     4  4 │   @Component({
-     5    │ - ··selector:·'app-root',
-     6    │ - ··standalone:·true,
-     7    │ - ··imports:·[RouterOutlet,·RouterLink,·RouterLinkActive],
-     8    │ - ··templateUrl:·'./app.component.html',
-     9    │ - ··styleUrls:·['./app.component.css'],
-        5 │ + → selector:·"app-root",
-        6 │ + → standalone:·true,
-        7 │ + → imports:·[RouterOutlet,·RouterLink,·RouterLinkActive],
-        8 │ + → templateUrl:·"./app.component.html",
-        9 │ + → styleUrls:·["./app.component.css"],
-    10 10 │   })
-    11 11 │   export class App {}
+     1    │ - html,·body·{·height:·100%;·}
+     2    │ - body·{·margin:·0;·font-family:·Roboto,·"Helvetica·Neue",·sans-serif;·}
+        1 │ + html,
+        2 │ + body·{
+        3 │ + → height:·100%;
+        4 │ + }
+        5 │ + body·{
+        6 │ + → margin:·0;
+        7 │ + → font-family:·Roboto,·"Helvetica·Neue",·sans-serif;
+        8 │ + }
+     3  9 │
+     4 10 │   .success-snackbar {
+     5    │ - ··background-color:·#4caf50;
+     6    │ - ··color:·white;
+       11 │ + → background-color:·#4caf50;
+       12 │ + → color:·white;
+     7 13 │   }
+     8 14 │
+     9 15 │   .error-snackbar {
+    10    │ - ··background-color:·#f44336;
+    11    │ - ··color:·white;
+       16 │ + → background-color:·#f44336;
+       17 │ + → color:·white;
+    12 18 │   }
+    13 19 │
 
 
 FleetTracker.Client/tsconfig.app.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -827,7 +837,7 @@ format ━━━━━━━━━━━━━━━━━━━━━━━━�
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 61.
-Checked 42 files in 158ms. No fixes applied.
+Checked 42 files in 162ms. No fixes applied.
 Found 38 errors.
 Found 42 warnings.
 Found 1 info.FleetTracker.Client/src/index.html:15:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
