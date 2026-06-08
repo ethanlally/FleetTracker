@@ -23,7 +23,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 
 builder.Services.AddOpenApi();
 builder.Services.AddAuthorization();
-builder.Services.AddMediator(options => 
+builder.Services.AddMediator(options =>
 {
     options.ServiceLifetime = ServiceLifetime.Scoped;
 }); // Registers Mediator handlers via Source Generator

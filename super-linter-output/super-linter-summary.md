@@ -9,18 +9,14 @@
 | EDITORCONFIG               | Pass ✅           |
 | GITLEAKS                   | Pass ✅           |
 | GIT_MERGE_CONFLICT_MARKERS | Pass ✅           |
-| JAVASCRIPT_ES              | Pass ✅           |
-| JAVASCRIPT_PRETTIER        | Fail ❌           |
 | JSCPD                      | Fail ❌           |
-| JSON                       | Pass ✅           |
-| JSON_PRETTIER              | Pass ✅           |
 | PRE_COMMIT                 | Pass ✅           |
 | SPELL_CODESPELL            | Pass ✅           |
 | TRIVY                      | Pass ✅           |
 
 All files and directories linted successfully
 
-For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27142149900)
+For more information, see the [GitHub Actions workflow run](https://github.com/ethanlally/FleetTracker/actions/runs/27149804097)
 
 Powered by [Super-linter](https://github.com/super-linter/super-linter)
 
@@ -31,7 +27,7 @@ Powered by [Super-linter](https://github.com/super-linter/super-linter)
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 16.
-Checked 36 files in 63ms. No fixes applied.
+Checked 36 files in 74ms. No fixes applied.
 Found 36 errors.FleetTracker.AppHost/Properties/launchSettings.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Formatter would have printed the following content:
@@ -831,7 +827,7 @@ format ━━━━━━━━━━━━━━━━━━━━━━━━�
 ```text
 The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
 Diagnostics not shown: 61.
-Checked 42 files in 126ms. No fixes applied.
+Checked 42 files in 158ms. No fixes applied.
 Found 38 errors.
 Found 42 warnings.
 Found 1 info.FleetTracker.Client/src/index.html:15:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1212,20 +1208,29 @@ Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 
 <details>
 
-<summary>JAVASCRIPT_PRETTIER</summary>
-
-```text
-Checking formatting...[[33mwarn[39m] FleetTracker.Client/proxy.conf.js
-[[33mwarn[39m] Code style issues found in the above file. Run Prettier with --write to fix.
-```
-
-</details>
-
-<details>
-
 <summary>JSCPD</summary>
 
 ```text
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Rentals/RentalsQueries.cs [1:1 - 11:8] (10 lines, 94 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesQueries.cs [1:1 - 11:9]
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Rentals/RentalsCommands.cs [1:1 - 10:8] (9 lines, 88 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesCommands.cs [1:1 - 10:9]
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersQueries.cs [2:8 - 10:10] (8 lines, 73 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesQueries.cs [3:5 - 11:9]
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersCommands.cs [2:5 - 11:10] (9 lines, 85 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesCommands.cs [1:7 - 10:9]
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersCommands.cs [71:8 - 76:9] (5 lines, 133 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersCommands.cs [32:11 - 37:4]
+
 Clone found (typescript):
  - /github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts [130:4 - 140:2] (10 lines, 97 tokens)
    /github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts [118:8 - 127:2]
@@ -1407,24 +1412,124 @@ Clone found (csharp):
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Application/Managers/RentalManager.cs [68:36 - 78:2]
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/RentalsController.cs [1:1 - 12:18] (11 lines, 85 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
-
-Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [1:1 - 12:20] (11 lines, 85 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
-
-Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 128 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [54:11 - 59:4]
-
-Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 91 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [77:9 - 88:10]
 
 Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [184:12 - 196:9] (12 lines, 101 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [105:7 - 117:2]
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Rentals/RentalsQueries.cs [1:1 - 11:8] (10 lines, 94 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesQueries.cs [1:1 - 11:9]
+
+ 1  │ 1  │ using System;
+
+ 2  │ 2  │ using System.Collections.Generic;
+
+ 3  │ 3  │ using System.Linq;
+
+ 4  │ 4  │ using System.Threading;
+
+ 5  │ 5  │ using System.Threading.Tasks;
+
+ 6  │ 6  │ using Mediator;
+
+ 7  │ 7  │ using Microsoft.AspNetCore.Http;
+
+ 8  │ 8  │ using FleetTracker.Services.Core.Interfaces;
+
+ 9  │ 9  │ using FleetTracker.Services.Core.Models;
+
+ 10 │ 10 │
+
+ 11 │ 11 │ namespace FleetTracker.Services.Api.Features.Rentals
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Rentals/RentalsCommands.cs [1:1 - 10:8] (9 lines, 88 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesCommands.cs [1:1 - 10:9]
+
+ 1  │ 1  │ using System;
+
+ 2  │ 2  │ using System.Threading;
+
+ 3  │ 3  │ using System.Threading.Tasks;
+
+ 4  │ 4  │ using Mediator;
+
+ 5  │ 5  │ using Microsoft.AspNetCore.Http;
+
+ 6  │ 6  │ using FleetTracker.Services.Core.Interfaces;
+
+ 7  │ 7  │ using FleetTracker.Services.Core.Models;
+
+ 8  │ 8  │ using FleetTracker.Services.Core.DataModels;
+
+ 9  │ 9  │
+
+ 10 │ 10 │ namespace FleetTracker.Services.Api.Features.Rentals
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersQueries.cs [2:8 - 10:10] (8 lines, 73 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesQueries.cs [3:5 - 11:9]
+
+ 2  │ 3  │ ;
+
+ 3  │ 4  │ using System.Threading;
+
+ 4  │ 5  │ using System.Threading.Tasks;
+
+ 5  │ 6  │ using Mediator;
+
+ 6  │ 7  │ using Microsoft.AspNetCore.Http;
+
+ 7  │ 8  │ using FleetTracker.Services.Core.Interfaces;
+
+ 8  │ 9  │ using FleetTracker.Services.Core.Models;
+
+ 9  │ 10 │
+
+ 10 │ 11 │ namespace FleetTracker.Services.Api.Features.Customers
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersCommands.cs [2:5 - 11:10] (9 lines, 85 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Vehicles/VehiclesCommands.cs [1:7 - 10:9]
+
+ 2  │ 1  │ ;
+
+ 3  │ 2  │ using System.Threading;
+
+ 4  │ 3  │ using System.Threading.Tasks;
+
+ 5  │ 4  │ using Mediator;
+
+ 6  │ 5  │ using Microsoft.AspNetCore.Http;
+
+ 7  │ 6  │ using FleetTracker.Services.Core.Interfaces;
+
+ 8  │ 7  │ using FleetTracker.Services.Core.Models;
+
+ 9  │ 8  │ using FleetTracker.Services.Core.DataModels;
+
+ 10 │ 9  │
+
+ 11 │ 10 │ namespace FleetTracker.Services.Api.Features.Customers
+
+Clone found (csharp):
+ - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersCommands.cs [71:8 - 76:9] (5 lines, 133 tokens)
+   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Features/Customers/CustomersCommands.cs [32:11 - 37:4]
+
+ 71 │ 32 │ );
+
+ 72 │ 33 │
+
+ 73 │ 34 │             var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
+
+ 74 │ 35 │             var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
+
+ 75 │ 36 │             var paymentInfo = new PaymentInformation(billingAddress, creditCard);
+
+ 76 │ 37 │             customer
 
 Clone found (typescript):
  - /github/workspace/FleetTracker.Client/src/app/store/fleet.store.ts [130:4 - 140:2] (10 lines, 97 tokens)
@@ -4687,51 +4792,6 @@ Clone found (csharp):
  206 │ 77 │             _console.WriteLine("Enter new values or press Enter to keep current values."
 
 Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/RentalsController.cs [1:1 - 12:18] (11 lines, 85 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
-
- 1  │ 1  │ using System;
- 2  │ 2  │ using System.Linq;
- 3  │ 3  │ using Microsoft.AspNetCore.Mvc;
- 4  │ 4  │ using FleetTracker.Services.Core.Interfaces;
- 5  │ 5  │ using FleetTracker.Services.Core.Models;
- 6  │ 6  │ using FleetTracker.Services.Core.DataModels;
- 7  │ 7  │
- 8  │ 8  │ namespace FleetTracker.Services.Api.Controllers
- 9  │ 9  │ {
- 10 │ 10 │     [ApiController]
- 11 │ 11 │     [Route("api/[controller]")]
- 12 │ 12 │     public class RentalsController
-
-Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [1:1 - 12:20] (11 lines, 85 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/VehiclesController.cs [1:1 - 12:19]
-
- 1  │ 1  │ using System;
- 2  │ 2  │ using System.Linq;
- 3  │ 3  │ using Microsoft.AspNetCore.Mvc;
- 4  │ 4  │ using FleetTracker.Services.Core.Interfaces;
- 5  │ 5  │ using FleetTracker.Services.Core.Models;
- 6  │ 6  │ using FleetTracker.Services.Core.DataModels;
- 7  │ 7  │
- 8  │ 8  │ namespace FleetTracker.Services.Api.Controllers
- 9  │ 9  │ {
- 10 │ 10 │     [ApiController]
- 11 │ 11 │     [Route("api/[controller]")]
- 12 │ 12 │     public class CustomersController
-
-Clone found (csharp):
- - /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [85:8 - 90:9] (5 lines, 128 tokens)
-   /github/workspace/FleetTracker.Services/FleetTracker.Services.Api/Controllers/CustomersController.cs [54:11 - 59:4]
-
- 85 │ 54 │ );
- 86 │ 55 │
- 87 │ 56 │             var billingAddress = new Address(request.PaymentInformation.BillingAddress.Street, request.PaymentInformation.BillingAddress.City, request.PaymentInformation.BillingAddress.State, request.PaymentInformation.BillingAddress.Zip, request.PaymentInformation.BillingAddress.Country);
- 88 │ 57 │             var creditCard = new CreditCard(request.PaymentInformation.CreditCard.CardNumber, request.PaymentInformation.CreditCard.CardHolderName, request.PaymentInformation.CreditCard.ExpirationDate, request.PaymentInformation.CreditCard.Cvv);
- 89 │ 58 │             var paymentInfo = new PaymentInformation(billingAddress, creditCard);
- 90 │ 59 │             customer
-
-Clone found (csharp):
  - /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/EfFleetRepository.cs [126:9 - 137:9] (11 lines, 91 tokens)
    /github/workspace/FleetTracker.Services/FleetTracker.Services.Data/Repositories/InMemoryFleetRepository.cs [77:9 - 88:10]
 
@@ -4766,13 +4826,13 @@ Clone found (csharp):
  195 │ 116 │                     vehicle.CompleteRental(rental, endingMileage);
  196 │ 117 │                     _context
 
-Found 50 clones.
-Error: ERROR: jscpd found too many duplicates (31.22%) over threshold (0%)
+Found 52 clones.
+Error: ERROR: jscpd found too many duplicates (30.72%) over threshold (0%)
     at ThresholdReporter.report (/node_modules/@jscpd/finder/dist/index.js:615:13)
     at /node_modules/@jscpd/finder/dist/index.js:109:18
     at Array.forEach (<anonymous>)
     at /node_modules/@jscpd/finder/dist/index.js:108:22
-    at async /node_modules/jscpd/dist/bin/jscpd.js:9:5ERROR: jscpd found too many duplicates (31.22%) over threshold (0%)
+    at async /node_modules/jscpd/dist/bin/jscpd.js:9:5ERROR: jscpd found too many duplicates (30.72%) over threshold (0%)
 ```
 
 </details>

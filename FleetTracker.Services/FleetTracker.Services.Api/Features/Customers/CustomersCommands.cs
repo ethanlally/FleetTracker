@@ -51,7 +51,7 @@ namespace FleetTracker.Services.Api.Features.Customers
         {
             var id = command.Id;
             var request = command.Request;
-            
+
             var customer = _repository.GetCustomerById(id);
             if (customer == null) return new ValueTask<IResult>(Results.NotFound());
 
